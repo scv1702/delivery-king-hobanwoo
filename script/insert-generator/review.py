@@ -1,7 +1,7 @@
 import csv
 
-review_f = open('../csv/review.csv', 'r', encoding='utf-8')
-review_insert_f = open('../../sql/insert/review_insert.sql', 'w', encoding='utf-8')
+review_f = open('csv/review.csv', 'r', encoding='utf-8')
+review_insert_f = open('sql/insert/review_insert.sql', 'w', encoding='utf-8')
 review_rdr = csv.reader(review_f, delimiter='|')
 
 for review in review_rdr:

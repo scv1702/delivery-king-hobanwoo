@@ -1,7 +1,7 @@
 import csv
 
-coupon_f = open('../csv/coupon.csv', 'r', encoding='utf-8')
-coupon_insert_f = open('../../sql/insert/coupon_insert.sql', 'w', encoding='utf-8')
+coupon_f = open('csv/coupon.csv', 'r', encoding='utf-8')
+coupon_insert_f = open('sql/insert/coupon_insert.sql', 'w', encoding='utf-8')
 coupon_rdr = csv.reader(coupon_f, delimiter='|')
 
 for coupon in coupon_rdr:

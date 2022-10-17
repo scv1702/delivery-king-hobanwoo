@@ -1,7 +1,7 @@
 import csv
 
-order_f = open('../csv/order.csv', 'r', encoding='utf-8')
-order_insert_f = open('../../sql/insert/order_insert.sql', 'w', encoding='utf-8')
+order_f = open('sv/order.csv', 'r', encoding='utf-8')
+order_insert_f = open('sql/insert/order_insert.sql', 'w', encoding='utf-8')
 order_rdr = csv.reader(order_f, delimiter='|')
 
 for order in order_rdr:
