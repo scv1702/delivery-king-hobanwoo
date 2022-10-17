@@ -7,10 +7,8 @@ CREATE TABLE Store(
     Store_Name VARCHAR(20) NOT NULL,
     Description VARCHAR(100),
     Delivery_Fee NUMBER NOT NULL,
-    Image ORDIMGB,
-    Business_Hour NUMBER, --삭제
-    Start_Hour NUMBER NOT NULL,
-    End_Hour NUMBER NOT NULL,
+    Image VARCHAR(10),
+    Business_Hour NUMBER NOT NULL,
     PRIMARY KEY(Store_ID)
     UNIQUE(Address)
 );
@@ -20,7 +18,7 @@ CREATE TABLE Menu(
     Store_ID NUMBER NOT NULL,
     Mname VARCHAR(15) NOT NULL,
     Description VARCHAR(100),
-    Image ORDIMGB,
+    Image VARCHAR(10),
     Price NUMBER NOT NULL,
     PRIMARY KEY(Menu_ID)
 );
@@ -81,7 +79,7 @@ CREATE TABLE Order_Menu(
     Order_Menu_ID NUMBER NOT NULL,
     Order_ID NUMBER NOT NULL,
     Menu_Name VARCHAR(15) NOT NULL,
-    Menu_Image ORDIMGB,
+    Menu_Image VARCHAR(10),
     Menu_Price NUMBER NOT NULL,
     Quantity NUMBER NOT NULL,
     PRIMARY KEY(Order_Menu_ID, Menu_Name)
