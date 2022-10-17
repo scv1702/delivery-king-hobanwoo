@@ -31,9 +31,9 @@ CREATE TABLE Department(
 CREATE TABLE User(
     User_ID NUMBER NOT NULL,
     User_Name VARCHAR(15) NOT NULL, --추가
+    Dname VARCHAR(15) NOT NULL,
     Password VARCHAR(10) NOT NULL,
     Phone_Number VARCHAR(13) NOT NULL,
-    Dname VARCHAR(15) NOT NULL,
     Membership_Tier VARCHAR(5) NOT NULL, --이거 derived로 하면?
     PRIMARY KEY(User_ID)
     UNIQUE(Phone_Number)
