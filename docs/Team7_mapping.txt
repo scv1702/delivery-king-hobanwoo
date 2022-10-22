@@ -1,0 +1,123 @@
+* Contents 순서:
+1. Phase2 진행 과정 중 수정한 Phase1 보완사항
+2. 관계형 스키마 mapping 정보
+
+
+*****************************************************************************
+************** Phase2 진행 과정 중 수정한 Phase1 보완사항 ****************
+*****************************************************************************
+1. table 생성 시 예약어 사용으로 오류보고(ORA-00904 부적합한 식별자)
+* 수정사항:
+	- 테이블 명 변경: User -> Users
+	- 테이블 명 변경: Order -> Orders
+	- attribute 명 변경: comment -> comments
+
+2. Coupon Entity type
+	- attribute 추가 : State (Coupon 사용여부, 상태 파악)
+
+3. Order_Menu Entity type
+  - Order_Menu_ID를 partial key로 변경
+  - Contains Entity type에서 Menu_ID과의 mapping 대신 Order_Menu_ID로 진행하도록 로직 수정 (구현의 명확함을 위함)
+
+4. Users Entity type
+	- attribute 추가: User_Name
+
+5. Users Entity type Membership_tier attribute
+구현의 편리성을 위해 설정된 조건내용을 수정한다.
+* Phase1 당시 설정한 조건
+Membership_Tier : 회원 등급. 주문 횟수에 따라 다음과 같이 나뉜다.
+고마워요: ~ 10회
+최고에요: 11회 ~ 50회
+사랑해요: 51회 ~
+* Phase 2 수정 조건
+Membership_Tier : 회원 등급. 주문 횟수에 따라 다음과 같이 나뉜다.
+고마워요: 0 ~ 1회
+최고에요: 2회
+사랑해요: 4회
+
+*****************************************************************************
+********************  관계형 스키마 mapping 정보  *************************
+*****************************************************************************
+-- Step 1: Mapping of Regular Entity Types
+The Store, Menu, Department, User, Coupon, Review, Order relations
+* Relation R: the Store, Menu, Department, User, Coupon, Review, Order entity types
+* PKs: 
+Store_ID for Store
+Menu_ID for Menu
+Dname for Department
+User_ID for Users
+Coupon_ID for Coupon
+Review_ID for Reivew
+Order_ID for Orders
+
+
+--Step 2: Mapping of Weak Entity Types
+The Order_Menu relation
+* PK: {Order_Menu_ID, Order_ID}
+
+--Step 3: Mapping of Binary 1:1 Relationship Types
+We don't have a one-on-one relationship.
+
+--Step 4: Mapping of Binary 1:N Relationship Types
+1. The Sells relationship type in the ER schema
+* Relation S: The Menu entity type (N-side)
+* Relation T: The Store entity type (1-side)
+ * The FK(Store_ID) of S: borrowed from the PK, Store_ID of T
+
+2. The Rates relationship type in the ER schema
+* Relation S: The Review entity type (N-side)
+* Relation T: The Store entity type (1-side)
+ * The FK(Store_ID) of S: borrowed from the PK, Store_ID of T
+
+3. The Writes relationship type in the ER schema
+* Relation S: The Review entity type (N-side)
+* Relation T: The User entity type (1-side)
+ * The FK(User_ID) of S: borrowed from the PK, User_ID of T
+
+4. The Has relationship type in the ER schema
+* Relation S: The Coupon entity type (N-side)
+* Relation T: The User entity type (1-side)
+ * The FK(User_ID) of S: borrowed from the PK, User_ID of T
+
+5. The Belongs relationship type in the ER schema
+* Relation S: The User entity type (N-side)
+* Relation T: The Department entity type (1-side)
+ * The FK(Dname) of S: borrowed from the PK, Dname of T
+
+6. The Does relationship type in the ER schema
+* Relation S: The Order entity type (N-side)
+* Relation T: The User entity type (1-side)
+ * The FK(User_ID) of S: borrowed from the PK, User_ID of T
+
+7. The Takes relationship type in the ER schema
+* Relation S: The Order entity type (N-side)
+* Relation T: The Store entity type (1-side)
+ * The FK(Store_ID) of S: borrowed from the PK, Store_ID of T
+
+8. The Contains relationship type in the ER schema
+* Relation S: The Order_Menu entity type (N-side)
+* Relation T: The Order entity type (1-side)
+ * The FK(Order_ID) of S: borrowed from the PK, Order_ID of T
+* include Quantity attribute of the 1:N relationship type as attributes of S
+
+
+--Step 5: Mapping of Binary M:N Relationship Types
+1. The Contains relationship type in ER
+* Relation U: The Contains relationship
+* FKs(Order_Menu_ID and Review_ID):
+  borrowed from PKs(Order_Menu_ID, Review_ID) of the Order_Menu and Review relations, respectively
+* PK: {Order_Menu_ID, Review_ID}
+
+2. The Cooperates relationship type in ER
+* Relation U: The Cooperates relationship
+* FKs(Store_ID and Dname):
+  borrowed from PKs(Store_ID, Dname) of the Store and Department relations, respectively
+* PK: {Store_ID, Dname}
+
+
+--Step 6: Mapping of Multivalued Attributes
+The Address multi-valued attribute of User
+* Relation U: the User_Address relation
+* A attribute: UAddress, from Address of the User entity type
+* FK: User_ID, from the PK of the User entity type
+* PK: {User_Id, UAddress}
