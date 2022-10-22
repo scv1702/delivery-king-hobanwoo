@@ -2,8 +2,8 @@
 -- 1. IT대학에 속하는 USERS 정보 조회
 SELECT U.User_ID, U.Password, U.Dname, U.Phone_Number
 FROM USERS U
-WHERE U.Dname = 'IT대학';
-
+WHERE U.Dname = 'IT대학';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    
 -- 2. User_ID가 1인 USERS가 가지고 있는 Coupon 정보 조회
 SELECT C.Coupon_ID, C.User_ID, C.Discount_Amount, C.Expiration_date, C.Minimum_Order_Amount, C.State
 FROM Coupon C
@@ -47,7 +47,7 @@ WHERE Menu_Price <= (SELECT AVG(Menu_Price)
 		                   FROM Order_Menu);
 
 -- 2. "간호대학"에 다니는 유저와 동일한 학과에 속하는 유저의 이름과 학과 정보, 주문내역을 조회
-SELECT U.User_Name, U.Dname, O.Order_ID "주문번호", S.Store_Name "주문한 가게"
+SELECT U.User_Name, U.Dname, O.Order_ID "주문 번호", S.Store_Name "주문한 가게"
 FROM Users U, Orders O, Store S
 WHERE U.User_ID = O.User_ID  AND S.Store_ID = O.Store_ID
 AND U.Dname IN (SELECT U1.Dname
@@ -84,7 +84,7 @@ WHERE U.User_ID IN (SELECT User_ID FROM ORDERS);
                   
 -- Type 7
 -- 1. User_ID가 3 이하인 User의 이름과 학과, 저장된 주소 정보들을 조회
-SELECT U.User_Name "유저 이름", U.Dname "유저 학과", UA.UAddress "저장된 주소"
+SELECT U.User_Name "사용자 이름", U.Dname "사용자 학과", UA.UAddress "사용자 주소"
 FROM User_Address UA,
 	   (SELECT User_ID, User_Name, Dname
 	    FROM USERS
@@ -92,7 +92,7 @@ FROM User_Address UA,
 WHERE U.User_ID = UA.User_ID;
 
 -- 2. IT대학에서 주문을 3회 이상 한 User의 이름과 학과를 조회
-SELECT U.User_Name "유저 이름", U.Dname "유저 학과"
+SELECT U.User_Name "사용자 이름", U.Dname "사용자 학과"
 FROM (SELECT U.User_Name, U.Dname, COUNT(*)
       FROM USERS U, ORDERS O
       WHERE U.User_ID = O.User_ID
@@ -119,14 +119,13 @@ GROUP BY C.Dname
 ORDER BY count(*) DESC;
 
 -- Type 9
--- 1. "사랑해요" Tier 에 있는 사용자 정보(User_ID 와 학과 이름) User_ID 순서대로 전체 조회
--- 아직 불가능
-SELECT U2.User_ID, D.Dname
-FROM User U2, Department D
+-- 1. "사랑해요" Tier 에 있는 사용자 정보(User_ID, User_Name, 학과 이름) User_ID 순서대로 전체 조회
+SELECT U2.User_ID, U2.User_Name, D.Dname
+FROM Users U2, Department D
 WHERE U2.User_ID in (SELECT U.User_ID
                      FROM Orders O, Users U
 					 HAVING O.User_ID = U.User_ID
-                     AND count(*) > 51
+                     AND count(*) >= 4
 					 GROUP BY U.User_ID)
 AND U2.Dname = D.Dname
 ORDER BY U2.User_ID;

@@ -13,13 +13,13 @@ drop table cooperates cascade constraints;
 -- create relations
 CREATE TABLE Store(
     Store_ID NUMBER NOT NULL,
-    Address VARCHAR(1000) NOT NULL,
-    Food_Category VARCHAR(1000) NOT NULL,
-    Store_Name VARCHAR(1000) NOT NULL,
-    Phone_Number VARCHAR(1000) NOT NULL,
-    Description VARCHAR(1000),
+    Address VARCHAR2(100) NOT NULL,
+    Food_Category VARCHAR2(100) NOT NULL,
+    Store_Name VARCHAR2(100) NOT NULL,
+    Phone_Number VARCHAR2(14) NOT NULL,
+    Description VARCHAR2(1000),
     Delivery_Fee NUMBER NOT NULL,
-    Image VARCHAR(1000),
+    Image VARCHAR2(100),
     Business_Hour NUMBER NOT NULL,
     PRIMARY KEY(Store_ID),
     UNIQUE(Address)
@@ -28,42 +28,42 @@ CREATE TABLE Store(
 CREATE TABLE Menu(
     Menu_ID NUMBER NOT NULL,
     Store_ID NUMBER NOT NULL,
-    Mname VARCHAR(1000) NOT NULL,
-    Description VARCHAR(1000),
-    Image VARCHAR(1000),
+    Mname VARCHAR2(100) NOT NULL,
+    Description VARCHAR2(1000),
+    Image VARCHAR2(100),
     Price NUMBER NOT NULL,
     PRIMARY KEY(Menu_ID)
 );
 
 CREATE TABLE Department(
-    Dname VARCHAR(1000) NOT NULL,
+    Dname VARCHAR2(24) NOT NULL,
     PRIMARY KEY(Dname)
 );
 
 CREATE TABLE Users(
     User_ID NUMBER NOT NULL,
-    User_Name VARCHAR(1000) NOT NULL,
-    Dname VARCHAR(1000) NOT NULL,
-    Password VARCHAR(1000) NOT NULL,
-    Phone_Number VARCHAR(1000) NOT NULL,
-    --Membership_Tier VARCHAR(5) NOT NULL,
+    User_Name VARCHAR2(20) NOT NULL,
+    Dname VARCHAR2(24) NOT NULL,
+    Password VARCHAR2(15) NOT NULL,
+    Phone_Number VARCHAR2(14) NOT NULL,
+    Membership_Tier VARCHAR2(20) NOT NULL,
     PRIMARY KEY(User_ID),
     UNIQUE(Phone_Number)
 );
 
 CREATE TABLE User_Address(
     User_ID NUMBER NOT NULL,
-    UAddress VARCHAR(1000) NOT NULL,
+    UAddress VARCHAR2(100) NOT NULL,
     PRIMARY KEY(User_ID, UAddress)
 );
 
 CREATE TABLE Coupon(
     Coupon_ID NUMBER NOT NULL,
     User_ID NUMBER NOT NULL,
-    Discount_Amount VARCHAR(1000) NOT NULL,
+    Discount_Amount NUMBER NOT NULL,
     Expiration_Date DATE NOT NULL,
-    Minimum_Order_Amount VARCHAR(1000) NOT NULL,
-    State VARCHAR(1000) NOT NULL,
+    Minimum_Order_Amount NUMBER NOT NULL,
+    State VARCHAR2(100) NOT NULL,
     PRIMARY KEY(Coupon_ID)
 );
 
@@ -72,7 +72,7 @@ CREATE TABLE Review(
     User_ID NUMBER NOT NULL,
     Store_ID NUMBER NOT NULL,
     Star_Rating NUMBER NOT NULL,
-    Comments VARCHAR(1000),
+    Comments VARCHAR2(1000),
     Created_At DATE NOT NULL,
     PRIMARY KEY(Review_ID)
 );
@@ -81,8 +81,8 @@ CREATE TABLE Orders(
     Order_ID NUMBER NOT NULL,
     User_ID NUMBER NOT NULL,
     Store_ID NUMBER NOT NULL,
-    Payment VARCHAR(1000) NOT NULL,
-    State VARCHAR(1000) NOT NULL,
+    Payment VARCHAR2(100) NOT NULL,
+    State VARCHAR2(100) NOT NULL,
     Order_Date DATE NOT NULL,
     PRIMARY KEY(Order_ID)
 );
@@ -90,8 +90,8 @@ CREATE TABLE Orders(
 CREATE TABLE Order_Menu(
     Order_Menu_ID NUMBER NOT NULL,
     Order_ID NUMBER NOT NULL,
-    Menu_Name VARCHAR(1000) NOT NULL,
-    Menu_Image VARCHAR(1000),
+    Menu_Name VARCHAR2(100) NOT NULL,
+    Menu_Image VARCHAR2(100),
     Menu_Price NUMBER NOT NULL,
     Quantity NUMBER NOT NULL,
     PRIMARY KEY(Order_Menu_ID)
@@ -105,7 +105,7 @@ CREATE TABLE Contains(
 
 CREATE TABLE Cooperates(
     Store_ID NUMBER NOT NULL,
-    Dname VARCHAR(1000) NOT NULL,
+    Dname VARCHAR2(30) NOT NULL,
     PRIMARY KEY(Store_ID, Dname)
 );
 
