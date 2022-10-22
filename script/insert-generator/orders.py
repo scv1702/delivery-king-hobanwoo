@@ -6,4 +6,4 @@ order_rdr = csv.reader(order_f, delimiter='|')
 
 for order in order_rdr:
     Order_ID, User_ID, Store_ID, Payment, State, Order_Date = order
-    order_insert_f.write(f'insert into order values({Order_ID}, {User_ID}, {Store_ID}, \"{Payment}\", \"{State}\", to_date(\"{Order_Date}\", \"yyyy-mm-dd hh24:mi:ss\"));\n')
+    order_insert_f.write(f'insert into order values({Order_ID}, {User_ID}, {Store_ID}, \'{Payment}\', \'{State}\', to_date(\'{Order_Date}\', \'yyyy-mm-dd hh24:mi:ss\'));\n')

@@ -14,6 +14,6 @@ for stores in stores_rdr:
     business_hour = random.choice(business_hours)
 
     if description == "NULL":
-        stores_insert_f.write(f'insert into store values({stores_id}, \"{address}\", \"{category}\", \"{store_name}\", \"{phone_number}\", NULL, {delivery_fee}, \"{image}\", {business_hour});\n')
+        stores_insert_f.write(f'insert into store values({stores_id}, \'{address}\', \'{category}\', \'{store_name}\', \'{phone_number}\', NULL, {delivery_fee}, \'{image}\', {business_hour});\n')
     else:
-        stores_insert_f.write(f'insert into store values({stores_id}, \"{address}\", \"{category}\", \"{store_name}\", \"{phone_number}\", \"{description}\", {delivery_fee}, \"{image}\", {business_hour});\n')
+        stores_insert_f.write(f'insert into store values({stores_id}, \'{address}\', \'{category}\', \'{store_name}\', \'{phone_number}\', \'{description}\', {delivery_fee}, \'{image}\', {business_hour});\n')

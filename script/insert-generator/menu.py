@@ -11,11 +11,11 @@ for menu in menu_rdr:
 
     if description == "NULL":
         if image == "NULL":
-            menu_insert_f.write(f'insert into menu values({menu_id}, {store_id}, \"{menu_name}\", NULL, NULL, {price});\n')
+            menu_insert_f.write(f'insert into menu values({menu_id}, {store_id}, \'{menu_name}\', NULL, NULL, {price});\n')
         else:
-            menu_insert_f.write(f'insert into menu values({menu_id}, {store_id}, \"{menu_name}\", NULL, \"{image}\", {price});\n')
+            menu_insert_f.write(f'insert into menu values({menu_id}, {store_id}, \'{menu_name}\', NULL, \'{image}\', {price});\n')
     else:
         if image == "NULL":
-            menu_insert_f.write(f'insert into menu values({menu_id}, {store_id}, \"{menu_name}\", \"{description}\", \"{image}\", {price});\n')
+            menu_insert_f.write(f'insert into menu values({menu_id}, {store_id}, \'{menu_name}\', \'{description}\', \'{image}\', {price});\n')
         else:
-            menu_insert_f.write(f'insert into menu values({menu_id}, {store_id}, \"{menu_name}\", \"{description}\", NULL, {price});\n')
+            menu_insert_f.write(f'insert into menu values({menu_id}, {store_id}, \'{menu_name}\', \'{description}\', NULL, {price});\n')

@@ -6,4 +6,4 @@ user_address_rdr = csv.reader(user_address_f, delimiter='|')
 
 for user_address in user_address_rdr:
     User_ID, UAddress = user_address
-    user_address_insert_f.write(f'insert into user_address values({User_ID}, \"{UAddress}\");\n')
+    user_address_insert_f.write(f'insert into user_address values({User_ID}, \'{UAddress}\');\n')

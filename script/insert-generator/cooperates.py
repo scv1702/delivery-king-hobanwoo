@@ -8,4 +8,4 @@ cooperates_rdr = csv.reader(cooperates_f, delimiter='|')
 for cooperates in cooperates_rdr:
     # 1|간호대학
     store_id, dname = cooperates
-    cooperates_insert_f.write(f'insert into cooperates values({store_id}, \"{dname}\");\n')
+    cooperates_insert_f.write(f'insert into cooperates values({store_id}, \'{dname}\');\n')

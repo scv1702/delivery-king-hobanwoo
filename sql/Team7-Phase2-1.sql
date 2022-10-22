@@ -159,7 +159,6 @@ BEGIN
     WHERE C.Dname = :OLD.Dname;
 END;
 /
-ALTER TRIGGER Dname_change ENABLE;
 
 -- 영업 시간이 지난 Store에 Order 넣을 시 발생
 CREATE OR REPLACE TRIGGER BusinessHour_VIOLATION
@@ -171,10 +170,11 @@ BEGIN
     SELECT S.business_hour INTO Business_Hour
     FROM Store S
     WHERE S.Store_ID = :NEW.Store_ID;
-    
-    IF (TO_NUMBER(TO_CHAR(SYSDATE, 'HH24')) >= Business_Hour) THEN
+    IF (TO_NUMBER(TO_CHAR(:NEW.Order_Date, 'HH24')) >= Business_Hour) THEN
         RAISE_APPLICATION_ERROR(-20007, '영업 시간 종료로 인한 주문 불가');
     END IF;
 END;
 /
-ALTER TRIGGER BusinessHour_VIOLATION ENABLE;
+
+ALTER TRIGGER Dname_change DISABLE;
+ALTER TRIGGER BUSINESSHOUR_VIOLATION DISABLE;

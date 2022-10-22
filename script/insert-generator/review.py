@@ -6,4 +6,4 @@ review_rdr = csv.reader(review_f, delimiter='|')
 
 for review in review_rdr:
     Review_ID, User_ID, Store_ID, Star_Rating, Comment, Created_At = review
-    review_insert_f.write(f'insert into review values({Review_ID}, {User_ID}, {Store_ID}, {Star_Rating}, \"{Comment}\", to_date(\"{Created_At}\", \"yyyy-mm-dd hh24:mi:ss\"));\n')
+    review_insert_f.write(f'insert into review values({Review_ID}, {User_ID}, {Store_ID}, {Star_Rating}, \'{Comment}\', to_date(\'{Created_At}\', \'yyyy-mm-dd hh24:mi:ss\'));\n')

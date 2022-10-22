@@ -21,13 +21,13 @@
 │   ├── Team7-README.txt: SQL 동작 환경 및 실행 방법 등 설명하고자 하는 사항들에 대한 문서
 │   ├── Team7-etr_mapping.txt: ER Schema가 어떻게 관계형 Schema로 매핑 되었는지 관계 순으로 설명한 문서
 │   ├── diagrams: 각종 다이어그램
-│   │   ├── entity-relationship: ER 다이어그램
-│   │   │   ├── er_diagram.drawio
-│   │   │   ├── er_diagram.png
-│   │   │   └── er_diagram_README.pdf
-│   │   └── relational-model: ETR Mapping 다이어그램
-│   │       ├── relational-model.drawio
-│   │       └── relational-model.png
+│   │   ├── entity_relationship: ER 다이어그램
+│   │   │   ├── entity_relationship.drawio
+│   │   │   ├── entity_relationship.png
+│   │   │   └── entity_relationship.pdf
+│   │   └── ert_mapping: ETR Mapping 다이어그램
+│   │       ├── ert_mapping.drawio
+│   │       └── ert_mapping.png
 │   └── ppts: 발표 자료
 │       └── 배달왕_호반우_프로젝트_제안서.pptx
 ├── images: 수집한 이미지, 향후 구현에서 사용 예정
