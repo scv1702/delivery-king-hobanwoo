@@ -13,11 +13,11 @@ drop table cooperates cascade constraints;
 -- create relations
 CREATE TABLE Store(
     Store_ID NUMBER NOT NULL,
-    Address VARCHAR2(100) NOT NULL,
-    Food_Category VARCHAR2(100) NOT NULL,
-    Store_Name VARCHAR2(100) NOT NULL,
+    Address VARCHAR2(45) NOT NULL,
+    Food_Category VARCHAR2(30) NOT NULL,
+    Store_Name VARCHAR2(30) NOT NULL,
     Phone_Number VARCHAR2(14) NOT NULL,
-    Description VARCHAR2(1000),
+    Description VARCHAR2(200),
     Delivery_Fee NUMBER NOT NULL,
     Image VARCHAR2(100),
     Business_Hour NUMBER NOT NULL,
@@ -28,8 +28,8 @@ CREATE TABLE Store(
 CREATE TABLE Menu(
     Menu_ID NUMBER NOT NULL,
     Store_ID NUMBER NOT NULL,
-    Mname VARCHAR2(100) NOT NULL,
-    Description VARCHAR2(1000),
+    Mname VARCHAR2(50) NOT NULL,
+    Description VARCHAR2(500),
     Image VARCHAR2(100),
     Price NUMBER NOT NULL,
     PRIMARY KEY(Menu_ID)
@@ -42,7 +42,7 @@ CREATE TABLE Department(
 
 CREATE TABLE Users(
     User_ID NUMBER NOT NULL,
-    User_Name VARCHAR2(20) NOT NULL,
+    User_Name VARCHAR2(30) NOT NULL,
     Dname VARCHAR2(24) NOT NULL,
     Password VARCHAR2(15) NOT NULL,
     Phone_Number VARCHAR2(14) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE Coupon(
     Discount_Amount NUMBER NOT NULL,
     Expiration_Date DATE NOT NULL,
     Minimum_Order_Amount NUMBER NOT NULL,
-    State VARCHAR2(13) NOT NULL,
+    State VARCHAR2(15) NOT NULL,
     PRIMARY KEY(Coupon_ID)
 );
 
@@ -72,7 +72,7 @@ CREATE TABLE Review(
     User_ID NUMBER NOT NULL,
     Store_ID NUMBER NOT NULL,
     Star_Rating NUMBER NOT NULL,
-    Comments VARCHAR2(1000),
+    Comments VARCHAR2(500),
     Created_At DATE NOT NULL,
     PRIMARY KEY(Review_ID)
 );
@@ -90,7 +90,7 @@ CREATE TABLE Orders(
 CREATE TABLE Order_Menu(
     Order_Menu_ID NUMBER NOT NULL,
     Order_ID NUMBER NOT NULL,
-    Menu_Name VARCHAR2(100) NOT NULL,
+    Menu_Name VARCHAR2(50) NOT NULL,
     Menu_Image VARCHAR2(100),
     Menu_Price NUMBER NOT NULL,
     Quantity NUMBER NOT NULL,

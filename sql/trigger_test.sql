@@ -6,21 +6,7 @@
 
 -- 1. Dname_change trigger TEST
 -- 학과명 변경시 해당 학과를 참조하고 있는 모든 릴레이션 또한 갱신
-CREATE OR REPLACE TRIGGER Dname_change
-AFTER UPDATE OF Dname ON Department
-FOR EACH ROW
-BEGIN
-    UPDATE Users U
-    SET U.Dname = :NEW.Dname 
-    WHERE U.Dname = :OLD.Dname;
-    
-    UPDATE Cooperates C
-    SET  C.Dname = :NEW.Dname
-    WHERE C.Dname = :OLD.Dname;
-END;
-/
 ALTER TRIGGER Dname_change ENABLE;
-
 
 -- 학과 이름을 바꾸기 TEST
 -- 바꾸기 전
@@ -71,50 +57,32 @@ WHERE c.dname='컴퓨터학부';
 --            10       컴퓨터학부
 --            18       컴퓨터학부
 
-
 -- 2. BusinessHour_VIOLATION trigger TEST
 -- 영업 시간이 지난 Store에 Order 넣을 시 발생 트리거
-CREATE OR REPLACE TRIGGER BusinessHour_VIOLATION
-BEFORE INSERT ON Orders
-FOR EACH ROW
-DECLARE
-   Business_Hour NUMBER;
-BEGIN
-    SELECT S.business_hour INTO Business_Hour
-    FROM Store S
-    WHERE S.Store_ID = :NEW.Store_ID;
-    
-    IF (TO_NUMBER(TO_CHAR(SYSDATE, 'HH24')) >= Business_Hour) THEN
-        RAISE_APPLICATION_ERROR(-20007, '영업 시간 종료로 인한 주문 불가');
-    END IF;
-END;
-/
 ALTER TRIGGER BusinessHour_VIOLATION ENABLE;
 
--- 영업시간이 지난 Store에 Order 넣을 시 오류보고 TEST
+-- 영업 시간이 지난 Store에 Order 넣을 시 오류 보고 TEST
 INSERT INTO Orders VALUES(51, 1, 7, '카드', '접수 중', to_date(sysdate, 'yyyy-mm-dd hh24:mi:ss'))
 
 -- 명령의 50 행에서 시작하는 중 오류 발생 -
 -- INSERT INTO Orders VALUES(51, 1, 7, '카드', '접수 중', to_date(sysdate, 'yyyy-mm-dd hh24:mi:ss'))
 -- 오류 보고 -
 -- ORA-20007: 영업시간 종료 -> 주문불가
--- ORA-06512: "DELIVERYKINGHOBANWOO.BUSINESSHOUR_VIOLATION",  9행
+-- ORA-06512: "DELIVERYKINGHOBANWOO.BUSINESSHOUR_VIOLATION", 9행
 -- ORA-04088: 트리거 'DELIVERYKINGHOBANWOO.BUSINESSHOUR_VIOLATION'의 수행시 오류
 
 SELECT * 
 FROM orders
-WHERE Order_ID=51;
+WHERE Order_ID = 51;
 -- 선택된 행 없음
 
-
--- 영업시간 내에 Store에 Order에 넣을 시 TEST
+-- 영업 시간 내에 Store에 Order에 넣을 시 TEST
 INSERT INTO Orders VALUES(51, 1, 7, '카드', '접수 중', to_date(sysdate, 'yyyy-mm-dd hh24:mi:ss'))
 -- 1 행 이(가) 삽입되었습니다.
 
 SELECT * 
 FROM orders
-WHERE Order_ID=51;
-
+WHERE Order_ID = 51;
 -- ORDER_ID   USER_ID   STORE_ID   PAYMENT    STATE       ORDER_DATE
 -- ------------   ---------   -----------   -----------    ---------   -----------------
 --           51           1              7           카드    접수 중          22/10/22
