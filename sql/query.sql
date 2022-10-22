@@ -161,4 +161,3 @@ FROM Users U1, Orders O1, Store S1
 WHERE U1.User_ID = O1.User_ID 
 AND O1.Store_ID = S1.Store_ID 
 AND S1.Address LIKE '%아양로%';
-    

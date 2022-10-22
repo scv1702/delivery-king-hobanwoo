@@ -63,7 +63,7 @@ CREATE TABLE Coupon(
     Discount_Amount NUMBER NOT NULL,
     Expiration_Date DATE NOT NULL,
     Minimum_Order_Amount NUMBER NOT NULL,
-    State VARCHAR2(100) NOT NULL,
+    State VARCHAR2(13) NOT NULL,
     PRIMARY KEY(Coupon_ID)
 );
 
@@ -144,3 +144,37 @@ ON DELETE CASCADE;
 
 ALTER TABLE Order_Menu ADD FOREIGN KEY (Order_ID) REFERENCES Orders(Order_ID)
 ON DELETE CASCADE;
+
+-- 학과명 변경시 해당 학과를 참조하고 있는 모든 릴레이션 또한 갱신
+CREATE OR REPLACE TRIGGER Dname_change
+AFTER UPDATE OF Dname ON Department
+FOR EACH ROW
+BEGIN
+    UPDATE Users U
+    SET U.Dname = :NEW.Dname 
+    WHERE U.Dname = :OLD.Dname;
+    
+    UPDATE Cooperates C
+    SET  C.Dname = :NEW.Dname
+    WHERE C.Dname = :OLD.Dname;
+END;
+/
+ALTER TRIGGER Dname_change ENABLE;
+
+-- 영업 시간이 지난 Store에 Order 넣을 시 발생
+CREATE OR REPLACE TRIGGER BusinessHour_VIOLATION
+BEFORE INSERT ON Orders
+FOR EACH ROW
+DECLARE
+   Business_Hour NUMBER;
+BEGIN
+    SELECT S.business_hour INTO Business_Hour
+    FROM Store S
+    WHERE S.Store_ID = :NEW.Store_ID;
+    
+    IF (TO_NUMBER(TO_CHAR(SYSDATE, 'HH24')) >= Business_Hour) THEN
+        RAISE_APPLICATION_ERROR(-20007, '영업 시간 종료로 인한 주문 불가');
+    END IF;
+END;
+/
+ALTER TRIGGER BusinessHour_VIOLATION ENABLE;
