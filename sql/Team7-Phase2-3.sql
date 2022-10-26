@@ -18,7 +18,7 @@ AND U.Dname = C.Dname
 AND C.Store_ID = S.Store_ID
 AND U.Dname = D.Dname;
 
--- 2. User_ID가 1인 USER가 리뷰를 작성한 모든 Store 정보
+-- 2. User_ID가 2인 USER가 리뷰를 작성한 모든 Store 정보
 SELECT S.Store_Name, S.Food_Category, S.Description, S.Image
 FROM Store S, USERS U, Review R
 WHERE U.User_ID = 2
@@ -26,7 +26,7 @@ AND U.User_ID = R.User_ID
 AND R.Store_ID = S.Store_ID;
 
 -- Type 3
--- 1. User_ID가 1인 USER가 현재까지 주문을 진행한 총 횟수
+-- 1. User_ID가 2인 USER가 현재까지 주문을 진행한 총 횟수
 SELECT COUNT(*)
 FROM USERS U, ORDERS O
 WHERE U.User_ID = 2
@@ -130,7 +130,7 @@ WHERE U2.User_ID in (SELECT U.User_ID
 AND U2.Dname = D.Dname
 ORDER BY U2.User_ID;
 
--- 2. 주문 수가 50개 이상인 가게의 가게 정보와 제휴 학과 정보
+-- 2. 주문 수가 3개 초과인 가게의 가게 정보와 제휴 학과 정보
 SELECT C.Dname, S.Store_Name, S.Food_Category, S.Description
 FROM Cooperates C, Store S
 WHERE C.Store_ID = S.Store_ID
