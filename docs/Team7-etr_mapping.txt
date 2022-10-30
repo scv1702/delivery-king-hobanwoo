@@ -12,8 +12,8 @@
 		- attribute 추가: State (Coupon 사용 여부, 상태 파악)
 
 	3) Order_Menu Entity type
-		- Order_Menu_ID를 partial key로 변경
-		- Contains Entity type에서 Menu_ID과의 mapping 대신 Order_Menu_ID로 진행하도록 로직 수정 (구현에 있어 편의성을 위함)
+		- Order_Menu_ID를 surrogate_id로 추가하고 Menu_Name 대신 Order_Menu_ID를 partial key로 변경
+		- Contains Entity type에서 Menu_ID과의 mapping 대신 Order_ID, Order_Menu_ID로 진행하도록 로직 수정 (구현에 있어 편의성을 위함)
 
 	4) Users Entity type
 		- attribute 추가: User_Name
@@ -98,9 +98,9 @@
 	5) Step 5: Mapping of Binary M:N Relationship Types
 		5-1). The Contains relationship type in ER
 			* Relation U: The Contains relationship
-			* FKs(Order_Menu_ID and Review_ID):
-			borrowed from PKs(Order_Menu_ID, Review_ID) of the Order_Menu and Review relations, respectively
-			* PK: {Order_Menu_ID, Review_ID}
+			* FKs(Order_Menu_ID and Order_ID and Review_ID):
+			borrowed from PKs(Order_Menu_ID, Order_ID, Review_ID) of the Order_Menu and Review relations, respectively
+			* PK: {Order_Menu_ID, Order_ID, Review_ID}
 
 		5-2) The Cooperates relationship type in ER
 			* Relation U: The Cooperates relationship
