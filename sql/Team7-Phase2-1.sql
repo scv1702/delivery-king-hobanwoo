@@ -1,14 +1,14 @@
-drop table store cascade constraints;
-drop table menu cascade constraints;
-drop table department cascade constraints;
-drop table users cascade constraints;
-drop table user_address cascade constraints;
-drop table coupon cascade constraints;
-drop table review cascade constraints;
-drop table orders cascade constraints;
-drop table order_menu cascade constraints;
-drop table contains cascade constraints;
-drop table cooperates cascade constraints;
+DROP TABLE Store CASCADE CONSTRAINTS;
+DROP TABLE Menu CASCADE CONSTRAINTS;
+DROP TABLE Department CASCADE CONSTRAINTS;
+DROP TABLE Users CASCADE CONSTRAINTS;
+DROP TABLE User_Address CASCADE CONSTRAINTS;
+DROP TABLE Coupon CASCADE CONSTRAINTS;
+DROP TABLE Review CASCADE CONSTRAINTS;
+DROP TABLE Orders CASCADE CONSTRAINTS;
+DROP TABLE Order_Menu CASCADE CONSTRAINTS;
+DROP TABLE Contains CASCADE CONSTRAINTS;
+DROP TABLE Cooperates CASCADE CONSTRAINTS;
 
 -- create relations
 CREATE TABLE Store(
@@ -94,13 +94,14 @@ CREATE TABLE Order_Menu(
     Menu_Image VARCHAR2(100),
     Menu_Price NUMBER NOT NULL,
     Quantity NUMBER NOT NULL,
-    PRIMARY KEY(Order_Menu_ID)
+    PRIMARY KEY(Order_Menu_ID, Order_ID)
 );
 
 CREATE TABLE Contains(
     Order_Menu_ID NUMBER NOT NULL,
+    Order_ID NUMBER NOT NULL,
     Review_ID NUMBER NOT NULL,
-    PRIMARY KEY(Order_Menu_ID, Review_ID)
+    PRIMARY KEY(Order_Menu_ID, Order_ID, Review_ID)
 );
 
 CREATE TABLE Cooperates(
@@ -122,7 +123,7 @@ ON DELETE CASCADE;
 ALTER TABLE Orders ADD FOREIGN KEY (Store_ID) REFERENCES Store(Store_ID)
 ON DELETE SET NULL;
 
-ALTER TABLE Contains ADD FOREIGN KEY (Order_Menu_ID) REFERENCES Order_Menu(Order_Menu_ID);
+ALTER TABLE Contains ADD FOREIGN KEY (Order_ID, Order_Menu_ID) REFERENCES Order_Menu(Order_ID, Order_Menu_ID);
 
 ALTER TABLE Users ADD FOREIGN KEY (Dname) REFERENCES Department(Dname)
 ON DELETE SET NULL;
