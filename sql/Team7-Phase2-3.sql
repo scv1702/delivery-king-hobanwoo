@@ -85,10 +85,9 @@ WHERE U.User_ID IN (SELECT User_ID FROM ORDERS);
 -- Type 7
 -- 1. User_ID가 3 이하인 User의 이름과 학과, 저장된 주소 정보들을 조회
 SELECT U.User_Name "사용자 이름", U.Dname "사용자 학과", UA.UAddress "사용자 주소"
-FROM User_Address UA,
-	   (SELECT User_ID, User_Name, Dname
-	    FROM USERS
-        WHERE User_ID <= 3) U
+FROM User_Address UA, (SELECT User_ID, User_Name, Dname
+                      FROM USERS
+                      WHERE User_ID <= 3) U
 WHERE U.User_ID = UA.User_ID;
 
 -- 2. IT대학에서 주문을 3회 이상 한 User의 이름과 학과를 조회
@@ -119,13 +118,13 @@ GROUP BY C.Dname
 ORDER BY count(*) DESC;
 
 -- Type 9
--- 1. "사랑해요" Tier 에 있는 사용자 정보(User_ID, User_Name, 학과 이름) User_ID 순서대로 전체 조회
+-- 1. "사랑해요" Tier에 있는 사용자 정보(User_ID, User_Name, 학과 이름) User_ID 순서대로 전체 조회
 SELECT U2.User_ID, U2.User_Name, D.Dname
 FROM Users U2, Department D
 WHERE U2.User_ID in (SELECT U.User_ID
                      FROM Orders O, Users U
                      WHERE O.User_ID = U.User_ID
-		    GROUP BY U.User_ID
+		         GROUP BY U.User_ID
                      HAVING count(*) >= 4)
 AND U2.Dname = D.Dname
 ORDER BY U2.User_ID;
