@@ -124,9 +124,9 @@ SELECT U2.User_ID, U2.User_Name, D.Dname
 FROM Users U2, Department D
 WHERE U2.User_ID in (SELECT U.User_ID
                      FROM Orders O, Users U
-					 HAVING O.User_ID = U.User_ID
-                     AND count(*) >= 4
-					 GROUP BY U.User_ID)
+                     WHERE O.User_ID = U.User_ID
+		    GROUP BY U.User_ID
+                     HAVING count(*) >= 4)
 AND U2.Dname = D.Dname
 ORDER BY U2.User_ID;
 
