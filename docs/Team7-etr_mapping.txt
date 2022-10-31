@@ -3,7 +3,7 @@
 	2) 관계형 스키마 mapping 정보
 
 2. Phase2 진행 과정 중 수정한 Phase 1 보완 사항
-	1) 테이블 생성 시 예약어 사용으로 오류보고 (ORA-00904 부적합한 식별자)
+	1) 테이블 생성 시 예약어 사용으로 오류 보고 (ORA-00904 부적합한 식별자)
 		- 테이블 명 변경: User -> Users
 		- 테이블 명 변경: Order -> Orders
 		- attribute 명 변경: comment -> comments
