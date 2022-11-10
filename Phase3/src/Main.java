@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,6 +19,29 @@ public class Main {
     public static Statement stmt = null;	// Statement object
 
     static Announcement ment = new Announcement(); // announcement를 위한 객체생성
+
+
+    // PreparedStatement를 통한 SQL Templete 사용
+    String Store_Templete="INSERT INTO STORE VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+    String Menu_Templete="INSERT INTO MENU VALUES ( ?, ?, ?, ?, ?, ? )";
+    String Department_Templete="INSERT INTO DEPARTMENT VALUES ( ? )";
+    String Users_Templete="INSERT INTO USERS VALUES ( ?, ?, ?, ?, ?, ? )";
+    String User_Address_Templete="INSERT INTO USER_ADDRESS VALUES ( ?, ? )";
+    String Coupon_Templete="INSERT INTO COUPON VALUES ( ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd'), ?, ? )";
+    String Review_Templete="INSERT INTO REVIEW VALUES ( ?, ?, ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd') )";
+    String Orders_Templete="INSERT INTO ORDERS VALUES ( ?, ?, ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd') )";
+    String Order_Menu_Templete="INSERT INTO ORDER_MENU VALUES ( ?, ?, ?, ?, ?, ? )";
+    String Contains_Templete="INSERT INTO CONTAINS VALUES ( ?, ?, ? )";
+    String Cooperates_Templete="INSERT INTO COOPERATES VALUES ( ?, ? )";
+
+    static void WaitBeforeReprint(){
+        try {
+            Thread.sleep(1500); // 바로 다른 출력문이 나오지 않게 뜸 들이기
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
     public static void main(String[] args) {
         connectToDb();
 
@@ -39,11 +63,12 @@ public class Main {
                     System.out.println("잘못 입력하셨습니다.");
                     break;
             }
+            WaitBeforeReprint(); // 바로 다른 출력문이 나오지 않게 뜸 들이기
             if (isLogin) {
-                // announcement
-                ment.FunctionSelect();
-
                 while (true) {
+                    // announcement
+                    ment.FunctionSelect();
+
                     switch (in.nextInt()) {
                         case 1:
                             profile();
@@ -66,6 +91,7 @@ public class Main {
                             System.exit(0);
                             break;
                     }
+                    WaitBeforeReprint(); // 바로 다른 출력문이 나오지 않게 뜸 들이기
                 }
             }
         }
@@ -97,20 +123,22 @@ public class Main {
 
     public static void menu() {
         Scanner in = new Scanner(System.in);
-
-        // announcement
+        // Menu 기능 인터페이스 announcement
         ment.menuAnnouncement();
 
         int funSelect= in.nextInt();
         switch (funSelect){
-            case 1: // 내 학과 전체 제휴업체 메뉴
+            case 1: // 음식 카테고리별 제휴업체 조회
+                System.out.println("아직 구현 전");
+                // 아래 case2 포맷과 동일하게 생성하면 될 듯
+                break;
+            case 2: // 내 학과 전체 제휴업체 메뉴
                 ///////////////   쿼리문      ////////
-                ///////////////              ///////
                 ////////////////////////////////////
 
                 ///////////////////////////////////
                 /////////// 테스트 코드//////////////
-                // StartAnnouncement
+                // Start Announcement
                 ment.All_AffiliatesStartAnnouncement();
 
                 int Menu_ID[] = {0, 1};
@@ -130,13 +158,12 @@ public class Main {
                     );
                 }
 
-                // EndAnnouncement
+                // End Announcement
                 ment.All_AffiliatesEndAnnouncement();
-
                 ////////////////////////////////////////
                 ////////////////////////////////////////
                 break;
-            case 2: // 내 주소에 있는 학과 제휴업체 메뉴
+            case 3: // 내 주소에 있는 학과 제휴업체 메뉴
                 System.out.println("아직 구현 전");
                 // case1 포맷과 동일하게 생성하면 될 듯
 
@@ -145,15 +172,158 @@ public class Main {
     }
 
     public static void order() {
-        System.out.println("order Function");
+        Scanner in = new Scanner(System.in);
+        ////////////////////////////////////////////////////
+        /////////////////////  테스트 코드  //////////////////
+
+        // Start Announcement
+        ment.orderStartAnnouncement();
+
+        //////////////// order 주문하기 format /////////////////
+        // order 파트 format
+        int Order_ID= 0; // 자동으로 오름차순으로 되도록
+        int User_ID= 0; // 유저ID는 회원정보에서 가져올 수 있도록
+        int Store_ID= 0;
+        String Payment="";
+        String State= "접수 중"; // 접수 중 으로 고정
+        String Created_At= "2021-09-25 15:43:48"; // 작성일 현재 날짜로 받아올 수 있도록 수정
+
+        // order_menu 파트 format
+        int Order_Menu_ID= 0;
+        String Menu_Name="";
+        String Menu_Image="3.jpg"; // 메뉴 이미지도 Menu를 통해서 가져올 수 있도록
+        int Menu_Price=0; // 메뉴가격도 Menu를 통해서 가져올 수 있도록
+        int Quantity=0;
+
+        // 입력 받기
+        System.out.print("│  주문시킬 가게ID : ");
+        Store_ID= in.nextInt();
+        in.nextLine(); // Int받고 String받을 때 개행문자 제거 하기 위함.
+
+        ///////////문제 있는지 없는지 테스트하고 문제없다면  ////////////////
+        ////////// Order_Menu로 바로 이어지도록          ////////////////
+        ////// 단일 메뉴뿐 아니라 여러 메뉴를 주문 시킬 수 있도록 수정 필요 //////////
+        System.out.print("│  주문 메뉴 이름 : ");
+        Menu_Name = in.nextLine();
+        System.out.print("│  주문 수량 : ");
+        Quantity= in.nextInt();
+        in.nextLine(); // Int받고 String받을 때 개행문자 제거 하기 위함.
+        System.out.print("│  결제 방식 : ");
+        Payment= in.nextLine();
+
+        // End announcement
+        ment.orderEndAnnouncement();
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
     }
 
     public static void myOrder() {
-        System.out.println("mrOrder Function");
+        ///////////////////////////////////
+        /////////// 테스트 코드//////////////
+        // Start Announcement
+        ment.myOrderStartAnnouncement();
+
+        int Order_ID[] = {0, 1};
+        int User_ID[] = {7, 8};
+        int Store_ID[] = {12, 31};
+        String Payment[] = {"카드", "현금"};
+        String State[] = {"배달 완료", "배달 중"};
+        String Order_Date[] = {
+                "2021-08-23 12:37:48",
+                "2021-08-26 23:37:49"};
+
+        // announcement
+        for(int i=0; i<Order_ID.length; i++){
+            ment.myOrderAnnouncement(
+                    Order_ID[i],
+                    User_ID[i],
+                    Store_ID[i],
+                    Payment[i],
+                    State[i],
+                    Order_Date[i]
+            );
+        }
+        // End Announcement
+        ment.myOrderEndAnnouncement();
+        ////////////////////////////////////////
+        ////////////////////////////////////////
     }
 
     public static void review() {
-        System.out.println("review Function");
+        ///////////////////////////////////
+        ////////////테스트 코드//////////////
+        Scanner in = new Scanner(System.in);
+
+        // Review 기능 인터페이스 announcement
+        ment.ReviewAnnouncement();
+
+        int funSelect= in.nextInt();
+        switch (funSelect){
+            case 1: // 리뷰 작성
+                in = new Scanner(System.in);
+                ///////////////////////////////////////////////////////
+                ///////// 테스트 코드 ///////////////////////////////////
+                // Start announcement
+                ment.ReviewStartAnnouncement(1);
+
+                // Review 작성 format
+                int Review_ID= 0; // 자동으로 오름차순으로 되도록
+                int User_ID= 0; // 유저ID는 회원정보에서 가져올 수 있도록
+                int Store_ID= 0;
+                int Star_Rating=0;
+                String Comments= "";
+                String Created_At= "2021-09-25 15:43:48"; // 작성일 현재 날짜로 받아올 수 있도록
+
+                // 입력 받기
+                System.out.print("│  가게ID : ");
+                Store_ID= in.nextInt();
+                System.out.print("│  평점 : ");
+                Star_Rating= in.nextInt();
+                in.nextLine(); // Int형 받고 string형 받았을 때의 개행문자 제거
+                System.out.print("│  리뷰 내용 : ");
+                Comments= in.nextLine();
+
+                //////////////쿼리문///////////////
+                //////////////       ////////////
+                /////////////////////////////////
+                // Data announcement
+                ment.ReviewDataAnnouncement(
+                        1,
+                        Review_ID,
+                        User_ID,
+                        Store_ID,
+                        Star_Rating,
+                        Comments,
+                        Created_At
+                );
+                /////////////////////////////////////////////////
+                /////////////////////////////////////////////////
+                break;
+            case 2: // 리뷰 수정
+                // Start announcement
+                ment.ReviewStartAnnouncement(2);
+                System.out.println("아직 구현 전");
+                break;
+            case 3: // 리뷰 삭제
+                // Start announcement
+                ment.ReviewStartAnnouncement(3);
+                System.out.println("아직 구현 전");
+                break;
+            case 4: // 내가 쓴 리뷰 조회
+                // Start announcement
+                ment.ReviewStartAnnouncement(4);
+                System.out.println("아직 구현 전");
+                break;
+            case 5: // 선택 가게 리뷰 조회
+                // Start announcement
+                ment.ReviewStartAnnouncement(5);
+                System.out.println("아직 구현 전");
+                break;
+        }
+        // End announcement
+        ment.ReviewEndAnnouncement();
+        //////////////////////////////////////////
+        //////////////////////////////////////////
     }
 
     public static void signup() {
@@ -163,7 +333,7 @@ public class Main {
          멤버십티어는 디폴트값 => 고마워요. 입력 받을 필요 X
          **/
 
-        // announcement
+        // Start announcement
         ment.SignUpStartAnnouncement();
 
         // 회원가입 정보 입력받기
@@ -180,13 +350,10 @@ public class Main {
 
             // announcement
             ment.SignUpEndAnnouncement();
-            Thread.sleep(1000);
+            
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
-
     }
 
     public static boolean login() {
@@ -195,7 +362,7 @@ public class Main {
         String userName= "";
         String password= "";
 
-        // announcement
+        // Start announcement
         ment.LoginStartAnnouncement();
         // 입력 받기
         System.out.print("유저이름 : ");
@@ -207,7 +374,7 @@ public class Main {
         ///////////                        //////////
         /////////////////////////////////////////////
 
-        // announcement
+        // End announcement
         ment.LoginEndAnnouncement();
 
         return true;
@@ -234,5 +401,4 @@ public class Main {
             System.exit(1);
         }
     }
-
 }
