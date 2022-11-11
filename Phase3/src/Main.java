@@ -110,12 +110,12 @@ public class Main {
 
     public static void profile() {
         try {
-            /////////////쿼리문 수행해서 값 받아오기////////
+            /////////////쿼리문 수행해서 값 받아오기//////////
             String sql = "SELECT * from USERS WHERE USER_ID = ?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, User_ID);
             rs = ps.executeQuery();
-            while(rs.next()) {
+            if(rs.next()) {
                 String User_Name = rs.getString(2);
                 String Dname = rs.getString(3);
                 String Password = rs.getString(4);
@@ -360,7 +360,6 @@ public class Main {
             rs = stmt.executeQuery(sql);
             while(rs.next()) {
                 User_ID= rs.getInt(1);
-                break;
             }
             sql = Users_Templete;
             ps = conn.prepareStatement(sql);
@@ -371,14 +370,14 @@ public class Main {
             ps.setString(5, signUpInfoSubStr[3]); // PHONE_NUMBER
             ps.setString(6, "고마워요"); // Membership_tier
             int resINSERT = ps.executeUpdate();
-            if(resINSERT==0){
+            if(resINSERT== 1){
                 // announcement
                 ment.SignUpEndAnnouncement();
             }else{
                 System.out.println("양식을 다시 확인하세요.");
             }
         } catch (IOException | SQLException | ArrayIndexOutOfBoundsException e) {
-            System.out.println("양식을 다시 확인하세요.");
+            System.out.println("양식을 다시 확인하세요." + e.getMessage());
         }
     }
 
