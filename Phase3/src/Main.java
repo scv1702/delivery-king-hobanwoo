@@ -1,38 +1,41 @@
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.Scanner;
-
 public class Main {
-    // 신찬규
-    // public static final String URL = "jdbc:oracle:thin:@localhost:1600:xe";
-
+    /** 신찬규
+    public static final String URL = "jdbc:oracle:thin:@localhost:1600:xe";
+    public static final String USER_UNIVERSITY = "university";
+    public static final String USER_PASSWD = "comp322";
+     **/
     // 노준혁
     public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 
-    public static final String USER_UNIVERSITY = "university";
+    public static final String USER_UNIVERSITY = "deliverykinghobanwoo"; // DB스키마 변수 수정 아직 안함.
     public static final String USER_PASSWD = "comp322";
 
     public static Connection conn = null; // Connection object
     public static Statement stmt = null;	// Statement object
 
+    /////////////// Setting  ////////////////////////
+    static PreparedStatement ps = null;
+    static ResultSet rs= null;
     static Announcement ment = new Announcement(); // announcement를 위한 객체생성
-
+    static int User_ID = 0;
 
     // PreparedStatement를 통한 SQL Templete 사용
-    String Store_Templete="INSERT INTO STORE VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )";
-    String Menu_Templete="INSERT INTO MENU VALUES ( ?, ?, ?, ?, ?, ? )";
-    String Department_Templete="INSERT INTO DEPARTMENT VALUES ( ? )";
-    String Users_Templete="INSERT INTO USERS VALUES ( ?, ?, ?, ?, ?, ? )";
-    String User_Address_Templete="INSERT INTO USER_ADDRESS VALUES ( ?, ? )";
-    String Coupon_Templete="INSERT INTO COUPON VALUES ( ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd'), ?, ? )";
-    String Review_Templete="INSERT INTO REVIEW VALUES ( ?, ?, ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd') )";
-    String Orders_Templete="INSERT INTO ORDERS VALUES ( ?, ?, ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd') )";
-    String Order_Menu_Templete="INSERT INTO ORDER_MENU VALUES ( ?, ?, ?, ?, ?, ? )";
-    String Contains_Templete="INSERT INTO CONTAINS VALUES ( ?, ?, ? )";
-    String Cooperates_Templete="INSERT INTO COOPERATES VALUES ( ?, ? )";
+    static String Store_Templete="INSERT INTO STORE VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+    static String Menu_Templete="INSERT INTO MENU VALUES ( ?, ?, ?, ?, ?, ? )";
+    static String Department_Templete="INSERT INTO DEPARTMENT VALUES ( ? )";
+    static String Users_Templete="INSERT INTO USERS VALUES ( ?, ?, ?, ?, ?, ? )";
+    static String User_Address_Templete="INSERT INTO USER_ADDRESS VALUES ( ?, ? )";
+    static String Coupon_Templete="INSERT INTO COUPON VALUES ( ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd'), ?, ? )";
+    static String Review_Templete="INSERT INTO REVIEW VALUES ( ?, ?, ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd') )";
+    static String Orders_Templete="INSERT INTO ORDERS VALUES ( ?, ?, ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd') )";
+    static String Order_Menu_Templete="INSERT INTO ORDER_MENU VALUES ( ?, ?, ?, ?, ?, ? )";
+    static String Contains_Templete="INSERT INTO CONTAINS VALUES ( ?, ?, ? )";
+    static String Cooperates_Templete="INSERT INTO COOPERATES VALUES ( ?, ? )";
 
     static void WaitBeforeReprint(){
         try {
@@ -88,6 +91,14 @@ public class Main {
                         case 6:
                             // announcement
                             ment.ProgramExitAnnouncement();
+
+                            try {
+                                ps.close();
+                                rs.close();
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+
                             System.exit(0);
                             break;
                     }
@@ -98,27 +109,32 @@ public class Main {
     }
 
     public static void profile() {
-        /////////////쿼리문 수행해서 값 받아오기////////
-        ////////                           ////////
-        ///////////////////////////////////////////
-        /////////// 테스트 코드//////////////
-        int User_ID = 0;
-        String User_Name = "나는 배달왕 이지안";
-        String Dname = "컴퓨터학부";
-        String Password = "abc12345";
-        String Phone_Number = "010-300-0030";
-        String Membership_Tier = "고마워요";
-        ///////////////////////////////////
+        try {
+            /////////////쿼리문 수행해서 값 받아오기////////
+            String sql = "SELECT * from USERS WHERE USER_ID = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, User_ID);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                String User_Name = rs.getString(2);
+                String Dname = rs.getString(3);
+                String Password = rs.getString(4);
+                String Phone_Number= rs.getString(5);
+                String Membership_Tier = rs.getString(6);
 
-        // announcement
-        ment.ProfileAnnouncement(
-                User_ID,
-                User_Name,
-                Dname,
-                Password,
-                Phone_Number,
-                Membership_Tier
-        );
+                // announcement
+                ment.ProfileAnnouncement(
+                        User_ID,
+                        User_Name,
+                        Dname,
+                        Password,
+                        Phone_Number,
+                        Membership_Tier
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println("sql error = " + e.getMessage());
+        }
     }
 
     public static void menu() {
@@ -327,11 +343,8 @@ public class Main {
     }
 
     public static void signup() {
-        /**
-         유저이름#비밀번호#학과(학부)#연락처
-         ID값은 자동으로 오름차순.
-         멤버십티어는 디폴트값 => 고마워요. 입력 받을 필요 X
-         **/
+        // User_ID는 계속 쓸 수 있도록 전역으로 받고 유지
+        // 멤버십티어는 디폴트값 => 고마워요. 입력 받을 필요 X
 
         // Start announcement
         ment.SignUpStartAnnouncement();
@@ -342,41 +355,70 @@ public class Main {
             String signUpInfo= in.readLine();
             String [] signUpInfoSubStr = signUpInfo.split("#"); // # 단위로 끊어서 받아오기
 
-            ///////////////테스트 코드: 쿼리문 들어가야 됨.////////////////////////
-            for(int i=0; i<signUpInfoSubStr.length; i++){
-                System.out.println(signUpInfoSubStr[i]);
+            String sql ="SELECT NVL(MAX(USER_ID)+1,0) " +      // 이렇게 하면 동시성 문제 있다는데 다른 방법도 알아봐야할듯?
+                        "FROM USERS";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()) {
+                User_ID= rs.getInt(1);
+                break;
             }
-            //////////////////////////////////////////////////////////////////
-
-            // announcement
-            ment.SignUpEndAnnouncement();
-            
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            sql = Users_Templete;
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, User_ID); // User_ID
+            ps.setString(2, signUpInfoSubStr[0]); // USER_NAME
+            ps.setString(4, signUpInfoSubStr[1]); // PASSWORD
+            ps.setString(3, signUpInfoSubStr[2]); // DNAME
+            ps.setString(5, signUpInfoSubStr[3]); // PHONE_NUMBER
+            ps.setString(6, "고마워요"); // Membership_tier
+            int resINSERT = ps.executeUpdate();
+            if(resINSERT==0){
+                // announcement
+                ment.SignUpEndAnnouncement();
+            }else{
+                System.out.println("양식을 다시 확인하세요.");
+            }
+        } catch (IOException | SQLException | ArrayIndexOutOfBoundsException e) {
+            System.out.println("양식을 다시 확인하세요.");
         }
     }
 
     public static boolean login() {
         Scanner in = new Scanner(System.in);
         // Login format
-        String userName= "";
+        String user_Name= "";
         String password= "";
 
         // Start announcement
         ment.LoginStartAnnouncement();
         // 입력 받기
         System.out.print("유저이름 : ");
-        userName= in.nextLine();
+        user_Name= in.nextLine();
         System.out.print("비밀번호 : ");
         password= in.nextLine();
 
         ////////////쿼리문 회원인지 아닌지 검사///////////
-        ///////////                        //////////
-        /////////////////////////////////////////////
+        try {
+            String sql = "SELECT User_ID " +
+                         "FROM USERS " +
+                         "WHERE User_Name=? AND Password=? ";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, user_Name);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                User_ID= rs.getInt(1); // User_ID는 계속 사용할 수 있게 전역으로 받아둠.
+            }else{
+                // Login Fail announcement
+                ment.LoginFailAnnouncement();
+                return false;
+            }
+        }catch(SQLException ex2) {
+            System.err.println("sql error = " + ex2.getMessage());
+            System.exit(1);
+        }
 
         // End announcement
         ment.LoginEndAnnouncement();
-
         return true;
     }
 

@@ -41,6 +41,11 @@ public class Announcement {
         System.out.println("------------------------------------------------------------------\n");
     }
 
+    public void LoginFailAnnouncement()  {
+        System.out.println("           회원이 아닙니다! 회원가입 후 이용해주세요.                      ");
+        System.out.println("------------------------------------------------------------------\n");
+    }
+
 
     /////////////////////////// 기능선택 출력 포맷 //////////////////////////////
 
@@ -271,4 +276,5 @@ public class Announcement {
     public void ReviewEndAnnouncement(){
         System.out.println("└---------------------------------------------------------------┘\n");
     }
+
 }
