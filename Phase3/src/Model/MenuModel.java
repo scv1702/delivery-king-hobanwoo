@@ -5,13 +5,13 @@ import View.Announcement;
 import java.sql.*;
 import java.util.Scanner;
 
-public class Menu {
+public class MenuModel {
     private final Oracle database;
     private final Announcement announcement;
     private final String insertTemplate = "INSERT INTO MENU VALUES ( ?, ?, ?, ?, ?, ? )";
     private UsersModel usersModel;
 
-    public Menu(Oracle database, UsersModel usersModel) throws SQLException {
+    public MenuModel(Oracle database, UsersModel usersModel) throws SQLException {
         this.database = database;
         this.announcement = new Announcement();
         this.usersModel = usersModel;

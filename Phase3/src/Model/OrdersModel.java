@@ -4,29 +4,28 @@ import View.Announcement;
 
 import java.sql.*;
 
-public class Orders {
+public class OrdersModel {
     private final Oracle database;
     private final Announcement announcement;
     private final String insertTemplate = "INSERT INTO ORDERS VALUES ( ?, ?, ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd'))";
     private int userId;
-    private int orderCount;
     private UsersModel usersModel;
 
-    public Orders(Oracle database, UsersModel usersModel) throws SQLException {
+    public OrdersModel(Oracle database, UsersModel usersModel) throws SQLException {
         this.announcement = new Announcement();
         this.usersModel = usersModel;
         this.database = database;
-        String sql = "SELECT NVL(MAX(Order_ID) + 1,0) FROM ORDERS"; // 이렇게 하면 동시성 문제 있다는데 다른 방법도 알아봐야할듯?
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
-        while (rs.next()) {
-            this.orderCount = rs.getInt(1);
-        }
     }
 
     public void order(String storeName, String menuName, int quantity, String payment) throws SQLException {
         // String createdAt = new Date(System.currentTimeMillis()).toString();
-        announcement.orderEnd();
+        String sql = "SELECT NVL(MAX(Order_ID) + 1,0) FROM ORDERS"; // 이렇게 하면 동시성 문제 있다는데 다른 방법도 알아봐야할듯?
+        Statement stmt = this.database.getStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        int orderCount = -1;
+        while (rs.next()) {
+            orderCount = rs.getInt(1);
+        }
     }
 
     public void temp() {
@@ -35,9 +34,8 @@ public class Orders {
 
     public void myOrder() throws SQLException {
         String sql = "SELECT * FROM ORDERS WHERE USER_ID = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        System.out.println(usersModel.getUserId());
-        ps.setInt(1, usersModel.getUserId());
+        PreparedStatement ps = this.database.getPreparedStatement(sql);
+        ps.setInt(1, usersModel.getUsers().userId);
         ResultSet rs = ps.executeQuery();
         announcement.myOrderStart();
         if (rs.next()) {

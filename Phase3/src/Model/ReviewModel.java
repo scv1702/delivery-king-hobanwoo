@@ -5,13 +5,13 @@ import View.Announcement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Review {
+public class ReviewModel {
     private final Announcement announcement;
     private Oracle database;
     private final String insertTemplate = "INSERT INTO REVIEW VALUES ( ?, ?, ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd'))";
     private UsersModel usersModel;
 
-    public Review(Oracle database, UsersModel usersModel) throws SQLException {
+    public ReviewModel(Oracle database, UsersModel usersModel) throws SQLException {
         this.database = database;
         this.announcement = new Announcement();
         this.usersModel = usersModel;

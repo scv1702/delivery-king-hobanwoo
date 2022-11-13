@@ -1,6 +1,6 @@
 package View;
 
-import DTO.Users;
+import DTO.UsersDto;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +15,22 @@ public class UsersView {
         System.out.println("유저이름(30자 이내), 비밀번호(15자 이내), 학과(학부), 연락처(000-000-0000) \n");
     }
 
+    public UsersDto signUp() {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String signUpInfo = in.readLine();
+            String [] signUpInfoSubStr = signUpInfo.split("#"); // # 단위로 끊어서 받아오기
+            String username =  signUpInfoSubStr[0];
+            String password = signUpInfoSubStr[1];
+            String dName = signUpInfoSubStr[2];
+            String phoneNumber = signUpInfoSubStr[3];
+            return new UsersDto(username, password, dName, phoneNumber);
+        } catch (IOException e) {
+            System.out.println("입력 오류");
+        }
+        return null;
+    }
+
     public void signUpEnd() {
         System.out.println("                           회원가입 성공 !");
         System.out.println("------------------------------------------------------------------\n");
@@ -23,6 +39,15 @@ public class UsersView {
     public void loginStart() {
         System.out.println("------------------------------------------------------------------\n");
         System.out.println("               유저이름과 비밀번호를 입력해주세요.                       \n");
+    }
+
+    public UsersDto login() {
+        Scanner in = new Scanner(System.in);
+        System.out.print("사용자 이름: ");
+        String userName = in.nextLine();
+        System.out.print("비밀번호: ");
+        String password = in.nextLine();
+        return new UsersDto(userName, password);
     }
 
     public void loginEnd() {
@@ -35,29 +60,24 @@ public class UsersView {
         System.out.println("------------------------------------------------------------------\n");
     }
 
-    public Users signUp() {
-        try {
-            signUpStart();
-            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-            String signUpInfo = in.readLine();
-            String[] signUpInfoSubStr = signUpInfo.split("#");
-            in.close();
-            signUpEnd();
-            return new Users(signUpInfoSubStr[0], signUpInfoSubStr[1], signUpInfoSubStr[2], signUpInfoSubStr[3]);
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-            return null;
-        }
-    }
-
-    public Users login() {
-        Scanner in = new Scanner(System.in);
-        loginStart();
-        System.out.print("사용자 이름: ");
-        String userName = in.nextLine();
-        System.out.print("비밀번호: ");
-        String password = in.nextLine();
-        loginEnd();
-        return new Users(userName, password, null, null);
+    public void profile(UsersDto usersDto) {
+        String OutPut = String.format(
+                "┌-----------------------------------------------┐\n" +
+                "│                  내 정보 확인                   │\n" +
+                "│----┬------------------------------------------│\n" +
+                "│ 1  │  유저번호 : %d\n" +
+                "│----┼------------------------------------------│\n" +
+                "│ 2  │  유저이름 : %s \n" +
+                "│----┼------------------------------------------│\n" +
+                "│ 3  │  학과 : %s\n" +
+                "│----┼------------------------------------------│\n" +
+                "│ 4  │  비밀번호 : %s\n" +
+                "│----┼------------------------------------------│\n" +
+                "│ 5  │  연락처 : %s\n" +
+                "│----┼------------------------------------------│\n" +
+                "│ 6  │  멤버십 등급 : %s\n" +
+                "└----┴------------------------------------------┘"
+                , usersDto.userId, usersDto.username, usersDto.dName, usersDto.password, usersDto.phoneNumber, usersDto.membershipTier);
+        System.out.println(OutPut);
     }
 }

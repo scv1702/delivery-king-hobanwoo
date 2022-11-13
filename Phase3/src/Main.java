@@ -1,15 +1,13 @@
 import Controller.UsersController;
-import Model.Menu;
+import DTO.UsersDto;
 import Model.Oracle;
-import Model.Orders;
 import Model.UsersModel;
-import View.Announcement;
-
 import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
-    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1600:xe";
+    // PORT CHANGE!
+    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
     private static final String DB_ID = "delivery_king_hobanwoo";
     private static final String DB_PASSWORD = "comp322";
 
@@ -25,59 +23,96 @@ public class Main {
         Oracle database = new Oracle(DB_URL, DB_ID, DB_PASSWORD);
         UsersController usersController = new UsersController(new UsersModel(database));
         Scanner in = new Scanner(System.in);
-        try {
-            while (true) {
-                switch (in.nextInt()) {
-                    case 1:
-                        usersController.signUp();
-                        break;
-                    case 2:
-                        usersController.login();
-                        break;
-                    default:
-                        System.out.println("잘못 입력하셨습니다.");
-                        break;
-                }
-                waitBeforeReprint();
-                if (usersModel.isLogin()) {
-                    while (true) {
-                        announcement.functionSelect();
-                        switch (in.nextInt()) {
-                            case 1:
-                                usersModel.profile();
-                                break;
-                            case 2:
-                                menu.main();
-                                break;
-                            case 3:
-                                System.out.print("│  가게 이름 : ");
-                                String storeName = in.nextLine();
-                                System.out.print("│  주문 메뉴 이름 : ");
-                                String menuName = in.nextLine();
-                                System.out.print("│  주문 수량 : ");
-                                int quantity = in.nextInt();
-                                System.out.print("│  결제 방식 : ");
-                                String payment = in.nextLine();
-                                orders.order(storeName, menuName, quantity, payment);
-                                break;
-                            case 4:
-                                orders.myOrder();
-                                break;
-                            case 5:
-                                review.review();
-                                break;
-                            case 6:
-                                announcement.programExit();
-                                in.close();
-                                System.exit(0);
-                                break;
-                        }
-                        waitBeforeReprint();
+        UsersDto isLogined = null;
+
+        start();
+        while (true) {
+            switch (in.nextInt()) {
+                case 1:
+                    usersController.signUp();
+                    break;
+                case 2:
+                    isLogined = usersController.login();
+                    break;
+                default:
+                    System.out.println("잘못 입력하셨습니다.");
+                    break;
+            }
+            waitBeforeReprint();
+            if (isLogined != null) {
+                while (true) {
+                    functionSelect();
+                    switch (in.nextInt()) {
+                        case 1:
+                            usersController.profile();
+                            break;
+                        case 2:
+                            // menuController.main();
+                            break;
+                        case 3:
+                            System.out.print("│  가게 이름 : ");
+                            String storeName = in.nextLine();
+                            System.out.print("│  주문 메뉴 이름 : ");
+                            String menuName = in.nextLine();
+                            System.out.print("│  주문 수량 : ");
+                            int quantity = in.nextInt();
+                            System.out.print("│  결제 방식 : ");
+                            String payment = in.nextLine();
+                            // orders.order(storeName, menuName, quantity, payment);
+                            break;
+                        case 4:
+                            // orders.myOrder();
+                            break;
+                        case 5:
+                            // review.review();
+                            break;
+                        case 6:
+                            programExit();
+                            in.close();
+                            System.exit(0);
+                            break;
                     }
+                    waitBeforeReprint();
                 }
             }
-        } catch (SQLException e) {
-            System.err.println("SQL Exception: " + e.getMessage());
         }
+    }
+
+    public static void start(){
+        System.out.println(
+                "┌-----------------------------------------------┐\n" +
+                        "│\t\t\t\t배달왕 호반우가 간다!\t\t\t\t│\n" +
+                        "│\t\t\t<경북대학교 제휴업체 배달 서비스>\t\t\t│\n" +
+                        "│-----------------------------------------------│\n" +
+                        "│\t\t혹시, 배달왕 호반우가 처음이신가요?\t\t\t│\n" +
+                        "│\t\t1. 회원가입\t\t\t\t\t\t\t\t│\n" +
+                        "│-----------------------------------------------│\n" +
+                        "│\t\t회원이라면, 로그인 해주세요.\t\t\t\t\t│\n" +
+                        "│\t\t2. 로그인\t\t\t\t\t\t\t\t│\n" +
+                        "└-----------------------------------------------┘");
+    }
+
+    public static void functionSelect(){
+        System.out.println(
+                "┌----┬------------------------------------------┐\n" +
+                        "│ NO │\t\t\t\t\t기능\t\t\t            │\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 1  │  profile();\t\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 2  │  menu();\t\t\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 3  │  order();\t\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 4  │  myOrder();\t\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 5  │  review();\t\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 6  │  종료하기\t\t\t\t\t\t\t\t\t│\n" +
+                        "└----┴------------------------------------------┘");
+    }
+
+    public static void programExit() {
+        System.out.println("------------------------------------------------------------------\n");
+        System.out.println("                         다음에 또 만나요 !                            ");
     }
 }
