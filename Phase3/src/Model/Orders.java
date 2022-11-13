@@ -1,18 +1,21 @@
+package Model;
+
+import View.Announcement;
+
 import java.sql.*;
-import java.util.Scanner;
 
 public class Orders {
-    private final Connection conn;
+    private final Oracle database;
     private final Announcement announcement;
     private final String insertTemplate = "INSERT INTO ORDERS VALUES ( ?, ?, ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd'))";
     private int userId;
     private int orderCount;
-    private Users users;
+    private UsersModel usersModel;
 
-    public Orders(Oracle database, Users users) throws SQLException {
-        this.conn = database.getConnection();
+    public Orders(Oracle database, UsersModel usersModel) throws SQLException {
         this.announcement = new Announcement();
-        this.users = users;
+        this.usersModel = usersModel;
+        this.database = database;
         String sql = "SELECT NVL(MAX(Order_ID) + 1,0) FROM ORDERS"; // 이렇게 하면 동시성 문제 있다는데 다른 방법도 알아봐야할듯?
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
@@ -33,8 +36,8 @@ public class Orders {
     public void myOrder() throws SQLException {
         String sql = "SELECT * FROM ORDERS WHERE USER_ID = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
-        System.out.println(users.getUserId());
-        ps.setInt(1, users.getUserId());
+        System.out.println(usersModel.getUserId());
+        ps.setInt(1, usersModel.getUserId());
         ResultSet rs = ps.executeQuery();
         announcement.myOrderStart();
         if (rs.next()) {

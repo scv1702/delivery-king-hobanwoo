@@ -1,3 +1,7 @@
+package Model;
+
+import View.Announcement;
+
 import java.sql.*;
 
 public class Contains {
@@ -5,7 +9,7 @@ public class Contains {
     private final Announcement announcement;
     private final String insertTemplate = "INSERT INTO CONTAINS VALUES ( ?, ?, ? )";
 
-    public Contains(Oracle database, Users users) throws SQLException {
+    public Contains(Oracle database, UsersModel usersModel) throws SQLException {
         this.conn = database.getConnection();
         this.announcement = new Announcement();
     }

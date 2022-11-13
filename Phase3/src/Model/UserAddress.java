@@ -1,3 +1,7 @@
+package Model;
+
+import View.Announcement;
+
 import java.sql.*;
 
 public class UserAddress {
@@ -5,7 +9,7 @@ public class UserAddress {
     private final Announcement announcement;
     private final String insertTemplate = "INSERT INTO USER_ADDRESS VALUES ( ?, ? )";
 
-    public UserAddress(Oracle database, Users users) throws SQLException {
+    public UserAddress(Oracle database, UsersModel usersModel) throws SQLException {
         this.conn = database.getConnection();
         this.announcement = new Announcement();
     }

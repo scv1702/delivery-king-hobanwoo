@@ -1,16 +1,20 @@
+package Model;
+
+import View.Announcement;
+
 import java.sql.*;
 import java.util.Scanner;
 
 public class Menu {
-    private final Connection conn;
+    private final Oracle database;
     private final Announcement announcement;
     private final String insertTemplate = "INSERT INTO MENU VALUES ( ?, ?, ?, ?, ?, ? )";
-    private Users users;
+    private UsersModel usersModel;
 
-    public Menu(Oracle database, Users users) throws SQLException {
-        this.conn = database.getConnection();
+    public Menu(Oracle database, UsersModel usersModel) throws SQLException {
+        this.database = database;
         this.announcement = new Announcement();
-        this.users = users;
+        this.usersModel = usersModel;
     }
 
     public void main() throws SQLException {
@@ -24,7 +28,7 @@ public class Menu {
             case 2: // 내 학과 전체 제휴업체 메뉴
                 /* query */
                 String sql = "";
-                PreparedStatement ps = conn.prepareStatement(sql);
+                PreparedStatement ps = this.database.getPreparedStatement(sql);
                 ResultSet rs = ps.executeQuery();
 
                 int[] Menu_ID = {0, 1};

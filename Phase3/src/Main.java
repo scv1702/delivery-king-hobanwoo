@@ -1,3 +1,9 @@
+import Model.Menu;
+import Model.Oracle;
+import Model.Orders;
+import Model.UsersModel;
+import View.Announcement;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -17,10 +23,10 @@ public class Main {
     
     public static void main(String[] args) throws SQLException {
         Oracle database = new Oracle(DB_URL, DB_ID, DB_PASSWORD);
-        Users users = new Users(database);
-        Menu menu = new Menu(database, users);
-        Review review = new Review(database, users);
-        Orders orders = new Orders(database, users);
+        UsersModel usersModel = new UsersModel(database);
+        Menu menu = new Menu(database, usersModel);
+        Review review = new Review(database, usersModel);
+        Orders orders = new Orders(database, usersModel);
         Scanner in = new Scanner(System.in);
 
         try {
@@ -28,22 +34,22 @@ public class Main {
                 announcement.main();
                 switch (in.nextInt()) {
                     case 1:
-                        users.signUp();
+                        usersModel.signUp();
                         break;
                     case 2:
-                        users.login();
+                        usersModel.login();
                         break;
                     default:
                         System.out.println("잘못 입력하셨습니다.");
                         break;
                 }
                 waitBeforeReprint();
-                if (users.isLogin()) {
+                if (usersModel.isLogin()) {
                     while (true) {
                         announcement.functionSelect();
                         switch (in.nextInt()) {
                             case 1:
-                                users.profile();
+                                usersModel.profile();
                                 break;
                             case 2:
                                 menu.main();

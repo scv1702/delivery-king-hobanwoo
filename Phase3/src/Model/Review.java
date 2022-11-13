@@ -1,17 +1,20 @@
-import java.sql.Connection;
+package Model;
+
+import View.Announcement;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Review {
-    private final Connection conn;
     private final Announcement announcement;
+    private Oracle database;
     private final String insertTemplate = "INSERT INTO REVIEW VALUES ( ?, ?, ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd'))";
-    private Users users;
+    private UsersModel usersModel;
 
-    public Review(Oracle database, Users users) throws SQLException {
-        this.conn = database.getConnection();
+    public Review(Oracle database, UsersModel usersModel) throws SQLException {
+        this.database = database;
         this.announcement = new Announcement();
-        this.users = users;
+        this.usersModel = usersModel;
     }
 
     public void review() {

@@ -1,3 +1,5 @@
+package View;
+
 public class Announcement {
     public void main(){
         System.out.println(
@@ -11,32 +13,6 @@ public class Announcement {
                         "│\t\t회원이라면, 로그인 해주세요.\t\t\t\t\t│\n" +
                         "│\t\t2. 로그인\t\t\t\t\t\t\t\t│\n" +
                         "└-----------------------------------------------┘");
-    }
-
-    public void signUpStart() {
-        System.out.println("------------------------------------------------------------------\n");
-        System.out.println("                 아래 정보를 '#' 단위로 입력해주세요.");
-        System.out.println("유저이름(30자 이내), 비밀번호(15자 이내), 학과(학부), 연락처(000-000-0000) \n");
-    }
-
-    public void signUpEnd() {
-        System.out.println("                           회원가입 성공 !");
-        System.out.println("------------------------------------------------------------------\n");
-    }
-
-    public void loginStart() {
-        System.out.println("------------------------------------------------------------------\n");
-        System.out.println("               유저이름과 비밀번호를 입력해주세요.                       \n");
-    }
-
-    public void loginEnd() {
-        System.out.println("                         로그인 성공!                                 ");
-        System.out.println("------------------------------------------------------------------\n");
-    }
-
-    public void loginFail()  {
-        System.out.println("           회원이 아닙니다! 회원가입 후 이용해주세요.                      ");
-        System.out.println("------------------------------------------------------------------\n");
     }
 
     public void functionSelect(){
