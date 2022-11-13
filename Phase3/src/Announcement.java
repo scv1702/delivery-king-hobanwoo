@@ -1,10 +1,5 @@
-import com.sun.deploy.panel.AndOrRadioPropertyGroup;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.SyntaxException;
-
 public class Announcement {
-
-    /////////////////////////// 메인 출력 포맷 //////////////////////////////
-    public void mainAnnouncement(){
+    public void main(){
         System.out.println(
                         "┌-----------------------------------------------┐\n" +
                         "│\t\t\t\t배달왕 호반우가 간다!\t\t\t\t│\n" +
@@ -18,38 +13,33 @@ public class Announcement {
                         "└-----------------------------------------------┘");
     }
 
-    /////////////////////////// 회원가입 출력 포맷 //////////////////////////////
-    public void SignUpStartAnnouncement() {
+    public void signUpStart() {
         System.out.println("------------------------------------------------------------------\n");
         System.out.println("                 아래 정보를 '#' 단위로 입력해주세요.");
         System.out.println("유저이름(30자 이내), 비밀번호(15자 이내), 학과(학부), 연락처(000-000-0000) \n");
     }
-    public void SignUpEndAnnouncement() {
+
+    public void signUpEnd() {
         System.out.println("                           회원가입 성공 !");
         System.out.println("------------------------------------------------------------------\n");
     }
 
-
-    ////////////////////////// 로그인 출력 포맷 ////////////////////////////
-    public void LoginStartAnnouncement() {
+    public void loginStart() {
         System.out.println("------------------------------------------------------------------\n");
         System.out.println("               유저이름과 비밀번호를 입력해주세요.                       \n");
     }
 
-    public void LoginEndAnnouncement() {
+    public void loginEnd() {
         System.out.println("                         로그인 성공!                                 ");
         System.out.println("------------------------------------------------------------------\n");
     }
 
-    public void LoginFailAnnouncement()  {
+    public void loginFail()  {
         System.out.println("           회원이 아닙니다! 회원가입 후 이용해주세요.                      ");
         System.out.println("------------------------------------------------------------------\n");
     }
 
-
-    /////////////////////////// 기능선택 출력 포맷 //////////////////////////////
-
-    public void FunctionSelect(){
+    public void functionSelect(){
         System.out.println(
                         "┌----┬------------------------------------------┐\n" +
                         "│ NO │\t\t\t\t\t기능\t\t\t            │\n" +
@@ -68,21 +58,19 @@ public class Announcement {
                         "└----┴------------------------------------------┘");
     }
 
-    /////////////////////////// 프로그램 종료 출력 포맷 //////////////////////////////
-    public void ProgramExitAnnouncement() {
+    public void programExit() {
         System.out.println("------------------------------------------------------------------\n");
         System.out.println("                         다음에 또 만나요 !                            ");
     }
 
-    /////////////////////////// 회원정보 조회 출력 포맷 //////////////////////////////
-    public void ProfileAnnouncement(
+    public void profile(
             int User_ID,
             String User_Name,
             String Dname,
             String Password,
             String Phone_Number,
             String Membership_Tier
-    ){
+    ) {
         String OutPut = String.format(
                         "┌-----------------------------------------------┐\n" +
                         "│                  내 정보 확인                   │\n" +
@@ -103,9 +91,7 @@ public class Announcement {
         System.out.println(OutPut);
     }
 
-
-    /////////////////////////// 메뉴관련 출력 포맷 //////////////////////////////
-    public void menuAnnouncement(){
+    public void menu(){
         System.out.println(
                         "┌----┬------------------------------------------┐\n" +
                         "│ NO │\t\t\t\t\t기능\t\t\t            │\n" +
@@ -118,22 +104,20 @@ public class Announcement {
                         "└----┴------------------------------------------┘");
     }
 
-
-    /////////////////////////// 내 학과 전체 제휴업체 메뉴 출력 포맷 //////////////////////////////
-    public void All_AffiliatesStartAnnouncement(){
+    public void affiliatesStart(){
         System.out.print(
                 "┌-----------------------------------------------┐\n" +
                 "│       \t 내 학과 전체 제휴업체 메뉴\t            │\n");
 
     }
 
-    public void All_AffiliatesAnnouncement(
+    public void affiliates(
             int Menu_ID,
             int Store_ID,
             String Mname,
             String Description,
             String Image
-    ){
+    ) {
         String OutPut = String.format(
                         "│----┬------------------------------------------│\n" +
                         "│    │  메뉴ID : %d\n" +
@@ -147,37 +131,37 @@ public class Announcement {
         System.out.print(OutPut);
     }
 
-    public void All_AffiliatesEndAnnouncement(){
+    public void affiliatesEnd(){
         System.out.println(
                 "└-----------------------------------------------┘");
     }
 
-    /////////// /////// Order 관련 출력 포맷 /////////////////////////
-    public void orderStartAnnouncement(){
+    public void orderStart(){
         System.out.println(
                 "┌---------------------------------------------------------------┐\n" +
                 "│       \t\t\t\t 주문 하기 페이지 \t\t\t\t            │\n"+
                 "│---------------------------------------------------------------│");
     }
-    public void orderEndAnnouncement(){
+
+    public void orderEnd(){
         System.out.println("│       \t\t\t\t 주문 접수 완료 ! \t\t\t            │" );
         System.out.println("└---------------------------------------------------------------┘\n");
     }
 
-    ////////////////////////  MyOrder 관련 출력 포맷 //////////////////////
-    public void myOrderStartAnnouncement(){
+    public void myOrderStart(){
         System.out.print(
                 "┌-----------------------------------------------┐\n" +
                 "│       \t\t 내 주문 내역 \t\t            │\n");
     }
-    public void myOrderAnnouncement(
+
+    public void myOrder(
             int Order_ID,
             int User_ID,
             int Store_ID,
             String Payment,
             String State,
             String Order_Date
-    ){
+    ) {
         String OutPut = String.format(
                 "│----┬------------------------------------------│\n" +
                 "│    │  주문ID : %d\n" +
@@ -191,14 +175,12 @@ public class Announcement {
         System.out.print(OutPut);
     }
 
-    public void myOrderEndAnnouncement(){
+    public void myOrderEnd(){
         System.out.println(
                 "└-----------------------------------------------┘");
     }
 
-
-    //////////// Review 관련 출력 포맷 //////////////
-    public void ReviewAnnouncement(){
+    public void review(){
         System.out.println(
                         "┌----┬------------------------------------------┐\n" +
                         "│ NO │\t\t\t\t\t기능\t\t\t            │\n" +
@@ -214,7 +196,8 @@ public class Announcement {
                         "│ 5  │  선택 가게 리뷰 조회\t\t\t\t\t\t│\n" +
                         "└----┴------------------------------------------┘");
     }
-    public void ReviewStartAnnouncement(int number){
+
+    public void reviewStart(int number){
         switch (number){
             case 1: // 리뷰 작성
                 System.out.println("┌---------------------------------------------------------------┐");
@@ -244,7 +227,7 @@ public class Announcement {
         }
     }
 
-    public void ReviewDataAnnouncement(
+    public void reviewData(
             int number,
             int Review_ID,
             int User_ID,
@@ -252,7 +235,7 @@ public class Announcement {
             int Star_Rating,
             String Comments,
             String Created_At
-    ){
+    ) {
         switch (number){
             case 1: // 리뷰 작성
                 System.out.println(
@@ -273,8 +256,7 @@ public class Announcement {
         }
     }
 
-    public void ReviewEndAnnouncement(){
+    public void reviewEnd(){
         System.out.println("└---------------------------------------------------------------┘\n");
     }
-
 }
