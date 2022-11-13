@@ -8,7 +8,7 @@ public class UserAddressModel {
     private final Oracle database;
     private final String insertTemplate = "INSERT INTO USER_ADDRESS VALUES ( ?, ? )";
 
-    public UserAddressModel(Oracle database, UsersModel usersModel) throws SQLException {
+    public UserAddressModel(Oracle database, UsersModel usersModel) {
         this.database = database;
     }
 }

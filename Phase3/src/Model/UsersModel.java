@@ -7,15 +7,12 @@ import java.sql.*;
 
 
 public class UsersModel {
-    private final Announcement announcement;
     private final Oracle database;
-    private UsersDto usersDto;
-    private UserAddressModel userAddressModel;
+    private UsersDto users;
 
-    public UsersModel(Oracle database) throws SQLException {
-        this.announcement = new Announcement();
+    public UsersModel(Oracle database) {
         this.database = database;
-        this.usersDto = null;
+        this.users = null;
     }
 
     public UsersDto insert(UsersDto user) throws SQLException {
@@ -36,6 +33,7 @@ public class UsersModel {
             ps.setString(5, user.phoneNumber);
             ps.setString(6, "고마워요");
             int resInsert = ps.executeUpdate();
+            ps.close();
             if (resInsert == 1) {
                 return new UsersDto(userCount, user.username, user.password, user.dName, user.phoneNumber, "고마워요");
             }
@@ -49,6 +47,7 @@ public class UsersModel {
         ps.setString(1, usersDto.username);
         ps.setString(2, usersDto.password);
         ResultSet rs = ps.executeQuery();
+        ps.close();
         if (rs.next()) {
             int userId = rs.getInt(1);
             String userName = rs.getString(2);
@@ -56,13 +55,13 @@ public class UsersModel {
             String password = rs.getString(4);
             String phoneNumber = rs.getString(5);
             String membershipTier = rs.getString(6);
-            this.usersDto = new UsersDto(userId, userName, dName, password, phoneNumber, membershipTier);
-            return this.usersDto;
+            this.users = new UsersDto(userId, userName, dName, password, phoneNumber, membershipTier);
+            return this.users;
         }
         return null;
     }
 
     public UsersDto getUsers() {
-        return this.usersDto;
+        return this.users;
     }
 }

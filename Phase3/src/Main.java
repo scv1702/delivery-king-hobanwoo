@@ -2,6 +2,8 @@ import Controller.UsersController;
 import DTO.UsersDto;
 import Model.Oracle;
 import Model.UsersModel;
+import com.sun.org.apache.xpath.internal.operations.Or;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -25,8 +27,8 @@ public class Main {
         Scanner in = new Scanner(System.in);
         UsersDto isLogined = null;
 
-        start();
         while (true) {
+            start();
             switch (in.nextInt()) {
                 case 1:
                     usersController.signUp();
@@ -69,6 +71,7 @@ public class Main {
                         case 6:
                             programExit();
                             in.close();
+                            database.closeConnection();
                             System.exit(0);
                             break;
                     }

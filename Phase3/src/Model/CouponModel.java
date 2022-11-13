@@ -6,11 +6,9 @@ import java.sql.*;
 
 public class CouponModel {
     private final Oracle database;
-    private final Announcement announcement;
     private final String insertTemplate = "INSERT INTO COUPON VALUES ( ?, ?, ?, TO_DATE(?, 'yyyy-mm-dd'), ?, ?)";
 
-    public CouponModel(Oracle database, UsersModel usersModel) throws SQLException {
+    public CouponModel(Oracle database, UsersModel usersModel) {
         this.database = database;
-        this.announcement = new Announcement();
     }
 }

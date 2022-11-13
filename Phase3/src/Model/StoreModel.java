@@ -6,7 +6,7 @@ public class StoreModel {
     private final Oracle database;
     private final String insertTemplate = "INSERT INTO STORE VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 
-    public StoreModel(Oracle database, UsersModel usersModel) throws SQLException {
+    public StoreModel(Oracle database, UsersModel usersModel) {
         this.database = database;
     }
 }

@@ -6,11 +6,9 @@ import java.sql.*;
 
 public class OrderMenuModel {
     private final Oracle database;
-    private final Announcement announcement;
     private final String insertTemplate = "INSERT INTO ORDER_MENU VALUES ( ?, ?, ?, ?, ?, ? )";
 
-    public OrderMenuModel(Oracle database, UsersModel usersModel) throws SQLException {
+    public OrderMenuModel(Oracle database) {
         this.database = database;
-        this.announcement = new Announcement();
     }
 }
