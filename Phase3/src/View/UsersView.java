@@ -1,10 +1,11 @@
 package View;
 
-import Controller.UsersController;
+import DTO.Users;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class UsersView {
 
@@ -34,15 +35,29 @@ public class UsersView {
         System.out.println("------------------------------------------------------------------\n");
     }
 
-    public void signUp() {
+    public Users signUp() {
         try {
+            signUpStart();
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
             String signUpInfo = in.readLine();
             String[] signUpInfoSubStr = signUpInfo.split("#");
             in.close();
-
+            signUpEnd();
+            return new Users(signUpInfoSubStr[0], signUpInfoSubStr[1], signUpInfoSubStr[2], signUpInfoSubStr[3]);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
+            return null;
         }
+    }
+
+    public Users login() {
+        Scanner in = new Scanner(System.in);
+        loginStart();
+        System.out.print("사용자 이름: ");
+        String userName = in.nextLine();
+        System.out.print("비밀번호: ");
+        String password = in.nextLine();
+        loginEnd();
+        return new Users(userName, password, null, null);
     }
 }

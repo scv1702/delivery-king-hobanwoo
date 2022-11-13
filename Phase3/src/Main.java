@@ -1,3 +1,4 @@
+import Controller.UsersController;
 import Model.Menu;
 import Model.Oracle;
 import Model.Orders;
@@ -11,7 +12,6 @@ public class Main {
     private static final String DB_URL = "jdbc:oracle:thin:@localhost:1600:xe";
     private static final String DB_ID = "delivery_king_hobanwoo";
     private static final String DB_PASSWORD = "comp322";
-    private static final Announcement announcement = new Announcement();
 
     public static void waitBeforeReprint(){
         try {
@@ -23,21 +23,16 @@ public class Main {
     
     public static void main(String[] args) throws SQLException {
         Oracle database = new Oracle(DB_URL, DB_ID, DB_PASSWORD);
-        UsersModel usersModel = new UsersModel(database);
-        Menu menu = new Menu(database, usersModel);
-        Review review = new Review(database, usersModel);
-        Orders orders = new Orders(database, usersModel);
+        UsersController usersController = new UsersController(new UsersModel(database));
         Scanner in = new Scanner(System.in);
-
         try {
             while (true) {
-                announcement.main();
                 switch (in.nextInt()) {
                     case 1:
-                        usersModel.signUp();
+                        usersController.signUp();
                         break;
                     case 2:
-                        usersModel.login();
+                        usersController.login();
                         break;
                     default:
                         System.out.println("잘못 입력하셨습니다.");
