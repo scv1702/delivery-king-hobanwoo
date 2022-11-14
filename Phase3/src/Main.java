@@ -1,16 +1,16 @@
 import Controller.UsersController;
 import DTO.UsersDto;
+import Model.CouponModel;
 import Model.Oracle;
+import Model.UserAddressModel;
 import Model.UsersModel;
-import com.sun.org.apache.xpath.internal.operations.Or;
-
 import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
     // PORT CHANGE!
     private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static final String DB_ID = "delivery_king_hobanwoo";
+    private static final String DB_ID = "deliverykinghobanwoo";
     private static final String DB_PASSWORD = "comp322";
 
     public static void waitBeforeReprint(){
@@ -24,6 +24,8 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         Oracle database = new Oracle(DB_URL, DB_ID, DB_PASSWORD);
         UsersController usersController = new UsersController(new UsersModel(database));
+        UserAddressModel userAddressModel = new UserAddressModel(database);
+        CouponModel couponModel = new CouponModel(database);
         Scanner in = new Scanner(System.in);
         UsersDto isLogined = null;
 
@@ -46,7 +48,7 @@ public class Main {
                     functionSelect();
                     switch (in.nextInt()) {
                         case 1:
-                            usersController.profile();
+                            usersController.profile(userAddressModel, couponModel);
                             break;
                         case 2:
                             // menuController.main();
@@ -83,7 +85,7 @@ public class Main {
 
     public static void start(){
         System.out.println(
-                "┌-----------------------------------------------┐\n" +
+                        "┌-----------------------------------------------┐\n" +
                         "│\t\t\t\t배달왕 호반우가 간다!\t\t\t\t│\n" +
                         "│\t\t\t<경북대학교 제휴업체 배달 서비스>\t\t\t│\n" +
                         "│-----------------------------------------------│\n" +
@@ -98,20 +100,20 @@ public class Main {
     public static void functionSelect(){
         System.out.println(
                 "┌----┬------------------------------------------┐\n" +
-                        "│ NO │\t\t\t\t\t기능\t\t\t            │\n" +
-                        "│----┼------------------------------------------│\n" +
-                        "│ 1  │  profile();\t\t\t\t\t\t\t\t│\n" +
-                        "│----┼------------------------------------------│\n" +
-                        "│ 2  │  menu();\t\t\t\t\t\t\t\t\t│\n" +
-                        "│----┼------------------------------------------│\n" +
-                        "│ 3  │  order();\t\t\t\t\t\t\t\t│\n" +
-                        "│----┼------------------------------------------│\n" +
-                        "│ 4  │  myOrder();\t\t\t\t\t\t\t\t│\n" +
-                        "│----┼------------------------------------------│\n" +
-                        "│ 5  │  review();\t\t\t\t\t\t\t\t│\n" +
-                        "│----┼------------------------------------------│\n" +
-                        "│ 6  │  종료하기\t\t\t\t\t\t\t\t\t│\n" +
-                        "└----┴------------------------------------------┘");
+                "│ NO │\t\t\t\t\t기능\t\t\t            │\n" +
+                "│----┼------------------------------------------│\n" +
+                "│ 1  │  내 정보 \t\t\t\t\t\t\t\t\t│\n" +
+                "│----┼------------------------------------------│\n" +
+                "│ 2  │  menu();\t\t\t\t\t\t\t\t\t│\n" +
+                "│----┼------------------------------------------│\n" +
+                "│ 3  │  order();\t\t\t\t\t\t\t\t│\n" +
+                "│----┼------------------------------------------│\n" +
+                "│ 4  │  myOrder();\t\t\t\t\t\t\t\t│\n" +
+                "│----┼------------------------------------------│\n" +
+                "│ 5  │  review();\t\t\t\t\t\t\t\t│\n" +
+                "│----┼------------------------------------------│\n" +
+                "│ 6  │  종료하기\t\t\t\t\t\t\t\t\t│\n" +
+                "└----┴------------------------------------------┘");
     }
 
     public static void programExit() {

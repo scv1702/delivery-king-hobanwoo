@@ -72,7 +72,7 @@ public class Announcement {
             String State,
             String Order_Date
     ) {
-        String OutPut = String.format(
+        String output = String.format(
                 "│----┬------------------------------------------│\n" +
                 "│    │  주문ID : %d\n" +
                 "│    │  유저ID : %d\n" +
@@ -82,7 +82,7 @@ public class Announcement {
                 "│    │  주문날짜 : %s\n" +
                 "│----┴------------------------------------------│\n"
                 , Order_ID, User_ID, Store_ID, Payment, State, Order_Date);
-        System.out.print(OutPut);
+        System.out.print(output);
     }
 
     public void myOrderEnd(){

@@ -1,8 +1,6 @@
 package Model;
 
 import DTO.UsersDto;
-import View.Announcement;
-
 import java.sql.*;
 
 
@@ -47,7 +45,6 @@ public class UsersModel {
         ps.setString(1, usersDto.username);
         ps.setString(2, usersDto.password);
         ResultSet rs = ps.executeQuery();
-        ps.close();
         if (rs.next()) {
             int userId = rs.getInt(1);
             String userName = rs.getString(2);
@@ -56,12 +53,12 @@ public class UsersModel {
             String phoneNumber = rs.getString(5);
             String membershipTier = rs.getString(6);
             this.users = new UsersDto(userId, userName, dName, password, phoneNumber, membershipTier);
+            ps.close();
             return this.users;
         }
+        ps.close();
         return null;
     }
 
-    public UsersDto getUsers() {
-        return this.users;
-    }
+    public UsersDto getUsers() { return this.users; }
 }

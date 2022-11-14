@@ -12,7 +12,7 @@ public class UsersView {
     public void signUpStart() {
         System.out.println("------------------------------------------------------------------\n");
         System.out.println("                 아래 정보를 '#' 단위로 입력해주세요.");
-        System.out.println("유저이름(30자 이내), 비밀번호(15자 이내), 학과(학부), 연락처(000-000-0000) \n");
+        System.out.println("유저이름(30자 이내), 비밀번호(15자 이내), 단과대학, 연락처(000-000-0000) \n");
     }
 
     public UsersDto signUp() {
@@ -60,8 +60,23 @@ public class UsersView {
         System.out.println("------------------------------------------------------------------\n");
     }
 
-    public void profile(UsersDto usersDto) {
-        String OutPut = String.format(
+    public void profile() {
+        System.out.println(
+                        "┌----┬------------------------------------------┐\n" +
+                        "│ NO │\t\t\t\t\t기능\t\t\t            │\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 1  │  내 프로필 보기\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 2  │  주소 등록하기\t\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 3  │  등록된 주소 목록 조회\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 4  │  보유 쿠폰 조회\t\t\t\t\t\t\t│\n" +
+                        "└----┴------------------------------------------┘");
+    }
+
+    public void myProfile(UsersDto usersDto) {
+        String output = String.format(
                 "┌-----------------------------------------------┐\n" +
                 "│                  내 정보 확인                   │\n" +
                 "│----┬------------------------------------------│\n" +
@@ -78,6 +93,6 @@ public class UsersView {
                 "│ 6  │  멤버십 등급 : %s\n" +
                 "└----┴------------------------------------------┘"
                 , usersDto.userId, usersDto.username, usersDto.dName, usersDto.password, usersDto.phoneNumber, usersDto.membershipTier);
-        System.out.println(OutPut);
+        System.out.println(output);
     }
 }
