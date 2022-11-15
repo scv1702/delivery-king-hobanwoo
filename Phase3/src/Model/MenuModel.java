@@ -1,5 +1,6 @@
 package Model;
 
+import DTO.MenuDto;
 import View.Announcement;
 
 import java.sql.*;
@@ -51,5 +52,26 @@ public class MenuModel {
 //                break;
 //        }
 //        in.close();
+    }
+
+    public MenuDto getMenu(String menuName) {
+        MenuDto menu = new MenuDto();
+        try {
+            String sql = "SELECT * FROM MENU WHERE Mname = '" + menuName + "'";
+            Statement stmt = this.database.getStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                menu.menuId = rs.getInt(1);
+                menu.storeId = rs.getInt(2);
+                menu.menuName = rs.getString(3);
+                menu.description = rs.getString(4);
+                menu.image = rs.getString(5);
+                menu.price = rs.getInt(6);
+            }
+            return menu;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
