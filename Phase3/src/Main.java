@@ -1,4 +1,5 @@
 import Controller.OrdersController;
+import Controller.StoreController;
 import Controller.UsersController;
 import DTO.UsersDto;
 import Model.*;
@@ -28,12 +29,14 @@ public class Main {
         UserAddressModel userAddressModel = new UserAddressModel(database);
         CouponModel couponModel = new CouponModel(database);
         StoreModel storeModel = new StoreModel(database, usersModel);
-        MenuModel menuModel = new MenuModel(database);
+        MenuModel menuModel = new MenuModel(database, storeModel);
         OrderMenuModel orderMenuModel = new OrderMenuModel(database, menuModel);
+        OrdersModel ordersModel = new OrdersModel(database, usersModel, orderMenuModel, storeModel);
 
         // Controllers
         UsersController usersController = new UsersController(usersModel);
-        OrdersController ordersController = new OrdersController(new OrdersModel(database, usersModel, orderMenuModel, storeModel));
+        OrdersController ordersController = new OrdersController(ordersModel);
+        StoreController storeController = new StoreController(storeModel, menuModel);
 
         Scanner in = new Scanner(System.in);
         UsersDto isLogined = null;
@@ -60,7 +63,26 @@ public class Main {
                             usersController.profile(userAddressModel, couponModel);
                             break;
                         case 2:
-                            // menuController.main();
+                            switch (in.nextInt()) {
+                                case 1:
+                                    storeController.stores();
+                                    break;
+                                case 2:
+                                    storeController.storesByDepartment();
+                                    break;
+                                case 3:
+                                    storeController.storesByCategory();
+                                    break;
+                                case 4:
+                                    storeController.storesByAddress();
+                                    break;
+                                case 5:
+                                    storeController.menuListOfStore();
+                                    break;
+                                default:
+                                    System.out.println("잘못 입력하셨습니다.");
+                                    break;
+                            }
                             break;
                         case 3:
                             ordersController.order();

@@ -1,5 +1,7 @@
 package View;
 
+import DTO.MenuDto;
+
 public class MenuView {
     public void affiliatesStart() {
         System.out.print(
@@ -31,5 +33,9 @@ public class MenuView {
     public void affiliatesEnd() {
         System.out.println(
                 "└-----------------------------------------------┘");
+    }
+
+    public void menu(MenuDto menuDto) {
+
     }
 }

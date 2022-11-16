@@ -24,7 +24,7 @@ public class OrderMenuModel {
         for (OrderMenuDto orderMenu : orderMenuList) {
             ps.setInt(1, ++orderMenuId);/**/
             ps.setInt(2, orderId);
-            MenuDto menu = this.menuModel.getMenu(orderMenu.menuName);
+            MenuDto menu = this.menuModel.getMenuByMenuName(orderMenu.menuName);
             ps.setString(3, menu.menuName);
             ps.setString(4, menu.image);
             ps.setInt(5, menu.price);

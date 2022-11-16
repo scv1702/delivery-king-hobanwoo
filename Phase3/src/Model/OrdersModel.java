@@ -35,7 +35,7 @@ public class OrdersModel {
             ps.setInt(1, ++orderId);
             int usersId = this.usersModel.getUsers().userId;
             ps.setInt(2, usersId);
-            int storeId = this.storeModel.getStoreId(orders.storeName);
+            int storeId = this.storeModel.getStoreByName(orders.storeName).getStoreId();
             ps.setInt(3, storeId);
             ps.setString(4, orders.payment);
             ps.setString(5, "주문 중");
