@@ -17,7 +17,7 @@ public class MenuModel {
     }
 
     public MenuDto getMenu(ResultSet rs) throws SQLException {
-       MenuDto menu = new MenuDto();
+        MenuDto menu = new MenuDto();
         while (rs.next()) {
             menu.menuId = rs.getInt(1);
             menu.storeId = rs.getInt(2);
@@ -43,7 +43,12 @@ public class MenuModel {
         ResultSet rs = stmt.executeQuery(sql);
         ArrayList<MenuDto> menuList = new ArrayList<>();
         while (rs.next()) {
-            menuList.add(getMenu(rs));
+            menuList.add(new MenuDto(rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getInt(6)));
         }
         return menuList;
     }

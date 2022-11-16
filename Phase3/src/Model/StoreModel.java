@@ -17,6 +17,7 @@ public class StoreModel {
     public ArrayList<StoreDto> getStores(ResultSet rs) throws SQLException {
         ArrayList<StoreDto> storeList = new ArrayList<>();
         while (rs.next()) {
+            int storeId = rs.getInt("Store_ID");
             String storeName = rs.getString("Store_Name");
             String address = rs.getString("Address");
             String foodCategory = rs.getString("Food_Category");
@@ -25,6 +26,7 @@ public class StoreModel {
             int deliveryFee = rs.getInt("Delivery_Fee");
             int businessHour = rs.getInt("Business_Hour");
             storeList.add(new StoreDto(
+                    storeId,
                     storeName,
                     address,
                     foodCategory,

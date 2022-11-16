@@ -1,6 +1,7 @@
 package DTO;
 
 public class MenuDto {
+
     public int menuId;
     public int storeId;
     public String menuName;
@@ -19,5 +20,29 @@ public class MenuDto {
 
     public MenuDto() {
 
+    }
+
+    public int getMenuId() {
+        return menuId;
+    }
+
+    public int getStoreId() {
+        return storeId;
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

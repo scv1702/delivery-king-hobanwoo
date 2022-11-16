@@ -36,6 +36,11 @@ public class MenuView {
     }
 
     public void menu(MenuDto menuDto) {
-
+        System.out.println("Menu ID: " + menuDto.getMenuId());
+        System.out.println("Store ID: " + menuDto.getStoreId());
+        System.out.println("Menu Name: " + menuDto.getMenuName());
+        System.out.println("Description: " + menuDto.getDescription());
+        System.out.println("Image: " + menuDto.getImage());
+        System.out.println("Price: " + menuDto.getPrice());
     }
 }

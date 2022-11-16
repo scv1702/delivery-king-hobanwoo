@@ -11,19 +11,8 @@ public class StoreDto {
     private String image;
     private int businessHour;
 
-    public StoreDto(int storeId, String address, String foodCategory, String storeName, String phoneNumber, String description, int deliveryFee, String image, int businessHour) {
+    public StoreDto(int storeId, String storeName, String address, String foodCategory, String phoneNumber, String description, int deliveryFee, int businessHour) {
         this.storeId = storeId;
-        this.address = address;
-        this.foodCategory = foodCategory;
-        this.storeName = storeName;
-        this.phoneNumber = phoneNumber;
-        this.description = description;
-        this.deliveryFee = deliveryFee;
-        this.image = image;
-        this.businessHour = businessHour;
-    }
-
-    public StoreDto(String storeName, String address, String foodCategory, String phoneNumber, String description, int deliveryFee, int businessHour) {
         this.storeName = storeName;
         this.address = address;
         this.foodCategory = foodCategory;
