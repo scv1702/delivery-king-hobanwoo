@@ -62,7 +62,8 @@ public class StoreController {
     public void menuListOfStore() {
         try {
             String storeName = this.storeView.menuListOfStore();
-            ArrayList<MenuDto> menuList = this.menuModel.getMenuListByStoreName(storeName);
+            int storeId = this.storeModel.getStoreByName(storeName).getStoreId();
+            ArrayList<MenuDto> menuList = this.menuModel.getMenuListByStoreId(storeId);
             for (MenuDto menu: menuList) {
                 this.menuView.menu(menu);
             }

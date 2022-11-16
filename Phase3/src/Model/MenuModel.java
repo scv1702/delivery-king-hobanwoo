@@ -9,11 +9,9 @@ import java.util.ArrayList;
 
 public class MenuModel {
     private final Oracle database;
-    private final StoreModel storeModel;
 
     public MenuModel(Oracle database, StoreModel storeModel) {
         this.database = database;
-        this.storeModel = storeModel;
     }
 
     public MenuDto getMenu(ResultSet rs) throws SQLException {
@@ -36,8 +34,7 @@ public class MenuModel {
         return getMenu(rs);
     }
 
-    public ArrayList<MenuDto> getMenuListByStoreName(String storeName) throws SQLException {
-        int storeId = this.storeModel.getStoreByName(storeName).getStoreId();
+    public ArrayList<MenuDto> getMenuListByStoreId(int storeId) throws SQLException {
         String sql = "SELECT * FROM MENU WHERE STORE_ID = " + storeId;
         Statement stmt = this.database.getStatement();
         ResultSet rs = stmt.executeQuery(sql);
