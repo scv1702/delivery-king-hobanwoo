@@ -1,4 +1,5 @@
 import Controller.OrdersController;
+import Controller.ReviewController;
 import Controller.StoreController;
 import Controller.UsersController;
 import DTO.UsersDto;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 public class Main {
     // PORT CHANGE!
     private static final String DB_URL = "jdbc:oracle:thin:@localhost:1600:xe";
-    private static final String DB_ID = "delivery_king_hobanwoo";
+    private static final String DB_ID = "deliveryKingHobanwoo";
     private static final String DB_PASSWORD = "comp322";
 
     public static void waitBeforeReprint() {
@@ -32,11 +33,13 @@ public class Main {
         MenuModel menuModel = new MenuModel(database, storeModel);
         OrderMenuModel orderMenuModel = new OrderMenuModel(database, menuModel);
         OrdersModel ordersModel = new OrdersModel(database, usersModel, orderMenuModel, storeModel);
+        ReviewModel reviewModel = new ReviewModel(database, usersModel, storeModel);
 
         // Controllers
         UsersController usersController = new UsersController(usersModel);
         OrdersController ordersController = new OrdersController(ordersModel);
         StoreController storeController = new StoreController(storeModel, menuModel);
+        ReviewController reviewController = new ReviewController(reviewModel, usersModel, ordersModel);
 
         Scanner in = new Scanner(System.in);
         UsersDto isLogined = null;
@@ -70,6 +73,7 @@ public class Main {
                                 case 2:
                                     storeController.storesByDepartment();
                                     break;
+
                                 case 3:
                                     storeController.storesByCategory();
                                     break;
@@ -88,10 +92,24 @@ public class Main {
                             ordersController.order();
                             break;
                         case 4:
-                            // orders.myOrder();
+//                             orders.myOrder();
                             break;
                         case 5:
-                            // review.review();
+                            reviewController.ReviewMenu();
+                            switch (in.nextInt()){
+                                case 1:     //리뷰 쓰기
+                                    reviewController.review();
+                                    break;
+                                case 2:     //리뷰 수정
+                                    reviewController.updateReview();
+                                    break;
+                                case 3:     //리뷰 삭제
+                                    reviewController.deleteReview();
+                                    break;
+                                case 4:     //내가 쓴 리뷰 보기
+                                    reviewController.getMyReview();
+                                    break;
+                            }
                             break;
                         case 6:
                             programExit();
