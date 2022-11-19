@@ -80,4 +80,16 @@ public class StoreModel {
         ResultSet rs = stmt.executeQuery(sql);
         return getStores(rs).get(0);
     }
+
+    public String getStoreNameById(int storeId) throws SQLException {
+        String storeName = null;
+        String sql = "SELECT * FROM STORE WHERE STORE_ID = ?";
+        PreparedStatement ps = this.database.getPreparedStatement(sql);
+        ps.setInt(1, storeId);
+        ResultSet rs2 = ps.executeQuery();
+        if (rs2.next()) {
+            storeName = rs2.getString("Store_Name");
+        }
+        return storeName;
+    }
 }
