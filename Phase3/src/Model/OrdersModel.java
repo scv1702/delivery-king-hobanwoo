@@ -52,8 +52,9 @@ public class OrdersModel {
         return null;
     }
 
-    public ArrayList<OrdersDto> getOrdersByUser(int userId) throws SQLException {
+    public ArrayList<OrdersDto> getOrdersByUser() throws SQLException {
         ArrayList<OrdersDto> orderList = new ArrayList<>();
+        int userId = usersModel.getUsers().userId;
 
         String sql = "SELECT * FROM ORDERS WHERE USER_ID = ? AND STATE = ?";
         PreparedStatement ps = this.database.getPreparedStatement(sql);
@@ -87,6 +88,4 @@ public class OrdersModel {
         }
 
     }
-
-
 }

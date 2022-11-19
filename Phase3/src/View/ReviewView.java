@@ -21,18 +21,18 @@ public class ReviewView {
     public void startSlectOrderReview(){
         System.out.println(
                 "┌---------------------------------------------------------------┐\n" +
-                        "│       \t\t\t 리뷰할 주문 선택 페이지 \t\t\t            │\n" +
+                        "│       \t\t\t 리뷰할 주문 선택 페이지 \t\t\t\t            │\n" +
                         "│---------------------------------------------------------------│");
     }
 
     public int selectOrderReview(ArrayList<OrdersDto> dtos){
         int i = 1;
         for (OrdersDto dto : dtos){
-            System.out.println(i + ". ");
-            System.out.println("가게 이름 : " + dto.getStoreName());
-            System.out.println("결제 수단 : " + dto.getPayment());
-            System.out.println("주문일 : " + dto.getOrderDate());
-            System.out.println("----------------------------------------------------");
+            System.out.println("│"+i + ". ");
+            System.out.println("│가게 이름 : " + dto.getStoreName());
+            System.out.println("│결제 수단 : " + dto.getPayment());
+            System.out.println("│주문일 : " + dto.getOrderDate());
+            System.out.println("│---------------------------------------------------------------");
             i++;
         }
         Scanner in = new Scanner(System.in);
@@ -62,39 +62,55 @@ public class ReviewView {
                         "│ 3  │  리뷰 삭제하기\t\t\t\t\t\t\t    │\n" +
                         "│----┼------------------------------------------│\n" +
                         "│ 4  │  내가 쓴 리뷰 보기\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 5  │  가게별 리뷰 보기\t\t\t\t\t\t\t│\n" +
                         "└----┴------------------------------------------┘");
     }
 
     public void noOrderReview() {
-        System.out.println("│       \t\t\t\t 리뷰를 작성할 주문이 없습니다. \t\t\t            │");
+        System.out.println("│       \t\t\t 리뷰를 작성할 주문이 없습니다. \t\t            │");
         System.out.println("└---------------------------------------------------------------┘\n");
     }
 
     public void insertSuccess() {
-        System.out.println("│       \t\t\t\t 리뷰 작성이 완료되었습니다. \t\t\t            │");
+        System.out.println("│    \t\t\t\t 리뷰 작성이 완료되었습니다. \t\t\t            │");
         System.out.println("└---------------------------------------------------------------┘\n");
     }
 
-    public void MyReview(ArrayList<ReviewDto> dtos) {
+    public void showMyReview(ArrayList<ReviewDto> dtos){
         if (dtos.size() == 0){
             System.out.println("---------------------------------------------------------");
-            System.out.println("                작성한 리뷰가 없습니다           \t\t         ");
+            System.out.println("                작성한 리뷰가 없습니다.           \t\t         ");
             return;
         }
+        showReview(dtos);
+    }
+
+    public void showReviewByStore(ArrayList<ReviewDto> dtos) {
+        if (dtos.size() == 0){
+            System.out.println();
+            System.out.println("---------------------------------------------------------");
+            System.out.println("                해당 가게의 리뷰가 없습니다.           \t\t         ");
+            return;
+        }
+        showReview(dtos);
+    }
+    public void showReview(ArrayList<ReviewDto> dtos) {
+        System.out.println();
         System.out.println( "┌----┬--------------------------------------------------┐\n" +
                             "│ NO │\t\t\t\t\t리뷰\t\t\t\t\t            │");
+        System.out.println( "│----┴--------------------------------------------------│");
         int i = 1;
         for (ReviewDto dto : dtos) {
-            System.out.println("│-------------------------------------------------------│");
             System.out.println("│ "+i+"    \t\t\t\t\t\t\t\t\t\t\t\t\t│\n" +
                                 "│-------------------------------------------------------│");
             System.out.println("│  가게 이름: " + dto.getStoreName() + "   \t\t         ");
             System.out.println("│  별점: " + dto.getStarRating() + "       \t\t         ");
             System.out.println("│  내용: " + dto.getComments() + "         ");
             System.out.println("│  작성 시간: " + dto.getCreatedAt() + "   \t\t           ");
+            System.out.println("│-------------------------------------------------------│");
             i++;
         }
-        System.out.println("└-------------------------------------------------------┘");
     }
 
     public void deleteSuccess() {
@@ -134,5 +150,13 @@ public class ReviewView {
         System.out.println();
         System.out.println("                리뷰가 수정되었습니다.");
         System.out.println();
+    }
+
+    public String selectStoreForReview(){
+        System.out.println("---------------------------------------------------------");
+        System.out.println();
+        System.out.print("              리뷰를 조회할 가게 이름 : ");
+        Scanner in = new Scanner(System.in);
+        return in.nextLine();
     }
 }

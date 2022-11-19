@@ -92,7 +92,7 @@ public class Main {
                             ordersController.order();
                             break;
                         case 4:
-//                             orders.myOrder();
+                             ordersController.myOrder();
                             break;
                         case 5:
                             reviewController.ReviewMenu();
@@ -108,6 +108,12 @@ public class Main {
                                     break;
                                 case 4:     //내가 쓴 리뷰 보기
                                     reviewController.getMyReview();
+                                    break;
+                                case 5:     //가게 이름별 리뷰 보기
+                                    reviewController.showReviewByStore();
+                                    break;
+                                default:
+                                    System.out.println("잘못 입력하셨습니다.");
                                     break;
                             }
                             break;

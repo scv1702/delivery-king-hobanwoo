@@ -7,6 +7,7 @@ import Model.ReviewModel;
 import Model.UsersModel;
 import View.ReviewView;
 
+import java.sql.Array;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,7 +30,7 @@ public class ReviewController {
         try {
             reviewView.startSlectOrderReview();
             //사용자의 주문 내역을 받아옴
-            ArrayList<OrdersDto> ordersDtos = ordersModel.getOrdersByUser(usersModel.getUsers().userId);
+            ArrayList<OrdersDto> ordersDtos = ordersModel.getOrdersByUser();
             if (ordersDtos == null) {
                 reviewView.noOrderReview();
                 return;
@@ -103,10 +104,20 @@ public class ReviewController {
         ArrayList<ReviewDto> reviewDtos = null;
         try {
             reviewDtos = reviewModel.getReviewByUser(usersModel.getUsers().userId);
-            reviewView.MyReview(reviewDtos);
+            reviewView.showMyReview(reviewDtos);
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }
         return reviewDtos;
+    }
+
+    public void showReviewByStore(){
+        try{
+            String storeName = reviewView.selectStoreForReview();
+            ArrayList<ReviewDto> reviewDtos = reviewModel.selectReviewByStoreName(storeName);
+            reviewView.showReviewByStore(reviewDtos);
+        }catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
     }
 }

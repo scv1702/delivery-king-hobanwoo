@@ -1,6 +1,7 @@
 package Model;
 
 import DTO.ReviewDto;
+import DTO.StoreDto;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -74,28 +75,6 @@ public class ReviewModel {
         return reviewId;
     }
 
-
-    private ArrayList<ReviewDto> toList(ResultSet rs) throws SQLException {
-        ArrayList<ReviewDto> reviewDtos = new ArrayList<>();
-        while (rs.next()){
-            reviewDtos.add(new ReviewDto(
-                    rs.getInt("REVIEW_ID"),
-                    rs.getInt("USER_ID"),
-                    rs.getInt("STORE_ID"),
-                    rs.getInt("STAR_RATING"),
-                    rs.getString("COMMENTS"),
-                    rs.getString("CREATED_AT")
-            ));
-        }
-        return reviewDtos;
-    }
-
-    public ArrayList<ReviewDto> selectMyReview() {
-        int userId = usersModel.getUsers().userId;
-
-        return null;
-    }
-
     public void selectUpdateReview(ReviewDto dto) throws SQLException {
         String sql = "SELECT * FROM REVIEW WHERE ORDER_ID = ?";
         PreparedStatement ps = this.database.getPreparedStatement(sql);
@@ -104,7 +83,6 @@ public class ReviewModel {
         if (rs.next()){
 
         }
-
     }
 
     public void updateReview(ReviewDto dto) throws SQLException {
@@ -115,6 +93,27 @@ public class ReviewModel {
         ps.setString(3, dto.getCreatedAt());
         ps.setInt(4, dto.getReviewId());
         ResultSet rs = ps.executeQuery();
+    }
 
+    public ArrayList<ReviewDto> selectReviewByStoreName(String storeName) throws SQLException {
+        int storeId = storeModel.getStoreByName(storeName).getStoreId();
+        String sql = "SELECT * FROM REVIEW WHERE STORE_ID = ?";
+        PreparedStatement ps = this.database.getPreparedStatement(sql);
+        ps.setInt(1, storeId);
+        ResultSet rs = ps.executeQuery();
+
+        ArrayList<ReviewDto> reviewDtos = new ArrayList<>();
+        while (rs.next()){
+            reviewDtos.add(new ReviewDto(
+                    rs.getInt("REVIEW_ID"),
+                    rs.getInt("USER_ID"),
+                    rs.getInt("STORE_ID"),
+                    storeName,
+                    rs.getInt("STAR_RATING"),
+                    rs.getString("COMMENTS"),
+                    rs.getString("CREATED_AT")
+            ));
+        }
+        return reviewDtos;
     }
 }

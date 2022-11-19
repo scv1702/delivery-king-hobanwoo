@@ -47,4 +47,25 @@ public class OrdersView {
         String payment = in.nextLine();
         return new OrdersDto(storeName, orderMenuList, payment);
     }
+
+    public void showMyOrder(ArrayList<OrdersDto> dtos) {
+        if (dtos.size() == 0){
+            System.out.println("---------------------------------------------------------");
+            System.out.println("                주문한 내역이 없습니다           \t\t         ");
+            return;
+        }
+        System.out.println( "┌----┬--------------------------------------------------┐\n" +
+                            "│ NO │\t\t\t\t\t주문\t\t\t\t\t            │\n" +
+                            "│----┴--------------------------------------------------│"  );
+        int i = 1;
+        for (OrdersDto dto : dtos){
+//            System.out.println("┌-------------------------------------------------------┐");
+            System.out.println("│"+i + ". ");
+            System.out.println("│가게 이름 : " + dto.getStoreName());
+            System.out.println("│결제 수단 : " + dto.getPayment());
+            System.out.println("│주문일 : " + dto.getOrderDate());
+            System.out.println("│-------------------------------------------------------");
+            i++;
+        }
+    }
 }
