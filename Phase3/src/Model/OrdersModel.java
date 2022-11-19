@@ -2,6 +2,7 @@ package Model;
 
 import DTO.OrderMenuDto;
 import DTO.OrdersDto;
+import DTO.StoreDto;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -50,4 +51,42 @@ public class OrdersModel {
         }
         return null;
     }
+
+    public ArrayList<OrdersDto> getOrdersByUser(int userId) throws SQLException {
+        ArrayList<OrdersDto> orderList = new ArrayList<>();
+
+        String sql = "SELECT * FROM ORDERS WHERE USER_ID = ? AND STATE = ?";
+        PreparedStatement ps = this.database.getPreparedStatement(sql);
+        ps.setInt(1, userId);
+        ps.setString(2, "배달 완료");
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int orderId = rs.getInt("Order_ID");
+            int storeId = rs.getInt("Store_ID");
+            String payment = rs.getString("Payment");
+            String state = rs.getString("State");
+            String orderDate = rs.getString("Order_Date");
+
+            String storeName = storeModel.getStoreNameById(storeId);
+
+            orderList.add(new OrdersDto(
+                    orderId,
+                    userId,
+                    storeId,
+                    storeName,
+                    payment,
+                    state,
+                    orderDate
+            ));
+        }
+        if (orderList.size() == 0){
+            return null;
+        }else {
+            return orderList;
+        }
+
+    }
+
+
 }
