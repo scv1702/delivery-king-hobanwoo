@@ -127,10 +127,12 @@ public class ReviewView {
         System.out.print("                삭제할 리뷰 번호 : ");
     }
 
-    public void startUpdate() {
+    public int getUpdateNum() {
         System.out.println("---------------------------------------------------------");
         System.out.println();
         System.out.print("                수정할 리뷰 번호 : ");
+        Scanner in = new Scanner(System.in);
+        return Integer.parseInt(in.nextLine());
     }
 
     public ReviewDto updateReview(int id) {

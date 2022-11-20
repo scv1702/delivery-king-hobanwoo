@@ -68,8 +68,7 @@ public class ReviewController {
             Scanner in = new Scanner(System.in);
             ArrayList<ReviewDto> reviewDtos = getMyReview();
             if (reviewDtos.size() == 0) return;
-            reviewView.startUpdate();
-            int n = Integer.parseInt(in.nextLine());
+            int n = reviewView.getUpdateNum();
             ReviewDto updateDto = reviewView.updateReview(reviewDtos.get(n-1).getReviewId());
             reviewModel.updateReview(updateDto);
 
