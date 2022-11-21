@@ -1,31 +1,46 @@
+import Controller.OrdersController;
+import Controller.ReviewController;
+import Controller.StoreController;
 import Controller.UsersController;
 import DTO.UsersDto;
-import Model.CouponModel;
-import Model.Oracle;
-import Model.UserAddressModel;
-import Model.UsersModel;
+import Model.*;
+
 import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
     // PORT CHANGE!
-    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static final String DB_ID = "deliverykinghobanwoo";
+    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1600:xe";
+    private static final String DB_ID = "deliveryKingHobanwoo";
     private static final String DB_PASSWORD = "comp322";
 
-    public static void waitBeforeReprint(){
+    public static void waitBeforeReprint() {
         try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
-    
+
     public static void main(String[] args) throws SQLException {
         Oracle database = new Oracle(DB_URL, DB_ID, DB_PASSWORD);
-        UsersController usersController = new UsersController(new UsersModel(database));
+
+        // Models
+        UsersModel usersModel = new UsersModel(database);
         UserAddressModel userAddressModel = new UserAddressModel(database);
         CouponModel couponModel = new CouponModel(database);
+        StoreModel storeModel = new StoreModel(database, usersModel);
+        MenuModel menuModel = new MenuModel(database, storeModel);
+        OrderMenuModel orderMenuModel = new OrderMenuModel(database, menuModel);
+        OrdersModel ordersModel = new OrdersModel(database, usersModel, orderMenuModel, storeModel);
+        ReviewModel reviewModel = new ReviewModel(database, usersModel, storeModel);
+
+        // Controllers
+        UsersController usersController = new UsersController(usersModel);
+        OrdersController ordersController = new OrdersController(ordersModel);
+        StoreController storeController = new StoreController(storeModel, menuModel);
+        ReviewController reviewController = new ReviewController(reviewModel, usersModel, ordersModel);
+
         Scanner in = new Scanner(System.in);
         UsersDto isLogined = null;
 
@@ -51,24 +66,56 @@ public class Main {
                             usersController.profile(userAddressModel, couponModel);
                             break;
                         case 2:
-                            // menuController.main();
+                            switch (in.nextInt()) {
+                                case 1:
+                                    storeController.stores();
+                                    break;
+                                case 2:
+                                    storeController.storesByDepartment();
+                                    break;
+
+                                case 3:
+                                    storeController.storesByCategory();
+                                    break;
+                                case 4:
+                                    storeController.storesByAddress();
+                                    break;
+                                case 5:
+                                    storeController.menuListOfStore();
+                                    break;
+                                default:
+                                    System.out.println("잘못 입력하셨습니다.");
+                                    break;
+                            }
                             break;
                         case 3:
-                            System.out.print("│  가게 이름 : ");
-                            String storeName = in.nextLine();
-                            System.out.print("│  주문 메뉴 이름 : ");
-                            String menuName = in.nextLine();
-                            System.out.print("│  주문 수량 : ");
-                            int quantity = in.nextInt();
-                            System.out.print("│  결제 방식 : ");
-                            String payment = in.nextLine();
-                            // orders.order(storeName, menuName, quantity, payment);
+                            ordersController.order();
                             break;
                         case 4:
-                            // orders.myOrder();
+                             ordersController.myOrder();
                             break;
                         case 5:
-                            // review.review();
+                            reviewController.ReviewMenu();
+                            switch (in.nextInt()){
+                                case 1:     //리뷰 쓰기
+                                    reviewController.review();
+                                    break;
+                                case 2:     //리뷰 수정
+                                    reviewController.updateReview();
+                                    break;
+                                case 3:     //리뷰 삭제
+                                    reviewController.deleteReview();
+                                    break;
+                                case 4:     //내가 쓴 리뷰 보기
+                                    reviewController.getMyReview();
+                                    break;
+                                case 5:     //가게 이름별 리뷰 보기
+                                    reviewController.showReviewByStore();
+                                    break;
+                                default:
+                                    System.out.println("잘못 입력하셨습니다.");
+                                    break;
+                            }
                             break;
                         case 6:
                             programExit();
@@ -83,9 +130,9 @@ public class Main {
         }
     }
 
-    public static void start(){
+    public static void start() {
         System.out.println(
-                        "┌-----------------------------------------------┐\n" +
+                "┌-----------------------------------------------┐\n" +
                         "│\t\t\t\t배달왕 호반우가 간다!\t\t\t\t│\n" +
                         "│\t\t\t<경북대학교 제휴업체 배달 서비스>\t\t\t│\n" +
                         "│-----------------------------------------------│\n" +
@@ -97,23 +144,23 @@ public class Main {
                         "└-----------------------------------------------┘");
     }
 
-    public static void functionSelect(){
+    public static void functionSelect() {
         System.out.println(
                 "┌----┬------------------------------------------┐\n" +
-                "│ NO │\t\t\t\t\t기능\t\t\t            │\n" +
-                "│----┼------------------------------------------│\n" +
-                "│ 1  │  내 정보 \t\t\t\t\t\t\t\t\t│\n" +
-                "│----┼------------------------------------------│\n" +
-                "│ 2  │  menu();\t\t\t\t\t\t\t\t\t│\n" +
-                "│----┼------------------------------------------│\n" +
-                "│ 3  │  order();\t\t\t\t\t\t\t\t│\n" +
-                "│----┼------------------------------------------│\n" +
-                "│ 4  │  myOrder();\t\t\t\t\t\t\t\t│\n" +
-                "│----┼------------------------------------------│\n" +
-                "│ 5  │  review();\t\t\t\t\t\t\t\t│\n" +
-                "│----┼------------------------------------------│\n" +
-                "│ 6  │  종료하기\t\t\t\t\t\t\t\t\t│\n" +
-                "└----┴------------------------------------------┘");
+                        "│ NO │\t\t\t\t\t기능\t\t\t            │\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 1  │  내 정보 \t\t\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 2  │  menu();\t\t\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 3  │  order();\t\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 4  │  myOrder();\t\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 5  │  review();\t\t\t\t\t\t\t\t│\n" +
+                        "│----┼------------------------------------------│\n" +
+                        "│ 6  │  종료하기\t\t\t\t\t\t\t\t\t│\n" +
+                        "└----┴------------------------------------------┘");
     }
 
     public static void programExit() {
