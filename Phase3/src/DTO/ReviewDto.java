@@ -6,13 +6,11 @@ public class ReviewDto {
     private int storeId;
     private int starRating;
     private String comments;
-
-
     private String storeName;
     private String createdAt;
 
     public ReviewDto(int reviewId, int userId, int storeId, int starRating,
-                     String comments, String createdAt){
+                     String comments, String createdAt) {
         this.reviewId = reviewId;
         this.userId = userId;
         this.storeId = storeId;
@@ -22,7 +20,7 @@ public class ReviewDto {
     }
 
     public ReviewDto(int reviewId, int userId, int storeId, String storeName, int starRating,
-                     String comments, String createdAt){
+                     String comments, String createdAt) {
         this.reviewId = reviewId;
         this.userId = userId;
         this.storeId = storeId;
@@ -32,7 +30,7 @@ public class ReviewDto {
         this.createdAt = createdAt;
     }
 
-    public ReviewDto(int starRating, String comments){
+    public ReviewDto(int starRating, String comments) {
         this.starRating = starRating;
         this.comments = comments;
     }
@@ -42,6 +40,10 @@ public class ReviewDto {
         this.starRating = starRating;
         this.comments = comments;
         this.createdAt = createdAt;
+    }
+
+    public ReviewDto() {
+
     }
 
     public int getReviewId() {
@@ -70,5 +72,33 @@ public class ReviewDto {
 
     public String getStoreName() {
         return storeName;
+    }
+
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
+    }
+
+    public void setStarRating(int starRating) {
+        this.starRating = starRating;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }

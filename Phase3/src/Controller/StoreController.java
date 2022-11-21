@@ -21,6 +21,10 @@ public class StoreController {
         this.menuModel = menuModel;
     }
 
+    public int storeMenu() {
+        return this.storeView.storeMenu();
+    }
+
     public void stores() {
         try {
             ArrayList<StoreDto> storeList = this.storeModel.getAllStores();

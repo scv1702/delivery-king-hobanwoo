@@ -7,115 +7,95 @@ import Model.ReviewModel;
 import Model.UsersModel;
 import View.ReviewView;
 
-import java.sql.Array;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ReviewController {
-
     private final ReviewView reviewView = new ReviewView();
     private final ReviewModel reviewModel;
     private final OrdersModel ordersModel;
     private final UsersModel usersModel;
+
     public ReviewController(ReviewModel reviewModel, UsersModel usersModel, OrdersModel ordersModel) {
         this.reviewModel = reviewModel;
         this.usersModel = usersModel;
         this.ordersModel = ordersModel;
     }
 
-    public void review() {
+    public int reviewMenu() {
+        return this.reviewView.reviewMenu();
+    }
+
+    public void write() {
         try {
-            reviewView.startSlectOrderReview();
-            //사용자의 주문 내역을 받아옴
-            ArrayList<OrdersDto> ordersDtos = ordersModel.getOrdersByUser();
-            if (ordersDtos == null) {
-                reviewView.noOrderReview();
+            ArrayList<OrdersDto> myOrderList = this.ordersModel.getOrdersByUser();
+            if (myOrderList == null) {
+                reviewView.noOrderForReview();
                 return;
             }
-
-            //사용자가 리뷰할 order index를 받아옴.
-            int orderNum = reviewView.selectOrderReview(ordersDtos);
-
-            //리뷰할 주문 dto
-            OrdersDto ordersDto = ordersDtos.get(orderNum-1);
-
-            reviewView.startReview();
-            //리뷰 내용과 별점을 받아옴
-            ReviewDto reviewDto = reviewView.review();
-            //리뷰 추가
+            int orderId = reviewView.selectOrderForReview(myOrderList);
+            OrdersDto orders= this.ordersModel.getOrdersById(orderId);
+            ReviewDto review = reviewView.writeReview();
             int reviewId = reviewModel.getMaxReviewId();
-            ReviewDto dto = new ReviewDto(
+            ReviewDto insertedReview = new ReviewDto(
                     ++reviewId,
-                    ordersDto.getUserId(),
-                    ordersDto.getStoreId(),
-                    reviewDto.getStarRating(),
-                    reviewDto.getComments(),
+                    orders.getUserId(),
+                    orders.getStoreId(),
+                    review.getStarRating(),
+                    review.getComments(),
                     LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                    );
-            reviewModel.insertReview(dto);
-            reviewView.insertSuccess();
-
+            );
+            reviewModel.insert(insertedReview);
+            reviewView.writeSuccess();
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }
     }
 
-    public void updateReview() {
-        try{
-            Scanner in = new Scanner(System.in);
-            ArrayList<ReviewDto> reviewDtos = getMyReview();
-            if (reviewDtos.size() == 0) return;
-            int n = reviewView.getUpdateNum();
-            ReviewDto updateDto = reviewView.updateReview(reviewDtos.get(n-1).getReviewId());
-            reviewModel.updateReview(updateDto);
-
-            reviewView.updateSuccess();
-        }catch (SQLException e){
-            System.out.println("SQL Error: " + e.getMessage());
-        }
-    }
-
-    public void deleteReview() {
-        try{
-            Scanner in = new Scanner(System.in);
-            ArrayList<ReviewDto> reviewDtos = getMyReview();
-            if (reviewDtos.size() == 0) return;
-
-            reviewView.startDelete();
-            int n = Integer.parseInt(in.nextLine());
-            ReviewDto dto = reviewDtos.get(n-1);
-            reviewModel.deleteReview(dto.getReviewId());
-
-            reviewView.deleteSuccess();
-        }catch (SQLException e){
-            System.out.println("SQL Error: " + e.getMessage());
-        }
-    }
-
-    public void ReviewMenu() {
-        reviewView.reviewMenu();
-    }
-
-    public ArrayList<ReviewDto> getMyReview() {
-        ArrayList<ReviewDto> reviewDtos = null;
+    public void update() {
         try {
-            reviewDtos = reviewModel.getReviewByUser(usersModel.getUsers().userId);
-            reviewView.showMyReview(reviewDtos);
+            showMyReview();
+            int reviewId = this.reviewView.getUpdateNum();
+            ReviewDto review = this.reviewModel.getReviewById(reviewId);
+            if (review == null) {
+                System.out.println("해당 리뷰가 없습니다.\n");
+                return;
+            }
+            ReviewDto updateDto = this.reviewView.updateReview(review);
+            this.reviewModel.update(updateDto);
+            this.reviewView.updateSuccess();
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }
-        return reviewDtos;
     }
 
-    public void showReviewByStore(){
-        try{
-            String storeName = reviewView.selectStoreForReview();
-            ArrayList<ReviewDto> reviewDtos = reviewModel.selectReviewByStoreName(storeName);
-            reviewView.showReviewByStore(reviewDtos);
-        }catch (SQLException e) {
+    public void delete() {
+        try {
+            showMyReview();
+            int reviewId = this.reviewView.getDeleteNum();
+            this.reviewModel.deleteById(reviewId);
+            reviewView.deleteSuccess();
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+    }
+
+    public void showMyReview() {
+        try {
+            this.reviewView.showMyReview(this.reviewModel.getReviewByUserId(usersModel.getUsers().userId));
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+    }
+
+    public void showReviewByStoreName() {
+        try {
+            String storeName = this.reviewView.selectStoreForReview();
+            ArrayList<ReviewDto> reviewList = this.reviewModel.getReviewByStoreName(storeName);
+            this.reviewView.showReviewByStore(reviewList);
+        } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }
     }

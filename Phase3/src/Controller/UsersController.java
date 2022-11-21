@@ -4,7 +4,6 @@ import DTO.CouponDto;
 import DTO.UserAddressDto;
 import DTO.UsersDto;
 import Model.CouponModel;
-import Model.Oracle;
 import Model.UserAddressModel;
 import Model.UsersModel;
 import View.CouponView;
@@ -13,22 +12,22 @@ import View.UsersView;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class UsersController {
     private final UsersModel usersModel;
+    private final UserAddressModel userAddressModel;
+    private final CouponModel couponModel;
     private final UsersView usersView = new UsersView();
-    private UserAddressModel userAddressModel;
-    private UserAddressView userAddressView = new UserAddressView();
+    private final UserAddressView userAddressView = new UserAddressView();
+    private final CouponView couponView = new CouponView();
 
-    private CouponModel couponModel;
-    private CouponView couponView = new CouponView();
-
-    public UsersController(UsersModel usersModel) {
+    public UsersController(UsersModel usersModel, UserAddressModel userAddressModel, CouponModel couponModel) {
         this.usersModel = usersModel;
+        this.userAddressModel = userAddressModel;
+        this.couponModel = couponModel;
     }
+
     public UsersDto signUp() {
-        this.usersView.signUpStart();
         try {
             UsersDto usersDto = this.usersView.signUp();
             UsersDto signedUp = this.usersModel.insert(usersDto);
@@ -58,31 +57,27 @@ public class UsersController {
         return null;
     }
 
-    public void profile(UserAddressModel userAddressModel, CouponModel couponModel) {
-        this.userAddressModel = userAddressModel;
-        this.couponModel = couponModel;
-        this.usersView.profile();
-        Scanner in = new Scanner(System.in);
-        int selectProfile= in.nextInt();
-        switch (selectProfile) {
-            case 1: // 내 프로필 보기
+    public void usersMenu() {
+        switch (this.usersView.usersMenu()) {
+            case 1:
                 this.usersView.myProfile(this.usersModel.getUsers());
                 break;
-            case 2: // 주소 등록하기
+            case 2:
                 insertAddress(this.usersModel.getUsers());
                 break;
-            case 3: // 등록된 주소 목록 조회
-                // userAddressModel= new UserAddressModel(database);
+            case 3:
                 showMyAddress(this.usersModel.getUsers());
                 break;
-            case 4: // 보유 쿠폰 조회
+            case 4:
                 showMyCoupon(this.usersModel.getUsers());
+                break;
+            default:
+                System.out.println("잘못 입력하셨습니다.\n");
                 break;
         }
     }
 
     public UserAddressDto insertAddress(UsersDto usersDto) {
-        this.userAddressView.insertAddressStart();
         try {
             String newAddress = this.userAddressView.insertAddress();
             boolean myAddress = this.userAddressModel.insert(usersDto, newAddress);
@@ -96,13 +91,11 @@ public class UsersController {
     }
 
     public UserAddressDto showMyAddress(UsersDto usersDto) {
-        this.userAddressView.showMyAddressStart();
         try {
             ArrayList<UserAddressDto> myAddress = this.userAddressModel.showMyAddress(usersDto);
             if (myAddress != null) {
                 this.userAddressView.showMyAddress(myAddress);
             }
-            this.userAddressView.showMyAddressEnd();
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }
@@ -110,13 +103,13 @@ public class UsersController {
     }
 
     public CouponDto showMyCoupon(UsersDto usersDto) {
-        this.couponView.showMyCouponsStart();
         try {
             ArrayList<CouponDto> myCoupon = this.couponModel.showMyCoupons(usersDto);
-            if (myCoupon != null) {
+            if (myCoupon != null && myCoupon.size() > 0) {
                 this.couponView.showMyCoupons(myCoupon);
+            } else {
+                this.couponView.noMyCoupons();
             }
-            this.couponView.showMyCouponsEnd();
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }

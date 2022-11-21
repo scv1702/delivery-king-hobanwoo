@@ -55,22 +55,17 @@ public class OrdersModel {
     public ArrayList<OrdersDto> getOrdersByUser() throws SQLException {
         ArrayList<OrdersDto> orderList = new ArrayList<>();
         int userId = usersModel.getUsers().userId;
-
-        String sql = "SELECT * FROM ORDERS WHERE USER_ID = ? AND STATE = ?";
+        String sql = "SELECT * FROM ORDERS WHERE USER_ID = ? ORDER BY ORDER_DATE";
         PreparedStatement ps = this.database.getPreparedStatement(sql);
         ps.setInt(1, userId);
-        ps.setString(2, "배달 완료");
         ResultSet rs = ps.executeQuery();
-
         while (rs.next()) {
             int orderId = rs.getInt("Order_ID");
             int storeId = rs.getInt("Store_ID");
             String payment = rs.getString("Payment");
             String state = rs.getString("State");
             String orderDate = rs.getString("Order_Date");
-
             String storeName = storeModel.getStoreNameById(storeId);
-
             orderList.add(new OrdersDto(
                     orderId,
                     userId,
@@ -81,11 +76,36 @@ public class OrdersModel {
                     orderDate
             ));
         }
-        if (orderList.size() == 0){
-            return null;
-        }else {
+        if (orderList.size() > 0) {
             return orderList;
+        } else {
+            return null;
         }
+    }
 
+    public OrdersDto getOrdersById(int orderId) throws SQLException {
+        String sql = "SELECT * FROM ORDERS WHERE Order_ID = ? ORDER BY ORDER_DATE";
+        PreparedStatement ps = this.database.getPreparedStatement(sql);
+        ps.setInt(1, orderId);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            int userId = rs.getInt("User_ID");
+            int storeId = rs.getInt("Store_ID");
+            String payment = rs.getString("Payment");
+            String state = rs.getString("State");
+            String orderDate = rs.getString("Order_Date");
+            String storeName = storeModel.getStoreNameById(storeId);
+            return new OrdersDto(
+                    orderId,
+                    userId,
+                    storeId,
+                    storeName,
+                    payment,
+                    state,
+                    orderDate
+            );
+        } else {
+            return null;
+        }
     }
 }

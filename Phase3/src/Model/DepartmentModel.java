@@ -1,9 +1,5 @@
 package Model;
 
-import View.Announcement;
-
-import java.sql.*;
-
 public class DepartmentModel {
     private final Oracle database;
     private final String insertTemplate = "INSERT INTO DEPARTMENT VALUES ( ? )";
