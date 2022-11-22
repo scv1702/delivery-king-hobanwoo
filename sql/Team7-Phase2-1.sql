@@ -48,7 +48,7 @@ CREATE TABLE Users(
     Phone_Number VARCHAR2(14) NOT NULL,
     Membership_Tier VARCHAR2(20) NOT NULL,
     PRIMARY KEY(User_ID),
-    UNIQUE(Phone_Number)
+    UNIQUE(User_Name, Phone_Number)
 );
 
 CREATE TABLE User_Address(
