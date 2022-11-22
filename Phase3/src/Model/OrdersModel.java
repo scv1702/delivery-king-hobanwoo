@@ -55,7 +55,7 @@ public class OrdersModel {
     public ArrayList<OrdersDto> getOrdersByUser() throws SQLException {
         ArrayList<OrdersDto> orderList = new ArrayList<>();
         int userId = usersModel.getUsers().userId;
-        String sql = "SELECT * FROM ORDERS WHERE USER_ID = ? ORDER BY ORDER_DATE";
+        String sql = "SELECT * FROM ORDERS WHERE USER_ID = ? INTERSECT SELECT * FROM ORDERS WHERE STATE = \'배달 완료\'";
         PreparedStatement ps = this.database.getPreparedStatement(sql);
         ps.setInt(1, userId);
         ResultSet rs = ps.executeQuery();
