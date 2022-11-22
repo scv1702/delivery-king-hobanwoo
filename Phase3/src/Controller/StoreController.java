@@ -36,9 +36,19 @@ public class StoreController {
 
     public void storesByCategory() {
         try {
-            String category = this.storeView.selectCategory();
-            ArrayList<StoreDto> storeList = this.storeModel.getStoresByCategory(category);
-            this.storeView.showStores(storeList);
+            int categoryCount = this.storeView.selectCategoryCount();
+            switch (categoryCount) {
+                case 1: // 1개의 카테고리로 검색하기
+                    String category = this.storeView.selectCategory();
+                    ArrayList<StoreDto> storeList = this.storeModel.getStoresByCategory(category);
+                    this.storeView.showStores(storeList);
+                    break;
+                case 2: // 여러 개의 카테고리로 검색하기
+                    String multipleCategory = this.storeView.selectMultipleCategory();
+                    ArrayList<StoreDto> storeLists = this.storeModel.getStoresByMultipleCategory(multipleCategory);
+                    this.storeView.showStores(storeLists);
+                    break;
+            }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }

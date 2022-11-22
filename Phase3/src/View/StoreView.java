@@ -31,12 +31,30 @@ public class StoreView {
         }
     }
 
+    public int selectCategoryCount() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("1. 1개의 카테고리로 검색하기");
+        System.out.println("2. 여러 개의 카테고리로 검색하기");
+        System.out.print(": ");
+        int select = in.nextInt();
+        return select;
+    }
+
     public String selectCategory() {
         Scanner in = new Scanner(System.in);
         System.out.print("카테고리: ");
         String category = in.nextLine();
         System.out.println();
         return category;
+    }
+
+    public String selectMultipleCategory() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("카테고리들을 '#' 단위로 입력해주세요.");
+        System.out.print("카테고리: ");
+        String multipleCategory = in.nextLine();
+        System.out.println();
+        return multipleCategory;
     }
 
     public String selectAddress() {

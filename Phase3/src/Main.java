@@ -98,6 +98,9 @@ public class Main {
                                 case 5: // 가게 이름별 리뷰 보기
                                     reviewController.reviewByStoreName();
                                     break;
+                                case 6: // 아직 리뷰를 작성하지 않은 주문 내역
+                                    reviewController.unReviewedOrdersList();
+                                    break;
                                 default:
                                     System.out.println("잘못 입력하셨습니다.\n");
                                     break;
