@@ -62,7 +62,7 @@ public class ReviewView {
         showReview(reviewList);
     }
 
-    public void showReviewByStore(ArrayList<ReviewDto> reviewList) {
+    public void reviewByStore(ArrayList<ReviewDto> reviewList) {
         if (reviewList.size() == 0) {
             System.out.println("해당 가게의 리뷰가 없습니다.\n");
             return;
@@ -81,7 +81,7 @@ public class ReviewView {
         }
     }
 
-    public int getUpdateNum() {
+    public int getReviewIdForUpdate() {
         System.out.print("수정할 리뷰 번호: ");
         Scanner in = new Scanner(System.in);
         int updateNum = Integer.parseInt(in.nextLine());
@@ -89,7 +89,7 @@ public class ReviewView {
         return updateNum;
     }
 
-    public int getDeleteNum() {
+    public int getReviewIdForDelete() {
         System.out.print("삭제할 리뷰 번호: ");
         Scanner in = new Scanner(System.in);
         int deleteNum = Integer.parseInt(in.nextLine());

@@ -60,16 +60,16 @@ public class UsersController {
     public void usersMenu() {
         switch (this.usersView.usersMenu()) {
             case 1:
-                this.usersView.myProfile(this.usersModel.getUsers());
+                this.usersView.showMyProfile(this.usersModel.getUsers());
                 break;
             case 2:
                 insertAddress(this.usersModel.getUsers());
                 break;
             case 3:
-                showMyAddress(this.usersModel.getUsers());
+                myAddress(this.usersModel.getUsers());
                 break;
             case 4:
-                showMyCoupon(this.usersModel.getUsers());
+                myCoupon(this.usersModel.getUsers());
                 break;
             default:
                 System.out.println("잘못 입력하셨습니다.\n");
@@ -90,9 +90,9 @@ public class UsersController {
         return null;
     }
 
-    public UserAddressDto showMyAddress(UsersDto usersDto) {
+    public UserAddressDto myAddress(UsersDto usersDto) {
         try {
-            ArrayList<UserAddressDto> myAddress = this.userAddressModel.showMyAddress(usersDto);
+            ArrayList<UserAddressDto> myAddress = this.userAddressModel.getAddressByUser(usersDto);
             if (myAddress != null) {
                 this.userAddressView.showMyAddress(myAddress);
             }
@@ -102,9 +102,9 @@ public class UsersController {
         return null;
     }
 
-    public CouponDto showMyCoupon(UsersDto usersDto) {
+    public CouponDto myCoupon(UsersDto usersDto) {
         try {
-            ArrayList<CouponDto> myCoupon = this.couponModel.showMyCoupons(usersDto);
+            ArrayList<CouponDto> myCoupon = this.couponModel.getCouponsByUser(usersDto);
             if (myCoupon != null && myCoupon.size() > 0) {
                 this.couponView.showMyCoupons(myCoupon);
             } else {

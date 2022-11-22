@@ -31,7 +31,7 @@ public class OrdersView {
         return new OrdersDto(storeName, orderMenuList, payment);
     }
 
-    public void showMyOrder(ArrayList<OrdersDto> ordersList) {
+    public void showMyOrders(ArrayList<OrdersDto> ordersList) {
         for (OrdersDto orders : ordersList){
             System.out.println("가게 이름 : " + orders.getStoreName());
             System.out.println("결제 수단 : " + orders.getPayment());

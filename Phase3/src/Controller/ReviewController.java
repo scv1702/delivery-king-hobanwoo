@@ -56,8 +56,8 @@ public class ReviewController {
 
     public void update() {
         try {
-            showMyReview();
-            int reviewId = this.reviewView.getUpdateNum();
+            myReview();
+            int reviewId = this.reviewView.getReviewIdForUpdate();
             ReviewDto review = this.reviewModel.getReviewById(reviewId);
             if (review == null) {
                 System.out.println("해당 리뷰가 없습니다.\n");
@@ -73,8 +73,8 @@ public class ReviewController {
 
     public void delete() {
         try {
-            showMyReview();
-            int reviewId = this.reviewView.getDeleteNum();
+            myReview();
+            int reviewId = this.reviewView.getReviewIdForDelete();
             this.reviewModel.deleteById(reviewId);
             reviewView.deleteSuccess();
         } catch (SQLException e) {
@@ -82,7 +82,7 @@ public class ReviewController {
         }
     }
 
-    public void showMyReview() {
+    public void myReview() {
         try {
             this.reviewView.showMyReview(this.reviewModel.getReviewByUserId(usersModel.getUsers().userId));
         } catch (SQLException e) {
@@ -90,11 +90,11 @@ public class ReviewController {
         }
     }
 
-    public void showReviewByStoreName() {
+    public void reviewByStoreName() {
         try {
             String storeName = this.reviewView.selectStoreForReview();
             ArrayList<ReviewDto> reviewList = this.reviewModel.getReviewByStoreName(storeName);
-            this.reviewView.showReviewByStore(reviewList);
+            this.reviewView.reviewByStore(reviewList);
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }

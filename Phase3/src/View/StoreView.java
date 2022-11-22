@@ -19,7 +19,7 @@ public class StoreView {
         return select;
     }
 
-    public void stores(ArrayList<StoreDto> storeList) {
+    public void showStores(ArrayList<StoreDto> storeList) {
         for (StoreDto store: storeList) {
             System.out.println("가게 이름: " + store.getStoreName());
             System.out.println("가게 주소: " + store.getAddress());
@@ -31,7 +31,7 @@ public class StoreView {
         }
     }
 
-    public String storesByCategory() {
+    public String selectCategory() {
         Scanner in = new Scanner(System.in);
         System.out.print("카테고리: ");
         String category = in.nextLine();
@@ -39,7 +39,7 @@ public class StoreView {
         return category;
     }
 
-    public String storesByAddress() {
+    public String selectAddress() {
         Scanner in = new Scanner(System.in);
         System.out.print("주소: ");
         String address = in.nextLine();
@@ -47,7 +47,7 @@ public class StoreView {
         return address;
     }
 
-    public String menuListOfStore() {
+    public String showMenuListOfStore() {
         Scanner in = new Scanner(System.in);
         System.out.print("가게 이름: ");
         String storeName = in.nextLine();

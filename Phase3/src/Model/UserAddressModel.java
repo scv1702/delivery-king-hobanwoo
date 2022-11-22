@@ -17,7 +17,7 @@ public class UserAddressModel {
         this.userAddress = null;
     }
 
-    public ArrayList<UserAddressDto> showMyAddress(UsersDto user) throws SQLException {
+    public ArrayList<UserAddressDto> getAddressByUser(UsersDto user) throws SQLException {
         this.userAddress = new ArrayList<>();
         String sql = "SELECT UADDRESS " +
                      "FROM USER_ADDRESS " +

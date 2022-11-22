@@ -31,7 +31,7 @@ public class OrdersController {
         try {
             ArrayList<OrdersDto> myOrder = this.ordersModel.getOrdersByUser();
             if (myOrder != null) {
-                this.ordersView.showMyOrder(this.ordersModel.getOrdersByUser());
+                this.ordersView.showMyOrders(this.ordersModel.getOrdersByUser());
             } else {
                 this.ordersView.noMyOrder();
             }

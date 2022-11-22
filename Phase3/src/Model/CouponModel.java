@@ -15,7 +15,7 @@ public class CouponModel {
         this.coupons = null;
     }
 
-    public ArrayList<CouponDto> showMyCoupons(UsersDto user) throws SQLException {
+    public ArrayList<CouponDto> getCouponsByUser(UsersDto user) throws SQLException {
         this.coupons = new ArrayList<>();
         String sql = "SELECT * " +
                      "FROM COUPON " +

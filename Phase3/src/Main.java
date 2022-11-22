@@ -93,10 +93,10 @@ public class Main {
                                     reviewController.delete();
                                     break;
                                 case 4: // 내가 쓴 리뷰 보기
-                                    reviewController.showMyReview();
+                                    reviewController.myReview();
                                     break;
                                 case 5: // 가게 이름별 리뷰 보기
-                                    reviewController.showReviewByStoreName();
+                                    reviewController.reviewByStoreName();
                                     break;
                                 default:
                                     System.out.println("잘못 입력하셨습니다.\n");

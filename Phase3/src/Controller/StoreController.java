@@ -28,7 +28,7 @@ public class StoreController {
     public void stores() {
         try {
             ArrayList<StoreDto> storeList = this.storeModel.getAllStores();
-            this.storeView.stores(storeList);
+            this.storeView.showStores(storeList);
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }
@@ -36,9 +36,9 @@ public class StoreController {
 
     public void storesByCategory() {
         try {
-            String category = this.storeView.storesByCategory();
+            String category = this.storeView.selectCategory();
             ArrayList<StoreDto> storeList = this.storeModel.getStoresByCategory(category);
-            this.storeView.stores(storeList);
+            this.storeView.showStores(storeList);
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }
@@ -46,9 +46,9 @@ public class StoreController {
 
     public void storesByAddress() {
         try {
-            String address = this.storeView.storesByAddress();
+            String address = this.storeView.selectAddress();
             ArrayList<StoreDto> storeList = this.storeModel.getStoresByAddress(address);
-            this.storeView.stores(storeList);
+            this.storeView.showStores(storeList);
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }
@@ -57,7 +57,7 @@ public class StoreController {
     public void storesByDepartment() {
         try {
             ArrayList<StoreDto> storeList = this.storeModel.getStoresByDepartment();
-            this.storeView.stores(storeList);
+            this.storeView.showStores(storeList);
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }
@@ -65,11 +65,11 @@ public class StoreController {
 
     public void menuListOfStore() {
         try {
-            String storeName = this.storeView.menuListOfStore();
+            String storeName = this.storeView.showMenuListOfStore();
             int storeId = this.storeModel.getStoreByName(storeName).getStoreId();
             ArrayList<MenuDto> menuList = this.menuModel.getMenuListByStoreId(storeId);
             for (MenuDto menu: menuList) {
-                this.menuView.menu(menu);
+                this.menuView.showMenu(menu);
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());

@@ -66,7 +66,7 @@ public class UsersView {
         return select;
     }
 
-    public void myProfile(UsersDto usersDto) {
+    public void showMyProfile(UsersDto usersDto) {
         System.out.println("사용자 이름: " + usersDto.username);
         System.out.println("단과대학: " + usersDto.dName);
         System.out.println("연락처: " + usersDto.phoneNumber);
