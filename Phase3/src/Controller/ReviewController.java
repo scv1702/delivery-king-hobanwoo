@@ -99,4 +99,17 @@ public class ReviewController {
             System.out.println("SQL Error: " + e.getMessage());
         }
     }
+
+    public void unReviewedOrdersList() {
+        try {
+            ArrayList<OrdersDto> myOrderList = this.ordersModel.getUnreviewedOrdersByUser();
+            if (myOrderList == null) {
+                reviewView.noOrderForReview();
+                return;
+            }
+            reviewView.showOrderForReview(myOrderList);
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+    }
 }

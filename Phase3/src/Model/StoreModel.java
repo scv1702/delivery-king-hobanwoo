@@ -2,6 +2,8 @@ package Model;
 
 import DTO.StoreDto;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -48,6 +50,19 @@ public class StoreModel {
 
     public ArrayList<StoreDto> getStoresByCategory(String category) throws SQLException {
         String sql = "SELECT * FROM STORE WHERE FOOD_CATEGORY = '" + category + "'";
+        Statement stmt = this.database.getStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        return getStores(rs);
+    }
+    public ArrayList<StoreDto> getStoresByMultipleCategory(String category) throws SQLException {
+        String[] categorySubStr = category.split("#"); // # 단위로 끊어서 받아오기
+        String sql = "";
+        for (int i = 0; i < categorySubStr.length; i++) {
+            sql += "SELECT * FROM STORE WHERE FOOD_CATEGORY = '" + categorySubStr[i] + "'";
+            if (i != categorySubStr.length-1) {
+                sql += " UNION ";
+            }
+        }
         Statement stmt = this.database.getStatement();
         ResultSet rs = stmt.executeQuery(sql);
         return getStores(rs);

@@ -23,6 +23,15 @@ public class ReviewView {
         return orderNum;
     }
 
+    public void showOrderForReview(ArrayList<OrdersDto> ordersList) {
+        for (OrdersDto orders : ordersList) {
+            System.out.println("주문 번호: " + orders.getOrderId());
+            System.out.println("가게 이름: " + orders.getStoreName());
+            System.out.println("결제 수단: " + orders.getPayment());
+            System.out.println("주문일: " + orders.getOrderDate() + '\n');
+        }
+    }
+
     public ReviewDto writeReview() {
         Scanner in = new Scanner(System.in);
         System.out.print("별점(1 ~ 5): ");
@@ -39,7 +48,8 @@ public class ReviewView {
         System.out.println("2. 리뷰 수정");
         System.out.println("3. 리뷰 삭제");
         System.out.println("4. 내가 쓴 리뷰");
-        System.out.println("5. 가게별 리뷰");
+        System.out.println("5. 특정 가게 리뷰 내역");
+        System.out.println("6. 아직 리뷰를 작성하지 않은 주문 내역");
         System.out.print(": ");
         int select = Integer.parseInt(in.nextLine());
         System.out.println();

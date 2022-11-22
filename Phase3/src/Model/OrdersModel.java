@@ -83,6 +83,44 @@ public class OrdersModel {
         }
     }
 
+    public ArrayList<OrdersDto> getUnreviewedOrdersByUser() throws SQLException {
+        ArrayList<OrdersDto> unReviewedOrderList = new ArrayList<>();
+        int userId = usersModel.getUsers().userId;
+        String sql ="SELECT * " +
+                    "FROM ORDERS O, USERS U " +
+                    "WHERE " +
+                    "U.USER_ID= O.USER_ID AND " +
+                    "U.USER_ID=? AND " +
+                    "NOT EXISTS (SELECT * " +
+                    "            FROM CONTAINS C " +
+                    "            WHERE C.ORDER_ID=O.ORDER_ID) ";
+        PreparedStatement ps = this.database.getPreparedStatement(sql);
+        ps.setInt(1, userId);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int orderId = rs.getInt("Order_ID");
+            int storeId = rs.getInt("Store_ID");
+            String payment = rs.getString("Payment");
+            String state = rs.getString("State");
+            String orderDate = rs.getString("Order_Date");
+            String storeName = storeModel.getStoreNameById(storeId);
+            unReviewedOrderList.add(new OrdersDto(
+                    orderId,
+                    userId,
+                    storeId,
+                    storeName,
+                    payment,
+                    state,
+                    orderDate
+            ));
+        }
+        if (unReviewedOrderList.size() > 0) {
+            return unReviewedOrderList;
+        } else {
+            return null;
+        }
+    }
+
     public OrdersDto getOrdersById(int orderId) throws SQLException {
         String sql = "SELECT * FROM ORDERS WHERE Order_ID = ? ORDER BY ORDER_DATE";
         PreparedStatement ps = this.database.getPreparedStatement(sql);
