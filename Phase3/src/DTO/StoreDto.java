@@ -24,6 +24,17 @@ public class StoreDto {
         this.businessHour = businessHour;
     }
 
+    public StoreDto(int storeId, String storeName, String address, String foodCategory, String phoneNumber, String description, int deliveryFee, int businessHour) {
+        this.storeId = storeId;
+        this.storeName = storeName;
+        this.address = address;
+        this.foodCategory = foodCategory;
+        this.phoneNumber = phoneNumber;
+        this.description = description;
+        this.deliveryFee = deliveryFee;
+        this.businessHour = businessHour;
+    }
+
     public int getStoreId() {
         return storeId;
     }

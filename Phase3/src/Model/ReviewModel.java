@@ -80,7 +80,7 @@ public class ReviewModel {
     }
 
     public ArrayList<ReviewDto> getReviewByStoreName(String storeName) throws SQLException {
-        int storeId = this.storeModel.getStoreByName(storeName).getStoreId();
+        int storeId = this.storeModel.getStoreByNameWithId(storeName).getStoreId();
         String sql = "SELECT * FROM REVIEW WHERE STORE_ID = ?";
         PreparedStatement ps = this.database.getPreparedStatement(sql);
         ps.setInt(1, storeId);
