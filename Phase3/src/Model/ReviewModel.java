@@ -1,6 +1,7 @@
 package Model;
 
 import DTO.ReviewDto;
+import DTO.StoreDto;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
