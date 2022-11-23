@@ -2,6 +2,7 @@ package Controller;
 
 import DTO.OrdersDto;
 import DTO.ReviewDto;
+import Model.ContainsModel;
 import Model.OrdersModel;
 import Model.ReviewModel;
 import Model.UsersModel;
@@ -17,11 +18,13 @@ public class ReviewController {
     private final ReviewModel reviewModel;
     private final OrdersModel ordersModel;
     private final UsersModel usersModel;
+    private final ContainsModel containsModel;
 
-    public ReviewController(ReviewModel reviewModel, UsersModel usersModel, OrdersModel ordersModel) {
+    public ReviewController(ReviewModel reviewModel, UsersModel usersModel, OrdersModel ordersModel, ContainsModel containsModel) {
         this.reviewModel = reviewModel;
         this.usersModel = usersModel;
         this.ordersModel = ordersModel;
+        this.containsModel = containsModel;
     }
 
     public int reviewMenu() {
@@ -48,6 +51,7 @@ public class ReviewController {
                     LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             );
             reviewModel.insert(insertedReview);
+            containsModel.containsInsert(orders.getOrderId(), reviewId);
             reviewView.writeSuccess();
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());

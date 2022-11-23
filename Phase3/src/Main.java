@@ -24,6 +24,7 @@ public class Main {
         StoreModel storeModel = new StoreModel(database, usersModel);
         MenuModel menuModel = new MenuModel(database, storeModel);
         OrderMenuModel orderMenuModel = new OrderMenuModel(database, menuModel);
+        ContainsModel containsModel = new ContainsModel(database, orderMenuModel);
         OrdersModel ordersModel = new OrdersModel(database, usersModel, orderMenuModel, storeModel);
         ReviewModel reviewModel = new ReviewModel(database, storeModel);
 
@@ -31,7 +32,7 @@ public class Main {
         UsersController usersController = new UsersController(usersModel, userAddressModel, couponModel);
         OrdersController ordersController = new OrdersController(ordersModel);
         StoreController storeController = new StoreController(storeModel, menuModel);
-        ReviewController reviewController = new ReviewController(reviewModel, usersModel, ordersModel);
+        ReviewController reviewController = new ReviewController(reviewModel, usersModel, ordersModel, containsModel);
 
         UsersDto loginedUser = null;
 

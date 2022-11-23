@@ -49,4 +49,16 @@ public class OrderMenuModel {
             return null;
         }
     }
+
+    public ArrayList<Integer> getOrderMenuIdByOrderId(Integer orderId) throws SQLException {
+        String sql = "SELECT * FROM ORDER_MENU WHERE ORDER_ID = " + orderId;
+        Statement stmt = this.database.getStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        ArrayList<Integer> orderMenuIdList = new ArrayList<>();
+        while (rs.next()) {
+            orderMenuIdList.add(rs.getInt("ORDER_MENU_ID"));
+            System.out.println(orderMenuIdList);
+        }
+        return orderMenuIdList;
+    }
 }
