@@ -110,7 +110,7 @@ public class ReviewController {
         try {
             ArrayList<OrdersDto> myOrderList = this.ordersModel.getUnreviewedOrdersByUser();
             if (myOrderList == null) {
-                reviewView.allOrderForReview();
+                reviewView.noOrderForReview();
                 return;
             }
             reviewView.showOrderForReview(myOrderList);
