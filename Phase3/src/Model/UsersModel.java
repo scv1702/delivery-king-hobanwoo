@@ -74,7 +74,6 @@ public class UsersModel {
         PreparedStatement ps = this.database.getPreparedStatement(sql);
         ps.setInt(1, this.users.userId);
         ResultSet rs = ps.executeQuery();
-        ps.close();
         if (rs.next()) {
             int count = rs.getInt(1);
             if (count >= 0 && count < 2) {
