@@ -16,7 +16,6 @@ public class OrdersController {
         this.ordersModel = ordersModel;
     }
 
-
     public void order() {
         try {
             OrdersDto orders = ordersView.order();
@@ -29,8 +28,8 @@ public class OrdersController {
         }
     }
 
-    public void myOrder(){
-        int select= this.ordersView.selectOrderMenu();
+    public void myOrder() {
+        int select = this.ordersView.selectOrderMenu();
         switch (select) {
             case 1: // 모든 주문 내역 보기
                 try {

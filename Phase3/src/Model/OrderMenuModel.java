@@ -41,7 +41,6 @@ public class OrderMenuModel {
             ));
         }
         int[] resInsert = ps.executeBatch();
-        System.out.println(resInsert.length);
         ps.close();
         if (resInsert.length == orderedMenuList.size()) {
             return orderedMenuList;
