@@ -61,10 +61,6 @@ public class ReviewView {
         System.out.println("리뷰를 작성할 주문이 없습니다.\n");
     }
 
-    public void allOrderForReview() {
-        System.out.println("모든 완료된 주문에 리뷰를 남겼습니다.\n");
-    }
-
     public void writeSuccess() {
         System.out.println("리뷰 작성이 완료 됐습니다.\n");
     }
