@@ -19,7 +19,6 @@ public class StoreModel {
     public ArrayList<StoreDto> getStores(ResultSet rs) throws SQLException {
         ArrayList<StoreDto> storeList = new ArrayList<>();
         while (rs.next()) {
-            int storeId = rs.getInt("Store_ID");
             String storeName = rs.getString("Store_Name");
             String address = rs.getString("Address");
             String foodCategory = rs.getString("Food_Category");
@@ -28,7 +27,6 @@ public class StoreModel {
             int deliveryFee = rs.getInt("Delivery_Fee");
             int businessHour = rs.getInt("Business_Hour");
             storeList.add(new StoreDto(
-                    storeId,
                     storeName,
                     address,
                     foodCategory,
@@ -69,7 +67,10 @@ public class StoreModel {
     }
 
     public ArrayList<StoreDto> getStoresByAddress(String address) throws SQLException {
-        String sql = "SELECT * FROM STORE WHERE ADDRESS LIKE '%" + address + "%'";
+        String sql = "SELECT * FROM STORE S " +
+                "WHERE S.STORE_ID IN (SELECT S1.STORE_ID " +
+                "FROM Store S1 " +
+                "WHERE S1.ADDRESS LIKE '%" + address + "%')";
         Statement stmt = this.database.getStatement();
         ResultSet rs = stmt.executeQuery(sql);
         return getStores(rs);

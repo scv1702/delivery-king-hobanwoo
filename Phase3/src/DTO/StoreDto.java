@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.ArrayList;
+
 public class StoreDto {
     private int storeId;
     private String address;
@@ -10,9 +12,9 @@ public class StoreDto {
     private int deliveryFee;
     private String image;
     private int businessHour;
+    private ArrayList<MenuDto> menuList;
 
-    public StoreDto(int storeId, String storeName, String address, String foodCategory, String phoneNumber, String description, int deliveryFee, int businessHour) {
-        this.storeId = storeId;
+    public StoreDto(String storeName, String address, String foodCategory, String phoneNumber, String description, int deliveryFee, int businessHour) {
         this.storeName = storeName;
         this.address = address;
         this.foodCategory = foodCategory;
