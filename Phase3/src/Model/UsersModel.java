@@ -1,6 +1,7 @@
 package Model;
 
 import DTO.UsersDto;
+
 import java.sql.*;
 
 
@@ -11,6 +12,40 @@ public class UsersModel {
     public UsersModel(Oracle database) {
         this.database = database;
         this.users = null;
+    }
+
+    public void getMembershipTier() throws SQLException {
+        String sql = "SELECT COUNT(*) " +
+                "FROM USERS U, ORDERS O " +
+                "WHERE U.User_ID = ? " +
+                "AND U.User_ID = O.User_ID " +
+                "GROUP BY U.User_ID";
+        PreparedStatement ps = this.database.getPreparedStatement(sql);
+        ps.setInt(1, this.users.userId);
+        ResultSet rs = ps.executeQuery();
+        ps.close();
+        if (rs.next()) {
+            int count = rs.getInt(1);
+            if (count >= 0 && count < 2) {
+                this.users.membershipTier = "고마워요";
+            } else if (count >= 2 && count < 4) {
+                this.users.membershipTier = "최고에요";
+            } else {
+                this.users.membershipTier = "사랑해요";
+            }
+        }
+    }
+
+    public void updateMembershipTier() throws SQLException {
+        getMembershipTier();
+        String sql = "UPDATE USERS " +
+                "SET Membership_Tier = ? " +
+                "WHERE User_ID = ?";
+        PreparedStatement ps = this.database.getPreparedStatement(sql);
+        ps.setString(1, this.users.membershipTier);
+        ps.setInt(2, this.users.userId);
+        ps.executeUpdate();
+        ps.close();
     }
 
     public UsersDto insert(UsersDto user) throws SQLException {
@@ -60,5 +95,8 @@ public class UsersModel {
         return null;
     }
 
-    public UsersDto getUsers() { return this.users; }
+    public UsersDto getUsers() throws SQLException {
+        getMembershipTier();
+        return this.users;
+    }
 }

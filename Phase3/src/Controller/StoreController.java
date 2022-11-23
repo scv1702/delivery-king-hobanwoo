@@ -4,6 +4,7 @@ import DTO.MenuDto;
 import DTO.StoreDto;
 import Model.MenuModel;
 import Model.StoreModel;
+import Model.UsersModel;
 import View.MenuView;
 import View.StoreView;
 
@@ -15,10 +16,12 @@ public class StoreController {
     private final StoreView storeView = new StoreView();
     private final MenuModel menuModel;
     private final MenuView menuView = new MenuView();
+    private final UsersModel usersModel;
 
-    public StoreController(StoreModel storeModel, MenuModel menuModel) {
+    public StoreController(StoreModel storeModel, MenuModel menuModel, UsersModel usersModel) {
         this.storeModel = storeModel;
         this.menuModel = menuModel;
+        this.usersModel = usersModel;
     }
 
     public int storeMenu() {
@@ -66,7 +69,7 @@ public class StoreController {
 
     public void storesByDepartment() {
         try {
-            ArrayList<StoreDto> storeList = this.storeModel.getStoresByDepartment();
+            ArrayList<StoreDto> storeList = this.storeModel.getStoresByDepartment(this.usersModel.getUsers().userId);
             this.storeView.showStores(storeList);
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
