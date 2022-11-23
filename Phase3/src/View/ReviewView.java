@@ -50,6 +50,7 @@ public class ReviewView {
         System.out.println("4. 내가 쓴 리뷰");
         System.out.println("5. 특정 가게 리뷰 내역");
         System.out.println("6. 아직 리뷰를 작성하지 않은 주문 내역");
+        System.out.println("7. 리뷰를 작성한 가게 목록");
         System.out.print(": ");
         int select = Integer.parseInt(in.nextLine());
         System.out.println();

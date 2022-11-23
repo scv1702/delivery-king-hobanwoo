@@ -102,7 +102,7 @@ public class Main {
                                 case 6: // 아직 리뷰를 작성하지 않은 주문 내역
                                     reviewController.unReviewedOrdersList();
                                     break;
-                                case 7: // 내가 쓴 리뷰의 가게 보기
+                                case 7: // 리뷰를 작성한 가게 목록
                                     reviewController.storesByMyReview();
                                     break;
                                 default:
