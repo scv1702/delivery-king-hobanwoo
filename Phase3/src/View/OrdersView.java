@@ -11,6 +11,17 @@ public class OrdersView {
         System.out.println("주문 접수 됐습니다.\n");
     }
 
+
+    public int selectOrderMenu() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("1. 모든 주문 내역 보기");
+        System.out.println("2. 배달이 완료된 주문 내역만 보기");
+        System.out.print(": ");
+        int select = Integer.parseInt(in.nextLine());
+        System.out.println();
+        return select;
+    }
+
     public OrdersDto order() {
         Scanner in = new Scanner(System.in);
         System.out.print("가게 이름: ");

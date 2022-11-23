@@ -17,7 +17,7 @@ public class ContainsModel {
         String sql = "INSERT INTO CONTAINS VALUES ( ?, ?, ? )";
         PreparedStatement ps = this.database.getPreparedStatement(sql);
         for (Integer orderMenuId : orderMenuIdList){
-            System.out.println(orderMenuId);
+            //System.out.println(orderMenuId);
             ps.setInt(1, orderMenuId);
             ps.setInt(2, orderId);
             ps.setInt(3, reviewId);
