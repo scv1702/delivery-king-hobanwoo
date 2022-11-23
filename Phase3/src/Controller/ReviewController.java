@@ -2,11 +2,10 @@ package Controller;
 
 import DTO.OrdersDto;
 import DTO.ReviewDto;
-import Model.ContainsModel;
-import Model.OrdersModel;
-import Model.ReviewModel;
-import Model.UsersModel;
+import DTO.StoreDto;
+import Model.*;
 import View.ReviewView;
+import View.StoreView;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -19,12 +18,15 @@ public class ReviewController {
     private final OrdersModel ordersModel;
     private final UsersModel usersModel;
     private final ContainsModel containsModel;
+    private final StoreView storeView = new StoreView();
+    private final StoreModel storeModel;
 
-    public ReviewController(ReviewModel reviewModel, UsersModel usersModel, OrdersModel ordersModel, ContainsModel containsModel) {
+    public ReviewController(ReviewModel reviewModel, UsersModel usersModel, OrdersModel ordersModel, ContainsModel containsModel, StoreModel storeModel) {
         this.reviewModel = reviewModel;
         this.usersModel = usersModel;
         this.ordersModel = ordersModel;
         this.containsModel = containsModel;
+        this.storeModel = storeModel;
     }
 
     public int reviewMenu() {
@@ -112,6 +114,15 @@ public class ReviewController {
                 return;
             }
             reviewView.showOrderForReview(myOrderList);
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+    }
+
+    public void storesByMyReview() {
+        try {
+            ArrayList<StoreDto> storeList = this.storeModel.getStoresByMyReview(this.usersModel.getUsers().userId);
+            this.storeView.showStores(storeList);
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }

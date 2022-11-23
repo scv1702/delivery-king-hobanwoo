@@ -44,6 +44,7 @@ public class OrdersModel {
             ps.setString(6, date);
             int resInsert = ps.executeUpdate();
             ps.close();
+            this.usersModel.updateMembershipTier();
             if (resInsert == 1) {
                 ArrayList<OrderMenuDto> orderedMenuList = this.orderMenuModel.insert(orderId, orders.orderMenuDtoList);
                 return new OrdersDto(orderId, orders.storeId, orderedMenuList, orders.payment, "주문 중", date);

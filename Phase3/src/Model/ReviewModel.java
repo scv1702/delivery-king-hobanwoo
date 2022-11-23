@@ -80,10 +80,9 @@ public class ReviewModel {
     }
 
     public ArrayList<ReviewDto> getReviewByStoreName(String storeName) throws SQLException {
-        int storeId = this.storeModel.getStoreByNameWithId(storeName).getStoreId();
-        String sql = "SELECT * FROM REVIEW WHERE STORE_ID = ?";
+        String sql = "SELECT * FROM REVIEW R WHERE EXISTS (SELECT * FROM STORE S WHERE S.STORE_NAME = ? AND S.STORE_ID = R.STORE_ID)";
         PreparedStatement ps = this.database.getPreparedStatement(sql);
-        ps.setInt(1, storeId);
+        ps.setString(1, storeName);
         ResultSet rs = ps.executeQuery();
         ArrayList<ReviewDto> reviewList = new ArrayList<>();
         while (rs.next()) {

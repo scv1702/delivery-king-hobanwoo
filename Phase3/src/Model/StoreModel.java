@@ -9,11 +9,9 @@ import java.util.ArrayList;
 
 public class StoreModel {
     private final Oracle database;
-    private final UsersModel usersModel;
 
-    public StoreModel(Oracle database, UsersModel usersModel)  {
+    public StoreModel(Oracle database) {
         this.database = database;
-        this.usersModel = usersModel;
     }
 
     public ArrayList<StoreDto> getStores(ResultSet rs) throws SQLException {
@@ -39,31 +37,6 @@ public class StoreModel {
         return storeList;
     }
 
-    public ArrayList<StoreDto> getStoresWithId(ResultSet rs) throws SQLException {
-        ArrayList<StoreDto> storeList = new ArrayList<>();
-        while (rs.next()) {
-            int storeId = rs.getInt("Store_ID");
-            String storeName = rs.getString("Store_Name");
-            String address = rs.getString("Address");
-            String foodCategory = rs.getString("Food_Category");
-            String phoneNumber = rs.getString("Phone_Number");
-            String description = rs.getString("Description");
-            int deliveryFee = rs.getInt("Delivery_Fee");
-            int businessHour = rs.getInt("Business_Hour");
-            storeList.add(new StoreDto(
-                    storeId,
-                    storeName,
-                    address,
-                    foodCategory,
-                    phoneNumber,
-                    description,
-                    deliveryFee,
-                    businessHour
-            ));
-        }
-        return storeList;
-    }
-
     public ArrayList<StoreDto> getAllStores() throws SQLException {
         String sql = "SELECT * FROM STORE";
         Statement stmt = this.database.getStatement();
@@ -77,12 +50,13 @@ public class StoreModel {
         ResultSet rs = stmt.executeQuery(sql);
         return getStores(rs);
     }
+
     public ArrayList<StoreDto> getStoresByMultipleCategory(String category) throws SQLException {
         String[] categorySubStr = category.split("#"); // # 단위로 끊어서 받아오기
         String sql = "";
         for (int i = 0; i < categorySubStr.length; i++) {
             sql += "SELECT * FROM STORE WHERE FOOD_CATEGORY = '" + categorySubStr[i] + "'";
-            if (i != categorySubStr.length-1) {
+            if (i != categorySubStr.length - 1) {
                 sql += " UNION ";
             }
         }
@@ -101,8 +75,7 @@ public class StoreModel {
         return getStores(rs);
     }
 
-    public ArrayList<StoreDto> getStoresByDepartment() throws SQLException {
-        int userID = this.usersModel.getUsers().userId;
+    public ArrayList<StoreDto> getStoresByDepartment(int userId) throws SQLException {
         String sql = "SELECT * " +
                 "FROM USERS U, DEPARTMENT D, Cooperates C, Store S " +
                 "WHERE U.User_ID = ? " +
@@ -110,7 +83,7 @@ public class StoreModel {
                 "AND C.Store_ID = S.Store_ID " +
                 "AND U.Dname = D.Dname";
         PreparedStatement ps = this.database.getPreparedStatement(sql);
-        ps.setInt(1, userID);
+        ps.setInt(1, userId);
         ResultSet rs = ps.executeQuery();
         return getStores(rs);
     }
@@ -120,12 +93,6 @@ public class StoreModel {
         Statement stmt = this.database.getStatement();
         ResultSet rs = stmt.executeQuery(sql);
         return getStores(rs).get(0);
-    }
-    public StoreDto getStoreByNameWithId(String storeName) throws SQLException {
-        String sql = "SELECT * FROM STORE WHERE Store_Name = '" + storeName + "'";
-        Statement stmt = this.database.getStatement();
-        ResultSet rs = stmt.executeQuery(sql);
-        return getStoresWithId(rs).get(0);
     }
 
     public String getStoreNameById(int storeId) throws SQLException {
@@ -138,5 +105,16 @@ public class StoreModel {
             storeName = rs2.getString("Store_Name");
         }
         return storeName;
+    }
+
+    public ArrayList<StoreDto> getStoresByMyReview(int userId) throws SQLException {
+        String sql = "SELECT DISTINCT * " +
+                "FROM Store S, USERS U, Review R " +
+                "WHERE U.User_ID = ? " +
+                "AND U.User_ID = R.User_ID " +
+                "AND R.Store_ID = S.Store_ID";
+        PreparedStatement ps = this.database.getPreparedStatement(sql);
+        ps.setInt(1, userId);
+        return getStores(ps.executeQuery());
     }
 }

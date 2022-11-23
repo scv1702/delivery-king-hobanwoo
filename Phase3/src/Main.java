@@ -21,7 +21,7 @@ public class Main {
         UsersModel usersModel = new UsersModel(database);
         UserAddressModel userAddressModel = new UserAddressModel(database);
         CouponModel couponModel = new CouponModel(database);
-        StoreModel storeModel = new StoreModel(database, usersModel);
+        StoreModel storeModel = new StoreModel(database);
         MenuModel menuModel = new MenuModel(database, storeModel);
         OrderMenuModel orderMenuModel = new OrderMenuModel(database, menuModel);
         ContainsModel containsModel = new ContainsModel(database, orderMenuModel);
@@ -31,8 +31,8 @@ public class Main {
         // Controllers
         UsersController usersController = new UsersController(usersModel, userAddressModel, couponModel);
         OrdersController ordersController = new OrdersController(ordersModel);
-        StoreController storeController = new StoreController(storeModel, menuModel);
-        ReviewController reviewController = new ReviewController(reviewModel, usersModel, ordersModel, containsModel);
+        StoreController storeController = new StoreController(storeModel, menuModel, usersModel);
+        ReviewController reviewController = new ReviewController(reviewModel, usersModel, ordersModel, containsModel, storeModel);
 
         UsersDto loginedUser = null;
 
@@ -101,6 +101,9 @@ public class Main {
                                     break;
                                 case 6: // 아직 리뷰를 작성하지 않은 주문 내역
                                     reviewController.unReviewedOrdersList();
+                                    break;
+                                case 7: // 내가 쓴 리뷰의 가게 보기
+                                    reviewController.storesByMyReview();
                                     break;
                                 default:
                                     System.out.println("잘못 입력하셨습니다.\n");

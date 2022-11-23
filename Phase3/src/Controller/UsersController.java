@@ -58,22 +58,26 @@ public class UsersController {
     }
 
     public void usersMenu() {
-        switch (this.usersView.usersMenu()) {
-            case 1:
-                this.usersView.showMyProfile(this.usersModel.getUsers());
-                break;
-            case 2:
-                insertAddress(this.usersModel.getUsers());
-                break;
-            case 3:
-                myAddress(this.usersModel.getUsers());
-                break;
-            case 4:
-                myCoupon(this.usersModel.getUsers());
-                break;
-            default:
-                System.out.println("잘못 입력하셨습니다.\n");
-                break;
+        try {
+            switch (this.usersView.usersMenu()) {
+                case 1:
+                    this.usersView.showMyProfile(this.usersModel.getUsers());
+                    break;
+                case 2:
+                    insertAddress(this.usersModel.getUsers());
+                    break;
+                case 3:
+                    myAddress(this.usersModel.getUsers());
+                    break;
+                case 4:
+                    myCoupon(this.usersModel.getUsers());
+                    break;
+                default:
+                    System.out.println("잘못 입력하셨습니다.\n");
+                    break;
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
         }
     }
 
