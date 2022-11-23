@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 public class Main {
     // PORT CHANGE!
-    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1600:xe";
-    private static final String DB_ID = "delivery_king_hobanwoo";
+    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+    private static final String DB_ID = "deliverykinghobanwoo";
     private static final String DB_PASSWORD = "comp322";
 
     public static void main(String[] args) throws SQLException {

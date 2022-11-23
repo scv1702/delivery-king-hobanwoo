@@ -39,6 +39,31 @@ public class StoreModel {
         return storeList;
     }
 
+    public ArrayList<StoreDto> getStoresWithId(ResultSet rs) throws SQLException {
+        ArrayList<StoreDto> storeList = new ArrayList<>();
+        while (rs.next()) {
+            int storeId = rs.getInt("Store_ID");
+            String storeName = rs.getString("Store_Name");
+            String address = rs.getString("Address");
+            String foodCategory = rs.getString("Food_Category");
+            String phoneNumber = rs.getString("Phone_Number");
+            String description = rs.getString("Description");
+            int deliveryFee = rs.getInt("Delivery_Fee");
+            int businessHour = rs.getInt("Business_Hour");
+            storeList.add(new StoreDto(
+                    storeId,
+                    storeName,
+                    address,
+                    foodCategory,
+                    phoneNumber,
+                    description,
+                    deliveryFee,
+                    businessHour
+            ));
+        }
+        return storeList;
+    }
+
     public ArrayList<StoreDto> getAllStores() throws SQLException {
         String sql = "SELECT * FROM STORE";
         Statement stmt = this.database.getStatement();
@@ -95,6 +120,12 @@ public class StoreModel {
         Statement stmt = this.database.getStatement();
         ResultSet rs = stmt.executeQuery(sql);
         return getStores(rs).get(0);
+    }
+    public StoreDto getStoreByNameWithId(String storeName) throws SQLException {
+        String sql = "SELECT * FROM STORE WHERE Store_Name = '" + storeName + "'";
+        Statement stmt = this.database.getStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        return getStoresWithId(rs).get(0);
     }
 
     public String getStoreNameById(int storeId) throws SQLException {
