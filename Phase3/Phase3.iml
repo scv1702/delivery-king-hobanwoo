@@ -10,6 +10,6 @@
     <orderEntry type="library" name="ojdbc6" level="project" />
     <orderEntry type="library" name="ojdbc81" level="project" />
     <orderEntry type="library" name="ojdbc8" level="project" />
-    <orderEntry type="library" name="orai18n-21.7.0.0" level="project" />
+    <orderEntry type="library" name="orai18n-21.7.0.01" level="project" />
   </component>
 </module>

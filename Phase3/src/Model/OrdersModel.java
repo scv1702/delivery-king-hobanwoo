@@ -44,8 +44,8 @@ public class OrdersModel {
             ps.setString(6, date);
             int resInsert = ps.executeUpdate();
             ps.close();
-            this.usersModel.updateMembershipTier();
             if (resInsert == 1) {
+                this.usersModel.updateMembershipTier();
                 ArrayList<OrderMenuDto> orderedMenuList = this.orderMenuModel.insert(orderId, orders.orderMenuDtoList);
                 return new OrdersDto(orderId, orders.storeId, orderedMenuList, orders.payment, "주문 중", date);
             }
@@ -54,6 +54,37 @@ public class OrdersModel {
     }
 
     public ArrayList<OrdersDto> getOrdersByUser() throws SQLException {
+        ArrayList<OrdersDto> orderList = new ArrayList<>();
+        int userId = usersModel.getUsers().userId;
+        String sql = "SELECT * FROM ORDERS WHERE USER_ID = ?";
+        PreparedStatement ps = this.database.getPreparedStatement(sql);
+        ps.setInt(1, userId);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int orderId = rs.getInt("Order_ID");
+            int storeId = rs.getInt("Store_ID");
+            String payment = rs.getString("Payment");
+            String state = rs.getString("State");
+            String orderDate = rs.getString("Order_Date");
+            String storeName = storeModel.getStoreNameById(storeId);
+            orderList.add(new OrdersDto(
+                    orderId,
+                    userId,
+                    storeId,
+                    storeName,
+                    payment,
+                    state,
+                    orderDate
+            ));
+        }
+        if (orderList.size() > 0) {
+            return orderList;
+        } else {
+            return null;
+        }
+    }
+
+    public ArrayList<OrdersDto> getCompleteOrdersByUser() throws SQLException {
         ArrayList<OrdersDto> orderList = new ArrayList<>();
         int userId = usersModel.getUsers().userId;
         String sql = "SELECT * FROM ORDERS WHERE USER_ID = ? INTERSECT SELECT * FROM ORDERS WHERE STATE = '배달 완료'";
@@ -92,7 +123,7 @@ public class OrdersModel {
                     "WHERE " +
                     "U.USER_ID= O.USER_ID AND " +
                     "U.USER_ID=? AND " +
-                    "O.STATE='배달완료' AND " +
+                    "O.STATE='배달 완료' AND " +
                     "NOT EXISTS (SELECT * " +
                     "            FROM CONTAINS C " +
                     "            WHERE C.ORDER_ID=O.ORDER_ID) ";
