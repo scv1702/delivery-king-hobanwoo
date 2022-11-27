@@ -1,7 +1,0 @@
-.food_category_container {
-    display: grid;
-}
-
-.food_category_item {
-    grid-template-columns: 200px 200px 200px;
-}
