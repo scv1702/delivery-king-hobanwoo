@@ -9,6 +9,8 @@ import ReviewPage from "./pages/ReviewPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import LoginPage from "./pages/LoginPage";
 import OrderPage from "./pages/OrderPage";
+import SignupPage from "./pages/SignupPage";
+import MyPage from "./pages/MyPage";
 
 function Main() {
   // 아래 Route path=":storeSlug(경로 파라미터)"를 통해 경로에서 사용하는 동적인 값인 storeSlug라는 변수를 파라미터로써 useParams()를 이용해 동적인 경로로 사용하고 있다.
@@ -32,6 +34,12 @@ function Main() {
           <Route path="*" element={<NotFoundPage />} />
 
           <Route path="login" element={<LoginPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+
+          <Route path="signup" element={<SignupPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+
+          <Route path="mypage" element={<MyPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
