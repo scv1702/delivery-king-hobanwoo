@@ -1,0 +1,23 @@
+.storeList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+@media (max-width: 840px) {
+  .storeList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.emptyList {
+  margin: 40px auto;
+}
+
+.count {
+  margin: 20px 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: #878787;
+}

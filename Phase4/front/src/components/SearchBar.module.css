@@ -1,0 +1,35 @@
+.form {
+  display: flex;
+  height: 40px;
+  box-shadow: var(--box-shadow);
+}
+
+.form input {
+  flex: 1 1;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+
+.form input::placeholder {
+  color: #878787;
+}
+
+.form button[type="submit"] {
+  flex: none;
+  padding: 8px 10px;
+  color: #fff;
+  cursor: pointer;
+  background-color: #545454;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  outline: none;
+}
+
+.form button[type="submit"] img {
+  width: 24px;
+  height: 24px;
+}

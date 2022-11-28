@@ -1,0 +1,33 @@
+.marginImg {
+  margin-top: 1.5px;
+}
+.nav {
+  position: relative;
+  z-index: 1;
+  padding: 15px 0;
+  background-color: #fff;
+  box-shadow: var(--box-shadow);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+ul.menu {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+ul.menu > li:not(:last-child) {
+  margin-right: 30px;
+}
+
+ul.menu a:hover,
+ul.menu a:active {
+  text-decoration: underline;
+}

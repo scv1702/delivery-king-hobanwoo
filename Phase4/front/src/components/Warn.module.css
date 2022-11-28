@@ -1,0 +1,30 @@
+.warn {
+  text-align: center;
+}
+
+.icon {
+  display: block;
+  margin: 0 auto;
+}
+
+.title {
+  margin: 20px auto 3px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.big .title {
+  font-size: 24px;
+}
+
+.description {
+  margin: 0;
+  font-weight: 500;
+  line-height: 2.07;
+  color: #878787;
+}
+
+.big .description {
+  font-size: 18px;
+  line-height: 1.61;
+}
