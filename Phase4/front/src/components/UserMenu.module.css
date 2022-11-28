@@ -1,0 +1,52 @@
+.userMenu {
+  position: relative;
+}
+
+.iconButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.userMenu,
+.iconButton,
+.iconButton img {
+  width: 30px;
+  height: 30px;
+}
+
+ul.popup {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background-color: #fff;
+  position: absolute;
+  top: calc(100% + 25px);
+  right: -10px;
+  border: 1px solid #ebebeb;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px 0 5px 5px;
+  overflow: hidden;
+}
+
+ul.popup li {
+  padding: 15px 19px;
+  font-family: var(--noto-sans);
+}
+
+ul.popup li:hover {
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+ul.popup li.disabled {
+  background-color: #fff;
+  color: #c4c4c4;
+  user-select: none;
+  cursor: default;
+}
+
+.userMenu ul.popup a:hover {
+  text-decoration: none;
+}

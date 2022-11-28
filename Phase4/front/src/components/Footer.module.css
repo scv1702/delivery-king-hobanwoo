@@ -1,0 +1,44 @@
+.footer {
+  padding: 20px 0 53px;
+  color: #878787;
+  background-color: #494949;
+}
+
+.links {
+  padding: 0;
+  color: #c4c4c4;
+  list-style: none;
+}
+
+.links > * {
+  display: inline-block;
+  line-height: 1.64;
+}
+
+.links > :not(:last-child) {
+  margin-right: 30px;
+}
+
+.info {
+  padding: 0;
+  margin-bottom: 36px;
+  list-style: none;
+}
+
+.info > * {
+  display: inline-block;
+  line-height: 1.64;
+}
+
+.info > :not(:last-child) {
+  margin-right: 30px;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sns :not(:last-child) {
+  margin-right: 13px;
+}

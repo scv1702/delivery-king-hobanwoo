@@ -1,0 +1,75 @@
+.bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0 30px;
+}
+
+.bg.catalog {
+  background-color: #ebebeb;
+}
+
+.bg.community {
+  background-color: #73bfad;
+}
+
+.bg.home {
+  background-color: #2ac1bc;
+}
+
+.icon {
+  height: 44px;
+  margin-right: 30px;
+}
+.bigicon {
+  height: 230px;
+  margin-left: 170px;
+  margin-right: 5px;
+}
+
+.heading {
+  margin: 0 0 5px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.description {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.homeheading {
+  margin: 0 0 5px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.homedescription {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.catalog .heading {
+  color: #545454;
+}
+
+.catalog .description {
+  color: #878787;
+}
+
+.community .heading,
+.community .description {
+  color: #fff;
+}
+
+.home .homeheading,
+.home .homedescription {
+  color: #fff;
+}
+
+.container {
+  margin-top: -20px;
+  margin-bottom: 100px;
+}

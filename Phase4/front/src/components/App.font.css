@@ -1,0 +1,48 @@
+/** Noto Sans(Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+/* GmarketSans(https://noonnu.cc/font_page/366) */
+@font-face {
+  font-family: 'Gmarket Sans';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+    format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gmarket Sans';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
+    format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gmarket Sans';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff')
+    format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  --gmarket-sans: 'Gmarket Sans';
+  --noto-sans: -apple-system, 'Noto Sans KR', sans-serif;
+}
+
+html {
+  font-family: var(--noto-sans);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+a,
+h1,
+h2,
+h3,
+h4,
+button {
+  font-family: var(--gmarket-sans);
+  font-weight: 500;
+}

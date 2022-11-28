@@ -1,0 +1,1173 @@
+{
+  "stores": [
+    {
+      "id": "5e71ac5d8b427122575e1d92",
+      "code": "101",
+      "title": "프로그래밍 기초 in Python",
+      "difficulty": 1,
+      "slug": "intro-to-python-programming",
+      "summary": "웹/앱 개발, 데이터 분석, 인공지능/머신러닝, 업무 자동화 등으로 나아가기 위한 첫 걸음!",
+      "language": "분식",
+      "photoUrl": "python",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e71b88447e1487937461f50",
+            "slug": "getting-started-with-python",
+            "title": "프로그래밍 시작하기 in Python",
+            "summary": "프로그래밍의 진입 장벽이 너무 높게 느껴진다면? 파이썬으로 프로그래밍을 시작하세요! 설치 과정부터 파이썬의 기본적인 개념들까지 모두 알려 드립니다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e71b98d855e806094b57ad0",
+            "slug": "core-concept-of-python-programming",
+            "title": "프로그래밍 핵심 개념 in Python",
+            "summary": "자료형, 추상화, 제어문... 쉽다면 쉬운 개념이지만, 많은 이들이 제대로 알고 있지 못한 프로그래밍 핵심 개념. 여러분은 완벽하게 알고 가시길 바랍니다!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5e71b9ce8b427122577e26f1",
+            "slug": "python-programming-and-data",
+            "title": "프로그래밍과 데이터 in Python",
+            "summary": "프로그래밍이란 결국 데이터를 받아서 처리하는 것인데요. 그렇다면 프로그래밍을 잘하기 위해서는 데이터를 제대로 알아야겠죠? 그 비결을 알려드립니다!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5e71ba1e855e806094b6ea9b",
+            "slug": "making-use-of-python",
+            "title": "파이썬 응용하기",
+            "summary": "파이썬 문법과 프로그래밍 개념은 배웠는데, 어떻게 활용해야 할지 모르겠다고요? 데이터 분석, 로또 시뮬레이션 등 프로젝트를 해 보며 아이디어를 얻어 보세요."
+          }
+        }
+      ]
+    },
+    {
+      "id": "5f44779ba1fe743841ae7939",
+      "code": "111",
+      "title": "Python 중급",
+      "difficulty": 2,
+      "slug": "python-intermediate",
+      "summary": "파이썬을 파고들어, 서버 개발, 업무 자동화, 게임 개발 등 무엇이든 할 수 있는 기반을 다져 보아요.",
+      "language": "양식",
+      "photoUrl": "python",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5f4478daa1fe743841b42acf",
+            "slug": "python-module-and-package",
+            "title": "파이썬 모듈과 패키지",
+            "summary": "파이썬 실력을 한 단계 향상해 주는 모듈과 패키지, 이번 토픽을 통해 마스터하세요!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5f4872fe372038687eb80444",
+            "slug": "python-environment-for-mac",
+            "title": "파이썬 환경 for Mac",
+            "summary": "파이썬 지금까지는 그냥 설치되는대로 사용해 왔죠? 이번 토픽에서 파이썬 환경에 대해 자세히 알아보세요! "
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e345223b3aa703b8a9a4f38",
+      "code": "121",
+      "title": "객체 지향 프로그래밍",
+      "difficulty": 2,
+      "slug": "object-oriented-programming",
+      "summary": "개발 업무에서 가장 널리 쓰이는 프로그래밍 방법론. 확장성 있고 관리가 쉬운 코드를 설계해 보세요.",
+      "language": "분식",
+      "photoUrl": "oop",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb41",
+            "slug": "what-is-oop",
+            "title": "객체 지향 프로그래밍이란?",
+            "summary": "객체 지향 프로그래밍, 바로 시작해 봅시다. 여러분도 게임 캐릭터, 블로그 유저 같은 요소들을 객체 지향적으로 설계하고 작성할 수 있습니다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb42",
+            "slug": "four-pillars-of-oop",
+            "title": "객체 지향 프로그래밍의 4개의 기둥",
+            "summary": "객체 지향에는 네 가지 핵심 기둥이 있다는 것 아셨나요? 좋은 객체 지향 프로그래밍에 대한 기준을 세워봅시다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb43",
+            "slug": "solid-principles-of-oop",
+            "title": "견고한 객체 지향 프로그래밍",
+            "summary": "객체 지향 프로그래밍의 마지막 걸음. 코드의 규모가 커질 수록 복잡성은 증가합니다. 객체 지향 코드를 견고하게 관리할 수 있는 방법을 배워 보세요."
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e345223b3aa703b8a9a4f37",
+      "code": "122",
+      "title": "알고리즘의 정석",
+      "difficulty": 2,
+      "slug": "algorithms",
+      "summary": "컴퓨터 과학의 핵심이자 개발자 면접의 핵심인 알고리즘! 효율적인 코드 작성의 밑바탕을 쌓아 보세요.",
+      "language": "중식",
+      "photoUrl": "algorithm",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb3d",
+            "slug": "what-is-a-good-algorithm",
+            "title": "좋은 알고리즘이란?",
+            "summary": "알고리즘이 정확히 뭘까요? 그렇다면 좋은 알고리즘이란 뭘까요? 알고리즘의 효율성을 평가하는 방법을 배우며 알고리즘 세계에 입문하세요."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb3e",
+            "slug": "recursion",
+            "title": "재귀 함수",
+            "summary": "함수 안에 함수 안에 함수... 뭐지, 인셉션인가? 헷갈리지만 개발자라면 피할 수 없는 재귀 함수! 개념을 정확히 파악하고 연습을 통해 재귀와 친해지세요."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb3f",
+            "slug": "algorithmic-paradigms",
+            "title": "알고리즘 패러다임",
+            "summary": "알고리즘에도 공식이 있다? 그게 바로 알고리즘 패러다임! 여지껏 해 왔던 순진한 방식이 아닌, 정말 효율적인 알고리즘을 생각해 내는 힘을 길러 보세요."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb40",
+            "slug": "practicing-algorithmic-problem-solving",
+            "title": "문제 해결 능력 기르기",
+            "summary": "개발자 면접을 보면 알고리즘 문제를 낸다던데… 그럼 훈련을 해야겠죠? 실전 문제들을 보고, 분석하는 단계부터 실제 코드를 구현하는 단계까지 모두 연습하세요."
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e345223b3aa703b8a9a4f39",
+      "code": "131",
+      "title": "자료 구조",
+      "difficulty": 2,
+      "slug": "data-structures",
+      "summary": "방대한 데이터를 효율적으로 관리하는 방법을 배워, 컴퓨터 과학의 기본기를 탄탄하게 쌓아봐요.",
+      "language": "중식",
+      "photoUrl": "ds",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb45",
+            "slug": "data-structure-basics",
+            "title": "기본 자료 구조들",
+            "summary": "자료 구조, 어디서부터 시작하지? 메모리, 추상 자료형 등 가장 기본부터 공부하세요! 그 후 기본 자료 구조들은 쉽게 이해하실 수 있을 것입니다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb46",
+            "slug": "trees",
+            "title": "트리",
+            "summary": "기본 자료 구조들은 이미 다 완벽하게 파악하셨다고요? 이번에는 좀 더 복잡하지만, 컴퓨터 과학 이곳저곳에서 많이 활용하는 트리를 배우시는 건 어떠신가요?"
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb47",
+            "slug": "graphs",
+            "title": "그래프",
+            "summary": "실세상에 존재하는 데이터들은 대부분 서로 연결되어 있는 경우가 많은데요. 컴퓨터에서 이런 데이터들을 저장하고 사용할 수 있게 해주는 그래프에 대해서 배워봅시다!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e345223b3aa703b8a9a4f32",
+      "code": "311",
+      "title": "데이터 사이언스 입문",
+      "difficulty": 2,
+      "slug": "data-science",
+      "summary": "데이터를 이해하고 다루는 능력을 기르고, 데이터 중심으로 다변하는 산업에서 경쟁력을 키우세요.",
+      "language": "분식",
+      "photoUrl": "data-science",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb38",
+            "slug": "getting-started-with-data-science",
+            "title": "데이터 사이언스 시작하기",
+            "summary": "데이터 사이언스... 말로만 많이 들었지, 실제 뭔지는 모르겠죠? 데이터 사이언스가 무엇인지 배우고, 데이터 사이언스를 하기 위해 필요한 도구들을 익혀 보세요."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb39",
+            "slug": "mastering-pandas-dataframe",
+            "title": "DataFrame 다루기",
+            "summary": "엑셀에서는 데이터를 표에 담는다면, 파이썬에서는 DataFrame에 담는다! 데이터 사이언스를 하기 전에, DataFrame을 현란하게 다룰 수 있도록 준비하세요."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb3a",
+            "slug": "data-analysis-and-visualization",
+            "title": "데이터 분석과 시각화",
+            "summary": "데이터를 아무리 많이 모아도, 활용할 줄 모르면 말짱 도루묵! 데이터를 분석해서 의미를 도출하고, 시각적으로 멋지게 표현하는 방법까지 배워 보세요."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb3b",
+            "slug": "improving-data-quality",
+            "title": "데이터 퀄리티 높이기",
+            "summary": "쓰레기를 넣으면 쓰레기가 나온다? 아무리 분석이 훌륭해도 데이터가 별로면 의미 없습니다! 좋은 데이터의 기준을 이해하고, 쓰레기 데이터를 보석으로 재가공하세요."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb3c",
+            "slug": "collecting-and-creating-data",
+            "title": "데이터 만들기",
+            "summary": "분석을 하기 위해 필요한 데이터를 수집해야겠죠? 웹사이트를 분해하는 코드도 작성하고, 자동으로 웹을 돌아다니면서 정보를 수집하는 프로그램도 만들어 보세요."
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e6732574b0b59235a15c86b",
+      "code": "321",
+      "title": "머신 러닝",
+      "difficulty": 3,
+      "slug": "machine-learning",
+      "summary": "이 시대의 핵심 IT 키워드인 인공 지능(AI). 그 기반이 되는 기술인 머신 러닝으로 시작해 보세요.",
+      "language": "양식",
+      "photoUrl": "machine-learning",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e6731d2e1c354224fb88efb",
+            "slug": "pre-machine-learning",
+            "title": "머신 러닝 기본기",
+            "summary": "머신 러닝이란 뭐고, 배우기 전에 미리 알고 있어야 되는 내용은 뭐가 있을까요? 머신 러닝을 본격적으로 시작하기 전에 이번 토픽에서 제대로 짚고 넘어갑시다!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5e6731eafa82385b57335783",
+            "slug": "elementary-supervised-algorithms",
+            "title": "기본 지도 학습 알고리즘들",
+            "summary": "머신 러닝이라는 과목 안에는 기계를 학습시키는 다양한 방법들이 있는데요. 이번 토픽에서는 다양한 알고리즘들 중 가장 기본이 되는 알고리즘들에 대해서 배워봅시다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e67320c4b0b59235a14e8fd",
+            "slug": "optimizing-machine-learning-models",
+            "title": "머신 러닝, 더 빠르고 정확하게",
+            "summary": "머신 러닝은 경험을 통해 프로그램의 성능을 최적화하는 학문인데요. 이번 레슨에서는 좀 더 빠르고 정확하게 프로그램을 학습시키는 방법에 대해서 배워봅시다!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5e6731fce1c354224fb953ba",
+            "slug": "decision-tree-and-ensemble",
+            "title": "결정 트리와 앙상블 기법",
+            "summary": "결정 트리와, 수많은 결정 트리를 합쳐서 좋은 성능의 모델을 만들어내는 앙상블 기반 알고리즘들 대해서 배워봅시다."
+          }
+        }
+      ]
+    },
+    {
+      "id": "5f69873536e82326c31293c7",
+      "code": "331",
+      "title": "머신 러닝 실전",
+      "difficulty": 3,
+      "slug": "machine-learning-in-practice",
+      "summary": "머신 러닝이 우리 생활 속에서 어디에 사용되고, 어떻게 적용되는지 실전 예제를 통해 알아 보아요!",
+      "language": "분식",
+      "photoUrl": "machine-learning",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5f6987ff36e82326c315f90f",
+            "slug": "recommender-systems",
+            "title": "추천 시스템",
+            "summary": "추천 시스템이란 무엇이고, 우리 생활에 어떤 영향을 미치고 있을까요? 이번 토픽에서 추천 시스템이 우리의 생활을 어떻게 지배하고 있는지를 배워봅시다!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5f6da787dab0f329c5c63eb1",
+            "slug": "natural_language_processing",
+            "title": "자연어 처리",
+            "summary": "자연어란 컴퓨터가 아니라 사람들이 사용하는 언어를 뜻하는데요. 머신 러닝을 사용해서 어떻게 사람들의 언어를 컴퓨터로 처리하는지 배워봅시다!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e673408e1c354224fc0c8eb",
+      "code": "336",
+      "title": "딥 러닝",
+      "difficulty": 3,
+      "slug": "deep-learning",
+      "summary": "1950년대부터 해 온 인공 지능 연구. 최근 들어 급격한 발전이 이루어졌는데요. 엄청난 성능의 딥 러닝 덕분에 가능했던 것입니다. 그저 마법 같은 이 기술의 원리와 활용법을 알려드리겠습니다.",
+      "language": "분식",
+      "photoUrl": "deep-learning",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e673393e1c354224fbec491",
+            "slug": "ann-theory",
+            "title": "인공 신경망 이론",
+            "summary": "인공 지능 연구의 핵심인 딥 러닝의 가장 기본이 되는 알고리즘 인공 신경망. 도대체 어떤 원리로 작동하는 걸까요? 이번 토픽에서 자세하고 정확하게 알아봅시다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e6733a5fa82385b573954da",
+            "slug": "deep-learning-topic-2",
+            "title": "인공 신경망 쉽게 사용하기",
+            "summary": "신경망은 이론만 알고 바로 실전에서 사용하기는 굉장히 어렵습니다. 이번 토픽에서는 라이브러리를 사용해서 신경망을 쉽게 사용하는 방법에 대해서 알아보겠습니다!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5f35fac7bae77a76bba6d44a",
+      "code": "501",
+      "title": "프로그래밍 기초 in JavaScript",
+      "difficulty": 1,
+      "slug": "intro-to-programming-in-javascript",
+      "summary": "웹 개발을 하고 싶다면 필수! 무엇이든 할 수 있는 기반을 다지려면 자바스크립트로 시작하세요.",
+      "language": "양식",
+      "photoUrl": "js",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5f35fd346008aa33709c1d6c",
+            "slug": "getting-started-with-javascript",
+            "title": "프로그래밍 시작하기 in JavaScript",
+            "summary": "프로그래밍의 진입 장벽이 너무 높게 느껴지나요? 자바스크립트로 프로그래밍을 시작해보세요! 간단한 환경 설정부터 기본적인 개념까지 모두 알려드립니다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5f361b01bae77a76bbf4b184",
+            "slug": "core-concept-of-javascript-programming",
+            "title": "프로그래밍 핵심 개념 in JavaScript",
+            "summary": "자료형, 추상화, 제어문... 쉽다면 쉬운 개념이지만, 많은 이들이 제대로 알고 있지 못한 프로그래밍 핵심 개념. 여러분은 완벽하게 알고 가시길 바랍니다!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5f361e2abae77a76bbfd815b",
+            "slug": "javascript-programming-and-data",
+            "title": "프로그래밍과 데이터 in JavaScript",
+            "summary": "프로그래밍이란 결국 데이터를 받아서 처리하는 것인데요. 그렇다면 프로그래밍을 잘하기 위해서는 데이터를 제대로 알아야겠죠? 그 비결을 알려드립니다!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e345223b3aa703b8a9a4f36",
+      "code": "502",
+      "title": "웹 퍼블리싱",
+      "difficulty": 1,
+      "slug": "web-publishing",
+      "summary": "웹 개발의 가장 기본이라 할 수 있는 HTML과 CSS를 통해 내 머릿속의 아이디어를 실현해 보세요!",
+      "language": "아시안",
+      "photoUrl": "web-publishing",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb32",
+            "slug": "getting-started-with-html-css",
+            "title": "HTML/CSS 시작하기",
+            "summary": "\"웹사이트 어떻게 만들지...\" 고민이라면? 일단 HTML과 CSS부터 공부하세요. 생각보다 너무 쉬워서 놀랄 수도 있습니다!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb33",
+            "slug": "html-css-core-concepts",
+            "title": "HTML/CSS 핵심 개념",
+            "summary": "처음에는 쉬워 보이는 HTML/CSS, 하다 보면 생각처럼 안 돼서 화가 납니다! 하지만 원리를 잘 익히면 브라우저를 마치 그림판처럼 자유자재로 쓸 수 있습니다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb35",
+            "slug": "responsive-web-publishing",
+            "title": "반응형 웹 퍼블리싱",
+            "summary": "분명 예쁘게 만들었는데... 스마트폰, 타블렛에서는 왜 깨질까요? 반응형 웹 퍼블리싱을 배워서 어떤 기기에서든 잘 동작하는 웹사이트를 만들어 보세요."
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e673b9a4b0b59235a36f0bd",
+      "code": "511",
+      "title": "JavaScript 중급",
+      "difficulty": 2,
+      "slug": "javascript-intermediate",
+      "summary": "웹의 핵심 언어인 자바스크립트의 여러 심화 문법을 통해, 웹 개발에 한 걸음 더 내딛어 보세요.",
+      "language": "분식",
+      "photoUrl": "js",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e673b55fa82385b5756be4b",
+            "slug": "interactive-javascript",
+            "title": "인터랙티브 자바스크립트",
+            "summary": "웹 페이지를 움직이는 마법, 자바스크립트로 웹을 다루는 기본 원리들을 제대로 익혀보세요!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5e673b6efa82385b57575760",
+            "slug": "modern-javascript",
+            "title": "모던 자바스크립트",
+            "summary": "ES6? ECMAScript? 자바스크립트도 버전이 있었어? 좀 더 트렌디한 자바스크립트를 익혀보세요!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5e673b63e1c354224fdc6c8a",
+            "slug": "object-oriented-javascript",
+            "title": "자바스크립트 객체 지향 기본기",
+            "summary": "웹 개발을 하려면 자바스크립트의 객체에 대한 이해가 필수적입니다. 관련된 핵심 내용을 빠르게 배워봅시다!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5fe160496552dd371745a0b3",
+            "slug": "basics-of-js-web-dev",
+            "title": "자바스크립트 웹 개발 기본기",
+            "summary": "자바스크립트로 웹 개발을 하려면 '웹 기초'부터 시작해서 'Promise 객체'까지 다양한 내용을 배워야 합니다. 필요한 배경 지식들을 제대로 쌓아봅시다."
+          }
+        }
+      ]
+    },
+    {
+      "id": "5f3cd65b92f99f1bae2b7238",
+      "code": "512",
+      "title": "jQuery",
+      "difficulty": 2,
+      "slug": "jquery",
+      "summary": "요즘은 인터랙티브한 사이트가 대세! jQuery와 함께 웹 프론트엔드 개발을 시작하세요.",
+      "language": "양식",
+      "photoUrl": "jquery",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb34",
+            "slug": "getting-started-with-jquery",
+            "title": "jQuery 시작하기",
+            "summary": "인터랙티브한 사이트를 더 쉽게 만들고 싶다면? jQuery가 해결책! 복잡한 기능도 jQuery를 사용하면 몇 줄 안에 해결!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb37",
+            "slug": "making-use-of-jquery",
+            "title": "jQuery 활용하기",
+            "summary": "jQuery에 익숙해 졌다면, 본격적인 활용을 해 봅시다. 내부 동작 원리부터 포트폴리오까지!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5f598b6e3ea115401463e4cb",
+      "code": "516",
+      "title": "Django 웹 개발",
+      "difficulty": 2,
+      "slug": "django-web-development",
+      "summary": "파이썬으로 웹 개발을 하고싶다면? 지금 바로 Django 웹 개발을 시작해보세요. 여러분이 알고 있는 모든 파이썬 지식을 웹 개발에 그대로 적용할 수 있습니다.",
+      "language": "분식",
+      "photoUrl": "django",
+      "newReleased": true,
+      "topics": [
+        {
+          "topic": {
+            "id": "5f598c663c56b861a75cdcdd",
+            "slug": "getting-started-with-django",
+            "title": "Django 웹 개발 시작하기",
+            "summary": "설치부터 배포까지 하나의 토픽으로 Django의 매력을 느껴보세요! Django가 무엇인지 왜 사용하는지를 알고 예제를 통해 전체 구조와 흐름을 파악합니다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5f59911f85fa717f8c38ecdb",
+            "slug": "django-crud",
+            "title": "Django CRUD",
+            "summary": "웹 사이트 기능의 대부분은 CRUD 애플리케이션입니다. 이번 토픽에서 CRUD를 중심으로 웹 사이트의 핵심 기능을 구현해봅시다."
+          }
+        },
+        {
+          "topic": {
+            "id": "6078f3dd68a063759459007a",
+            "slug": "django-user-system",
+            "title": "Django 유저 기능 구현하기",
+            "summary": "요즘 대부분의 웹서비스는 유저 기능이 있습니다. 유저 기능이란 정확히 뭘까요? 유저 기능은 어떻게 만드는 걸까요? 이번 토픽에서 알아보세요!"
+          }
+        },
+        {
+          "topic": {
+            "id": "60f634203bda4b6064f238ad",
+            "slug": "django-understanding-models",
+            "title": "Django 모델 파헤치기",
+            "summary": "데이터 모델링부터 마이그레이션까지! Django 모델을 파헤쳐 봅시다."
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e673b1c4b0b59235a34af87",
+      "code": "521",
+      "title": "React 프론트엔드 개발",
+      "difficulty": 2,
+      "slug": "react-frontend-development",
+      "summary": "단순한 웹 문서가 아니라 완성도 높은 웹 화면을 개발해보고 싶나요? React를 사용하면 복잡한 웹 화면을 효율적으로 개발할 수 있습니다. 영향력이 점점 커지고 있는 React 프론트엔드 개발에 도전해 보세요!",
+      "language": "양식",
+      "photoUrl": "react",
+      "newReleased": true,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e673842e1c354224fd04c56",
+            "slug": "getting-started-with-react",
+            "title": "React 웹 개발 시작하기",
+            "summary": "개발 환경 설정부터 실제 배포까지! 리액트 프로젝트를 직접 만들어보면서 리액트의 기초를 배우면서 프론트엔드 웹 개발을 이해해봅시다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e673a87e1c354224fd9dfa7",
+            "slug": "react-topic-2",
+            "title": "React로 데이터 다루기",
+            "summary": "간단한 게시판이나 상품 목록 페이지를 만들어 보고 싶나요? 그렇다면 배열 렌더링, 페이지네이션, 입력 폼처럼 리액트로 데이터 다루는 방법을 배워보세요!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e6737c14b0b59235a28c35a",
+      "code": "524",
+      "title": "Node.js 백엔드 개발",
+      "difficulty": 3,
+      "slug": "nodejs-backend-development",
+      "summary": "요즘 가장 핫한 Node.js와 Express로, 서비스의 \"브레인\" 역할을 하는 서버 개발을 시작해 보세요!",
+      "language": "아시안",
+      "photoUrl": "node-js",
+      "newReleased": true,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e6736a2e1c354224fcb477f",
+            "slug": "intro-to-nodejs",
+            "title": "Node.js 기본기",
+            "summary": "Node.js를 배우면 자바스크립트 하나만 알아도 프론트엔드와 백엔드를 개발할 수 있습니다. Node.js로 고성능 웹 서버 프로그램을 개발하는 법을 배워봅시다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e6736d64b0b59235a26735f",
+            "slug": "intro-to-express",
+            "title": "Express 기본기",
+            "summary": "Node.js에는 Express라는 대표적인 웹 서버 프레임워크가 있습니다. 간단한 프로젝트를 수행하면서 Express의 기본적인 사용법을 알아봅시다. "
+          }
+        },
+        {
+          "topic": {
+            "id": "5e6736e94b0b59235a26ac2c",
+            "slug": "nodejs-user-authentication",
+            "title": "Express 활용하기",
+            "summary": "Node.js로 실무 수준의 프로젝트를 수행하려면 더 깊은 내용을 알아야합니다. Node.js와 Express 및 필수 패키지들을 더 깊게 공부해봅시다."
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e345223b3aa703b8a9a4f35",
+      "code": "701",
+      "title": "자바 기초",
+      "difficulty": 1,
+      "slug": "intro-to-java",
+      "summary": "프로그래밍 역사상 가장 꾸준한 인기 언어인 자바를 통해 앱 개발과 웹 개발의 핵심을 습득해 봐요.",
+      "language": "아시안",
+      "photoUrl": "java",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb2e",
+            "slug": "java-basics",
+            "title": "자바 왕기초",
+            "summary": "자바가 처음에는 배우기 조금 어려운 언어입니다. 복잡한 문법들은 모두 제쳐두고, 먼저 가장 기본적인 개념들부터 완벽하게 익혀 봅시다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb2f",
+            "slug": "java-oop",
+            "title": "자바 객체 지향 프로그래밍",
+            "summary": "대표적인 객체 지향 프로그래밍 언어인 자바! 자바를 제대로 알기 위해서는 “객체”가 뭔지 알아야 하죠. 실무 프로젝트를 통해 객체 지향 프로그래밍을 정복하세요!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb31",
+            "slug": "intermediate-java-concepts",
+            "title": "자바 중급 개념",
+            "summary": "자바 초보를 탈출하고 싶다면? 상속, 인터페이스, 추상 클래스 등 객체 지향 프로그래밍 심화 개념과 캐스팅, 제네릭 등 자바 중급 개념을 공부하세요!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e345223b3aa703b8a9a4f3a",
+      "code": "801",
+      "title": "컴퓨터 개론",
+      "difficulty": 0,
+      "slug": "intro-to-computer",
+      "summary": "어디서부터 시작해야 할지 고민된다면, 컴퓨터 개론 코스를 통해 프로그래밍의 첫 걸음을 시작해 봐요!",
+      "language": "분식",
+      "photoUrl": "intro-to-computer",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e71b88447e1487937461f50",
+            "slug": "getting-started-with-python",
+            "title": "프로그래밍 시작하기 in Python",
+            "summary": "프로그래밍의 진입 장벽이 너무 높게 느껴진다면? 파이썬으로 프로그래밍을 시작하세요! 설치 과정부터 파이썬의 기본적인 개념들까지 모두 알려 드립니다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb48",
+            "slug": "intro-to-programming-languages",
+            "title": "프로그래밍 언어 이해하기",
+            "summary": "전공자는 물론 비전공자도 이 토픽만 들어도 기본적인 프로그래밍 언어의 특징과 분야를 이해할 수 있습니다. 비전공자를 위한 기초강의!"
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb49",
+            "slug": "intro-to-the-world-of-programming",
+            "title": "프로그래머의 세계 이해하기",
+            "summary": "현직 프로그래머들은 뭔가 다른 세상에 살고 있다고 느낄 때가 많이 있는데요. 그들의 일상을 한번 들여다 봅시다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e345230d909cbb85ba2eb4a",
+            "slug": "intro-to-software",
+            "title": "소프트웨어 이해하기",
+            "summary": "프로그래머가 되기 위해서는 어떤 프로그램이 사용되고 있는지 알아야겠죠? 이 세상에 존재하는 소프트웨어의 큰 그림을 살펴봅시다."
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e67354afa82385b573ef490",
+      "code": "802",
+      "title": "4차 산업 혁명 생존 가이드",
+      "difficulty": 1,
+      "slug": "fourth-industrial-revolution",
+      "summary": "클라우드, 인공지능, 가상현실, 블록체인 등, 21세기 핫한 기술의 핵심 개념과 원리를 깨우쳐 보아요!",
+      "language": "양식",
+      "photoUrl": "fourth-revolution",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "6077b3fade87cf1b12ec42da",
+            "slug": "cloud-computing",
+            "title": "클라우드 컴퓨팅",
+            "summary": "우리는 클라우드 덕분에 수많은 서비스를 편리하게 쓰고 있습니다. 클라우드가 뭘까요? 클라우드의 개념, 시장 상황, 사용법, 그 미래까지 알아봅시다. "
+          }
+        },
+        {
+          "topic": {
+            "id": "5e6734f04b0b59235a1ef6bf",
+            "slug": "artificial-intelligence",
+            "title": "인공지능",
+            "summary": "오늘날 많은 분야에서 인공지능이 사용되고 있습니다. 인공지능 안에는 다양한 종류의 기술이 포함되어 있는데요. 이 기술들의 원리와 활용 분야를 살펴봅시다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5e6735004b0b59235a1ef82c",
+            "slug": "vr-and-ar",
+            "title": "증강 현실 & 가상 현실",
+            "summary": "증강 현실과 가상 현실은 우리에게 또다른 세계를 선물해주는 기술입니다. 이 기술들의 의의와 현재 시장 상황 등을 살펴보도록 합시다.  "
+          }
+        },
+        {
+          "topic": {
+            "id": "5e67350f4b0b59235a1efdb3",
+            "slug": "blockchain",
+            "title": "블록체인",
+            "summary": "블록체인은 동일한 정보를 여러 주체에게 분산 저장해서 정보의 조작을 막을 수 있는 기술입니다. 그 안에 들어있는 구체적인 원리와 기술의 전망을 알아봅시다. "
+          }
+        }
+      ]
+    },
+    {
+      "id": "5f991185d15fc22b2259f646",
+      "code": "811",
+      "title": "업무 자동화 for Windows",
+      "difficulty": 1,
+      "slug": "automation-for-windows",
+      "summary": "업무 효율은 일을 얼마나 빨리하는지에 달려 있다고요? 얼마나 자동화하느냐에 달려 있습니다! 업무 자동화의 파급력, 직접 경험해 보세요!",
+      "language": "중식",
+      "photoUrl": "automation",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5fb484501c8d503ae10090d3",
+            "slug": "web-automation",
+            "title": "웹 자동화",
+            "summary": "웹에서 하던 귀찮은 작업을 이제 자동으로! '웹 자동화'에 대해 알아보세요. "
+          }
+        },
+        {
+          "topic": {
+            "id": "5e672fdffa82385b572c4356",
+            "slug": "file-automation-for-windows",
+            "title": "파일 자동화 for Windows",
+            "summary": "우리는 하루에도 수많은 파일과 폴더를 다루고 있습니다. 이걸 자동화할 수 있다면? 생각보다 간단하답니다. 바로 시작해 보세요!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e670229fa82385b57bce83f",
+      "code": "812",
+      "title": "업무 자동화 for Mac",
+      "difficulty": 1,
+      "slug": "automation-for-mac",
+      "summary": "업무 효율은 일을 얼마나 빨리하는지에 달려 있다고요? 얼마나 자동화하느냐에 달려 있습니다! 업무 자동화의 파급력, 직접 경험해 보세요!",
+      "language": "중식",
+      "photoUrl": "automation",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5fb484501c8d503ae10090d3",
+            "slug": "web-automation",
+            "title": "웹 자동화",
+            "summary": "웹에서 하던 귀찮은 작업을 이제 자동으로! '웹 자동화'에 대해 알아보세요. "
+          }
+        },
+        {
+          "topic": {
+            "id": "5e672fcafa82385b572c3408",
+            "slug": "file-automation-for-mac",
+            "title": "파일 자동화 for Mac",
+            "summary": "우리는 하루에도 수많은 파일과 폴더를 다루고 있습니다. 이걸 자동화할 수 있다면? 생각보다 간단하답니다. 바로 시작해 보세요!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e673086fa82385b572ef1ed",
+      "code": "901",
+      "title": "유닉스 커맨드 라인",
+      "difficulty": 1,
+      "slug": "unix-command-line",
+      "summary": "리눅스, 우분투, macOS를 한 방에 배우고 싶다면? 그 시작점인 유닉스의 핵심만 요약해서 배워 보세요.",
+      "language": "아시안",
+      "photoUrl": "unix",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e6730e74b0b59235a11460a",
+            "slug": "unix-commands",
+            "title": "유닉스 커맨드 배우기",
+            "summary": "커맨드 환경은 개발자라면 실무에서 언제든 마주칠 수 있습니다. 더 다양한 작업을 빠르게 할 수 있는 커맨드, 바로 배워봅시다."
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e67317c4b0b59235a12e2a6",
+      "code": "902",
+      "title": "Git으로 배우는 버전 관리",
+      "difficulty": 2,
+      "slug": "version-control-with-git",
+      "summary": "개발자들의 필수 소양인 Git. 코드의 버전을 관리하며 다른 사람들과 협업하는 방식을 익혀 보세요.",
+      "language": "분식",
+      "photoUrl": "git",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e673156fa82385b57317531",
+            "slug": "git",
+            "title": "Git",
+            "summary": "개발자라면 프로젝트의 버전을 관리하고, 다른 개발자와 협업하기 위해 Git을 사용할 줄 알아야 합니다. 이번 토픽에서 Git을 사용하는 법을 익혀봅시다."
+          }
+        }
+      ]
+    },
+    {
+      "id": "5f991641d15fc22b226c4622",
+      "code": "903",
+      "title": "비개발자를 위한 SQL 데이터베이스",
+      "difficulty": 1,
+      "slug": "sql-database-for-data-analytics",
+      "summary": "비개발자는 조회 기능만으로도 실무에 충분합니다. 다수 기업에서 사용하는 SQL 역량을 쌓아보세요!",
+      "language": "아시안",
+      "photoUrl": "sql",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e67409cfa82385b5769cbb5",
+            "slug": "data-analysis-using-sql",
+            "title": "SQL로 하는 데이터 분석",
+            "summary": "데이터베이스에 저장된 데이터를 분석하려면 SQL을 사용할 줄 알아야 합니다. 이번 토픽에서 SQL로 데이터를 분석하는 방법을 제대로 배워봅시다.  "
+          }
+        }
+      ]
+    },
+    {
+      "id": "5e6740cb4b0b59235a49dfbf",
+      "code": "904",
+      "title": "개발자를 위한 SQL 데이터베이스",
+      "difficulty": 2,
+      "slug": "sql-database-for-developers",
+      "summary": "다수 기업에서 사용하는 SQL을 통해 데이터와 데이터베이스에 필요한 역량을 쌓아보세요!",
+      "language": "양식",
+      "photoUrl": "sql",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5e67409cfa82385b5769cbb5",
+            "slug": "data-analysis-using-sql",
+            "title": "SQL로 하는 데이터 분석",
+            "summary": "데이터베이스에 저장된 데이터를 분석하려면 SQL을 사용할 줄 알아야 합니다. 이번 토픽에서 SQL로 데이터를 분석하는 방법을 제대로 배워봅시다.  "
+          }
+        },
+        {
+          "topic": {
+            "id": "5e6740ac4b0b59235a49bf7f",
+            "slug": "data-management-using-sql",
+            "title": "SQL로 하는 데이터 관리",
+            "summary": "개발자라면 데이터를 데이터베이스에 새로 삽입하거나 기존 데이터를 갱신/삭제할 수 있어야 합니다. SQL로 이 작업들을 하는 방법을 배워봅시다."
+          }
+        },
+        {
+          "topic": {
+            "id": "5f1175247e77811acda9d247",
+            "slug": "database-modeling-and-normalization",
+            "title": "데이터베이스 모델링",
+            "summary": "끊임없이 변하는 환경에서 데이터베이스 내부의 구조를 손쉽게 수정하기 위해서는 첫 설계 시점부터 다양한 요소를 고려해야합니다. 이때 고려해야할 요소들을 배워봅시다."
+          }
+        },
+        {
+          "topic": {
+            "id": "6034d0b5bc1c9d4cea666ec9",
+            "slug": "data-modeling-in-practice",
+            "title": "데이터베이스 모델링 실전",
+            "summary": "모델링 이론은 다 알겠는데, 막상 직접 하려고 하니 막막하신가요? 모델링 실전 토픽에서 다양한 경우들을 경험해보세요!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5f9924b6d15fc22b229d7c7e",
+      "code": "915",
+      "title": "컴퓨터 아키텍처",
+      "difficulty": 1,
+      "slug": "computer-architecture",
+      "summary": "컴퓨터의 동작 원리에 대해 자세히 알고 싶으신가요? 컴퓨터 프로그램이 실행되는 과정을 직접 살펴보세요!",
+      "language": "분식",
+      "photoUrl": "computer-architecture",
+      "newReleased": false,
+      "topics": [
+        {
+          "topic": {
+            "id": "5f9924e2d15fc22b229e0828",
+            "slug": "understanding-computer-architecture",
+            "title": "컴퓨터 구조 이해하기",
+            "summary": "모든 개발자들에게 도움이 되는 컴퓨터 지식! 베일에 싸여 있던 컴퓨터의 내부를 들여다보세요."
+          }
+        }
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "616825",
+      "title": "특정 인덱스에 있는 컴포넌트만 바꾸기",
+      "content": "제가 커뮤니티 사이트를 개발하는 중인데 일부 글만 다르게 컴포넌트를 렌더링해주고 싶습니다 (예를들면 짝수 번째만 다른 걸 보여준다던지 한다는 거요) 어떻게 하나요?",
+      "answers": [
+        {
+          "createdAt": "2021-10-14T16:34:20.477Z",
+          "updatedAt": "2021-10-14T16:34:20.477Z",
+          "content": "뒤에서 배우실 건데요.. map 함수 콜백에서 리턴할 때 조건문으로 다르게 리턴하시면 됩니당. 저도 그런 식으로 했었어여",
+          "writer": {
+            "name": "잭 도시",
+            "profile": {
+              "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Jack_Dorsey_2014_%28cropped%29.jpg/440px-Jack_Dorsey_2014_%28cropped%29.jpg"
+            },
+            "level": "UNIVERSE"
+          }
+        }
+      ],
+      "createdAt": "2021-10-14T12:42:25.27Z",
+      "updatedAt": "2021-10-14T16:34:20.478Z",
+      "writer": {
+        "name": "아론 슈워츠",
+        "profile": {
+          "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Aaron_Swartz_profile.jpg/440px-Aaron_Swartz_profile.jpg"
+        },
+        "level": "EARTH"
+      }
+    },
+    {
+      "id": "616933d8715928349b3a11b7",
+      "title": "정말 기초적인 자바 질문인데.. 이해하는데 어려움이 있어 질문 드리겠습니다",
+      "content": "직각 이등변 삼각형을 출력하기 위해서는, 반복문 내에 반복문을 써야 한다는데 정확히 어떤 것을 의미하는 건가요?",
+      "answers": [
+        {
+          "createdAt": "2021-10-15T08:26:45.875Z",
+          "updatedAt": "2021-10-15T08:26:45.875Z",
+          "content": "반복을 하는 도중에 반복을 한다고 생각합니다. 예를 들자면 전단지에서 목차가 없는데 중국집을 찾고 싶으면 책장을 넘기는것과 가게가 중국집인지 확인하는것을 반복하잖아요? 그런데 반복문안에 반복문을 넣는다는건 책장을 넘기고 가게가 중국집인지 확인하고 다음장을 넘기고 중국집인지 확인하는겁니다. 반복문안에 반복문을 안넣으면 책장을 넘기고 넘기고 또 넘기고 다 넘기고 난 후에 가게가 중국집인지 확인하고 확인하고 또 확인하는 것 입니다. 저도 정확히 초보라 다른 분들의 설명이있었으면 좋겠네요.",
+          "writer": {
+            "name": "신속배달",
+            "profile": {
+              "photo": "/imgs/default_1.jpg"
+            },
+            "level": "STONE"
+          }
+        }
+      ],
+      "like": null,
+      "likeCount": 0,
+      "totalLikeCount": 0,
+      "createdAt": "2021-10-15T07:55:04.808Z",
+      "updatedAt": "2021-10-15T08:26:45.88Z",
+      "writer": {
+        "name": "자바칩 프라푸치노",
+        "profile": {
+          "photo": "/imgs/default_2.jpg"
+        },
+        "level": "STONE"
+      }
+    },
+    {
+      "id": "61690a",
+      "title": "리액트 질문입니다",
+      "content": "Context라는 걸 쓰는 이유가 뭔가요?",
+      "answers": [],
+      "createdAt": "2021-10-15T04:57:48.152Z",
+      "updatedAt": "2021-10-15T04:57:48.467Z",
+      "writer": {
+        "name": "세르게이",
+        "profile": {
+          "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Sergey_Brin_cropped.jpg/440px-Sergey_Brin_cropped.jpg"
+        },
+        "level": "STONE"
+      }
+    },
+    {
+      "id": "616903",
+      "title": "오류는 안나지만 원하는 대로 렌더링되지 않아요. 무엇이 잘못 되었을까요?",
+      "status": "PUBLISHED",
+      "content": "items.map((item) => ListItem) 이런식으로 렌더링하면 안 되나요? 넘 어렵네여;;",
+      "answers": [],
+      "createdAt": "2021-10-15T04:28:53.677Z",
+      "updatedAt": "2021-10-15T05:54:27.711Z",
+      "writer": {
+        "name": "폴 그레이엄",
+        "profile": {
+          "photo": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Paulgraham_240x320.jpg"
+        },
+        "level": "NEW"
+      }
+    },
+    {
+      "id": "6168fd",
+      "title": "리액트 설치가 되지 않습니다.",
+      "content": "노드 설치 파일은 다운로드했는데 실행하니까 멈춰서 진행되지 않는데 ... 혹시 최소사양 같은게 있나요?",
+      "answers": [
+        {
+          "createdAt": "2021-10-15T04:11:04.43Z",
+          "updatedAt": "2021-10-15T04:11:04.43Z",
+          "content": "혹시 현재 사용 중인 윈도우즈에 맞는 버전으로 까셨나요?",
+          "writer": {
+            "name": "Ryan Dahl",
+            "profile": {
+              "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Ryan_Dahl.jpg/1024px-Ryan_Dahl.jpg"
+            },
+            "level": "UNIVERSE"
+          }
+        }
+      ],
+      "createdAt": "2021-10-15T04:03:36.549Z",
+      "updatedAt": "2021-10-15T04:11:04.432Z",
+      "writer": {
+        "name": "조던 워크",
+        "profile": {
+          "photo": "/imgs/default_2.jpg"
+        },
+        "level": "NEW"
+      }
+    },
+    {
+      "id": "6168df",
+      "title": "제가 이해한 게 맞는 건가요???",
+      "content": "그니까 f`(x,y) = 2x + 4y인 거고,예를 들어 (x,y) = (1,3)인 지점에서의 기울기는y를 3에 고정시킨 경우 f`(x, 3)이며 x의 기울기는 2x를 1에 고정시킨 경우 f`(1, y)이며 y의 기울기는 12따라서 한 좌표점에 대해 기울기는 x에 대한 기울기, y에 대한 기울기 이렇게 2개가 나온다이게 맞을까요?",
+      "answers": [],
+      "createdAt": "2021-10-15T01:56:19.018Z",
+      "updatedAt": "2021-10-15T08:28:42.989Z",
+      "writer": {
+        "name": "앨런 튜링",
+        "profile": {
+          "photo": "/imgs/default_1.jpg"
+        },
+        "level": "SUN"
+      }
+    },
+    {
+      "id": "6168c5",
+      "title": "마지막 조건에서 elif 말고 else",
+      "content": "문제에서 마지막에 else: print(\"F\")말고, 저는 elif total 60: print(\"F\")로 했는데 오류가 뜨네요. 왜 그런 건가요? 마지막 조건문까지 온거면 전부 60점 미만이라는 건데, 그러면 elif total 60:에 해당하는 모든 경우에 대해 True 여서 상관 없지 않나요?",
+      "answers": [
+        {
+          "createdAt": "2021-10-15T04:12:21.523Z",
+          "updatedAt": "2021-10-15T04:12:21.523Z",
+          "content": "elif total 60 만 봐서는 틀린게 없는 거 같아요. 전체 코드를 답변으로 올려주시면 확인 해볼게요!",
+          "writer": {
+            "name": "파이소닉",
+            "profile": {
+              "photo": "/imgs/default_1.jpg"
+            },
+            "level": "UNIVERSE"
+          }
+        }
+      ],
+      "createdAt": "2021-10-15T00:04:21.247Z",
+      "updatedAt": "2021-10-15T04:12:21.525Z",
+      "writer": {
+        "name": "파이썬 초보",
+        "profile": {
+          "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Guido_van_Rossum_OSCON_2006_cropped.png/300px-Guido_van_Rossum_OSCON_2006_cropped.png"
+        },
+        "level": "NEW"
+      }
+    },
+    {
+      "id": "616878",
+      "title": "스테이트 초기화하는 방법",
+      "content": "초기값으로 스테이트 값을 바꾸려면 어떻게 해야하나요??",
+      "answers": [
+        {
+          "createdAt": "2021-10-15T04:15:29.513Z",
+          "updatedAt": "2021-10-15T04:15:29.513Z",
+          "content": "세터 함수를 사용하셔서 원하는 값으로 스테이트를 바꿀 수 있는데요, 초기값으로 세터 함수를 실행하면 됩니당.",
+          "writer": {
+            "name": "호랑이",
+            "profile": {
+              "photo": "/imgs/default_2.jpg"
+            },
+            "level": "UNIVERSE"
+          }
+        }
+      ],
+      "createdAt": "2021-10-14T18:34:02.059Z",
+      "updatedAt": "2021-10-15T06:26:50.477Z",
+      "writer": {
+        "name": "리액트 초보",
+        "profile": {
+          "photo": "/imgs/default_3.jpg"
+        },
+        "level": "STONE"
+      }
+    },
+    {
+      "id": "616861",
+      "title": "터미널 오류",
+      "content": "ENOENT: no such file or directory 라는 오류가 나요",
+      "answers": [
+        {
+          "createdAt": "2021-10-15T04:32:30.64Z",
+          "updatedAt": "2021-10-15T04:32:30.64Z",
+          "content": "혹시 올바른 폴더에서 npm start를 하신 건지 확인해보세요!!",
+          "writer": {
+            "name": "Ryan Dahl",
+            "profile": {
+              "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Ryan_Dahl.jpg/1024px-Ryan_Dahl.jpg"
+            },
+            "level": "UNIVERSE"
+          }
+        }
+      ],
+      "createdAt": "2021-10-14T16:55:46.394Z",
+      "updatedAt": "2021-10-15T06:47:48.12Z",
+      "writer": {
+        "name": "Soy Fried Chicken",
+        "profile": {
+          "photo": "/imgs/default_3.jpg"
+        },
+        "level": "SUN"
+      }
+    },
+    {
+      "id": "61682a",
+      "title": "어디가 잘못 된걸까요?",
+      "content": "useContext() 를 실행해도 컨텍스트 값이 안 나와요",
+      "answers": [
+        {
+          "createdAt": "2021-10-14T13:29:56.575Z",
+          "updatedAt": "2021-10-14T13:29:56.575Z",
+          "content": "아규먼트로 만드신 컨텍스트를 넣어보세요! 아마 컨텍스트를 지정해주지 않아서 그런 것 같습니다.",
+          "writer": {
+            "name": "호랑이",
+            "profile": {
+              "photo": "/imgs/default_1.jpg"
+            },
+            "level": "UNIVERSE"
+          }
+        }
+      ],
+      "createdAt": "2021-10-14T13:05:02.287Z",
+      "updatedAt": "2021-10-15T04:00:29.582Z",
+      "writer": {
+        "name": "로드스터",
+        "profile": {
+          "photo": "/imgs/default_1.jpg"
+        },
+        "level": "ROCK"
+      }
+    }
+  ]
+}
