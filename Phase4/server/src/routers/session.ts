@@ -17,11 +17,12 @@ router.post("/", async (req: Request, res: Response) => {
   if (result) {
     req.session.user = result;
     res.json({ success: true, message: "로그인 되었습니다." });
+  } else {
+    res.json({
+      success: false,
+      message: "아이디 또는 비밀번호가 일치하지 않습니다.",
+    });
   }
-  res.json({
-    success: false,
-    message: "아이디 또는 비밀번호가 일치하지 않습니다.",
-  });
 });
 
 module.exports = router;
