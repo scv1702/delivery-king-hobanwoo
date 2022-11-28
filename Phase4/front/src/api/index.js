@@ -2,7 +2,12 @@ import { stores, reviews } from "./mock.json";
 
 function filterByKeyword(items, keyword) {
   const lowered = keyword.toLowerCase();
-  return items.filter((data) => data.language.toLowerCase().includes(keyword));
+  var obj1 = items.filter((data) =>
+    data.language.toLowerCase().includes(keyword)
+  );
+  var obj2 = items.filter((data) => data.title.toLowerCase().includes(lowered));
+  Object.assign(obj1, obj2);
+  return obj1;
 }
 
 export function getStores(keyword) {
