@@ -28,17 +28,9 @@ function Main() {
             <Route path=":reviewId" element={<ReviewPage />} />
           </Route>
           <Route path="wishlist" element={<WishlistPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-
           <Route path="order" element={<OrderPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-
           <Route path="login" element={<LoginPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-
           <Route path="signup" element={<SignupPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-
           <Route path="mypage" element={<MyPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
