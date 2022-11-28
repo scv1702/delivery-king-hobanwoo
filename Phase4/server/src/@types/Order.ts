@@ -8,5 +8,5 @@ export type Order = {
   payment: string;
   state?: string;
   orderDate?: string;
-  orderMenuList: OrderMenu[];
+  orderMenuList?: OrderMenu[];
 };

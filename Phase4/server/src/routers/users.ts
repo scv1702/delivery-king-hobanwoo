@@ -6,13 +6,13 @@ const router = express.Router();
 
 router.post("/", async (req: Request, res: Response) => {
   const { username, dname, password, phoneNumber } = req.body;
-  const result = await UserModel.insert({
+  await UserModel.insert({
     username,
     dname,
     password,
     phoneNumber,
   });
-  res.json({ success: result });
+  res.json({ success: true, message: "회원 가입 되었습니다." });
 });
 
 router.get("/", async (req, res) => {

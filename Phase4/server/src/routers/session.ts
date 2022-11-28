@@ -14,11 +14,14 @@ declare module "express-session" {
 router.post("/", async (req: Request, res: Response) => {
   const { username, password } = req.body;
   const result = await UserModel.login(username, password);
-  if (result === undefined) {
-    res.json({ success: false });
+  if (result) {
+    req.session.user = result;
+    res.json({ success: true, message: "로그인 되었습니다." });
   }
-  req.session.user = result!;
-  res.json({ success: true });
+  res.json({
+    success: false,
+    message: "아이디 또는 비밀번호가 일치하지 않습니다.",
+  });
 });
 
 module.exports = router;

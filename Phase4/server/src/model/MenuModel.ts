@@ -1,4 +1,5 @@
 import database from "../database";
+import { Menu } from "../@types/Menu";
 
 type MenuDto = {
   MENU_ID: number;
@@ -10,26 +11,29 @@ type MenuDto = {
 };
 
 class MenuModel {
-  getMenuByMenuName = async (menuName: string) => {
+  getMenuByMenuName = async (menuName: string): Promise<Menu | undefined> => {
     const sql = `SELECT * FROM MENU WHERE MNAME = '${menuName}'`;
     const conn = await database.getConnection();
-    const result = (await conn.execute<MenuDto>(sql))?.rows?.[0];
+    const result = (await conn.execute<MenuDto>(sql)).rows;
     if (result) {
+      const { MENU_ID, STORE_ID, MNAME, DESCRIPTION, IMAGE, PRICE } = result[0];
       return {
-        menuId: result.MENU_ID,
-        storeId: result.STORE_ID,
-        menuName: result.MNAME,
-        description: result.DESCRIPTION,
-        image: result.IMAGE,
-        price: result.PRICE,
+        menuId: MENU_ID,
+        storeId: STORE_ID,
+        menuName: MNAME,
+        description: DESCRIPTION,
+        image: IMAGE,
+        price: PRICE,
       };
     }
     return undefined;
   };
-  getMenuListByStoreId = async (storeId: number) => {
+  getMenuListByStoreId = async (
+    storeId: number
+  ): Promise<Array<Menu> | undefined> => {
     const sql = `SELECT * FROM MENU WHERE STORE_ID = ${storeId}`;
     const conn = await database.getConnection();
-    const result = (await conn.execute<MenuDto>(sql))?.rows;
+    const result = (await conn.execute<MenuDto>(sql)).rows;
     if (result) {
       return result.map((menu: MenuDto) => {
         return {
@@ -42,7 +46,7 @@ class MenuModel {
         };
       });
     }
-    return [];
+    return undefined;
   };
 }
 

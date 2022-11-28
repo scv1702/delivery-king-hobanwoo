@@ -16,7 +16,7 @@ function isDBError(err: any): err is DBError {
 }
 
 class UserModel {
-  async insert(user: User) {
+  async insert(user: User): Promise<boolean> {
     const { username, dname, password, phoneNumber } = user;
     const autoIncrement = `(SELECT NVL(MAX(USER_ID), 0) + 1 FROM USERS)`;
     const sql = `INSERT INTO USERS VALUES (${autoIncrement}, '${username}', '${dname}', '${password}', '${phoneNumber}', '고마워요')`;
@@ -28,9 +28,10 @@ class UserModel {
       if (isDBError(err)) {
         console.error(err.message);
       }
+      return false;
     }
   }
-  async login(username: string, password: string) {
+  async login(username: string, password: string): Promise<User | undefined> {
     const sql = `SELECT * FROM USERS WHERE USER_NAME = '${username}' AND PASSWORD = '${password}'`;
     const conn = await database.getConnection();
     const result = (await conn.execute<UserDto>(sql)).rows?.[0];
@@ -47,11 +48,14 @@ class UserModel {
       return undefined;
     }
   }
-  async getUsers(): Promise<Array<User>> {
+  async getUsers(): Promise<Array<User> | undefined> {
     const sql = "SELECT * FROM USERS";
     const conn = await database.getConnection();
-    const result = (await conn.execute<User>(sql)).rows!;
-    return result;
+    const result = (await conn.execute<User>(sql)).rows;
+    if (result) {
+      return result;
+    }
+    return undefined;
   }
   getMembershipTier() {}
   updateMembershipTier() {}
