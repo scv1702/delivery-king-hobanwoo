@@ -1,6 +1,6 @@
-const express = require("express");
-const session = require("express-session");
-const cors = require("cors");
+import express from "express";
+import session from "express-session";
+import cors from "cors";
 
 const corsOptions = {
   origin: true,
@@ -27,8 +27,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use("/stores", require("./routers/stores"));
+app.use("/stores", require("./src/routers/stores"));
+app.use("/users", require("./src/routers/users"));
+app.use("/session", require("./src/routers/session"));
+app.use("/orders", require("./src/routers/orders"));
 
 app.listen(port, () => {
-  console.log(`express is running on ${port}`);
+  console.log(`Server starts on ${port}`);
 });
