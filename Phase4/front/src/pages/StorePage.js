@@ -7,6 +7,8 @@ import getStoreColor from "../utils/getStoreColor";
 import styles from "./StorePage.module.css";
 import { Navigate, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function StorePage() {
   // 리액트 라우터 dom 에서 제공하는 커스텀 훅인 useParams()
@@ -58,10 +60,10 @@ function StorePage() {
         </Container>
       </div>
       <Container className={styles.topics}>
-        {store.topics.map(({ topic }) => (
-          <Card className={styles.topic} key={topic.slug}>
-            <h3 className={styles.title}>{topic.title}</h3>
-            <p className={styles.summary}>{topic.summary}</p>
+        {store.map((store) => (
+          <Card className={styles.topic} key={store.storeId}>
+            <h3 className={styles.title}>{store.storeName}</h3>
+            <p className={styles.summary}>{store.description}</p>
           </Card>
         ))}
       </Container>

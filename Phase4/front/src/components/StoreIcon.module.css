@@ -1,4 +1,11 @@
 .storeIcon {
-  width: 60px;
-  height: 60px;
+  width: 100%;
+  filter: blur(1px);
+  scale: 1;
+  transition: filter 0.1s ease-in-out, scale 0.1s ease-out;
+}
+
+.storeIcon:hover {
+  filter: blur(0px);
+  scale: 1.1;
 }

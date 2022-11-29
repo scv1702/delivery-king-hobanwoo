@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ListPage from "../components/ListPage";
 import Warn from "../components/Warn";
 import StoreItem from "../components/StoreItem";
@@ -6,18 +6,44 @@ import { getStores } from "../api";
 import styles from "./StoreListPage.module.css";
 import searchBarStyles from "../components/SearchBar.module.css";
 import searchIcon from "../assets/search.svg";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 function StoreListPage() {
+  const [storeList, setStoreList] = useState([]);
   // 리액트 라우터에서는 쿼리 파라미터 값을 가져오고 싶을 때
   // useSearchParams라는 훅을 사용할 수 있다.
   // useState랑 비슷하나, 생성된 state가 객체라는 점이 다름!
   const [searchParams, setSearchParams] = useSearchParams(); // state가 객체로 생성된다. searchParams는 객체!
   const initKeyword = searchParams.get("keyword"); // get함수를 통해 안에있는 값을 가져올 수 있다.
+  const category = searchParams.get("category");
   const [keyword, setKeyword] = useState(initKeyword || "");
   // getStores()라는 함수로 코스 목록 데이터를 가져와서
   // (각 요소마다 StoresItem이라는 컴포넌트로 렌더링 해주는 함수임.)
   const stores = getStores(initKeyword);
+
+  useEffect(() => {
+    if (category) {
+      axios
+        .get(`http://localhost:3010/stores?category=${category}`)
+        .then((res) => {
+          setStoreList(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      axios
+        .get("http://localhost:3010/stores")
+        .then((res) => {
+          setStoreList(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }, []);
+
   const handleKeywordChange = (e) => {
     setKeyword(e.target.value);
   };
@@ -62,8 +88,8 @@ function StoreListPage() {
         />
       ) : (
         <div className={styles.storeList}>
-          {stores.map((store) => (
-            <StoreItem key={store.id} store={store} />
+          {storeList.map((store) => (
+            <StoreItem key={store.storeId} store={store} />
           ))}
         </div>
       )}

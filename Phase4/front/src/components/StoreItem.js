@@ -20,7 +20,6 @@ import { Link } from "react-router-dom";
 // ];
 
 function StoreItem({ store }) {
-  const showSummary = store.summary && store.title !== store.summary;
   const storeColor = getStoreColor(store.code);
   const thumbStyle = {
     borderColor: storeColor,
@@ -29,15 +28,15 @@ function StoreItem({ store }) {
   return (
     <Card className={styles.storeItem}>
       <div className={styles.thumb} style={thumbStyle}>
-        <StoreIcon photoUrl={store.photoUrl} />
+        <StoreIcon photoUrl={`imgs/${store.storeId}-1.jpg`} />
       </div>
       <div className={styles.content}>
         <h2 className={styles.title}>
-          <Link to={`/stores/${store.slug}`}>{store.title}</Link>
+          <Link to={`/stores/${store.slug}`}>{store.storeName}</Link>
         </h2>
-        <p className={styles.description}>{showSummary && store.summary}</p>
+        <p className={styles.description}>{store.description}</p>
         <div>
-          <Tags values={[store.language]} />
+          <Tags values={[store.foodCategory]} />
         </div>
       </div>
     </Card>

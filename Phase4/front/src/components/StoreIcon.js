@@ -53,7 +53,7 @@ function StoreIcon({ className, photoUrl = "default" }) {
   return (
     <img
       className={classNames(styles.storeIcon, className)}
-      src={ICONS[photoUrl]}
+      src={photoUrl}
       alt={photoUrl}
     />
   );

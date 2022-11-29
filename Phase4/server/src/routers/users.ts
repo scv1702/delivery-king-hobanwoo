@@ -9,18 +9,30 @@ const router = express.Router();
 
 router.post("/", async (req: Request, res: Response) => {
   const { username, dname, password, phoneNumber } = req.body;
-  await UserModel.insert({
-    username,
-    dname,
-    password,
-    phoneNumber,
-  });
-  res.json({ success: true, message: "회원 가입 되었습니다." });
+  try {
+    await UserModel.insert({
+      username,
+      dname,
+      password,
+      phoneNumber,
+    });
+    res.json({ success: true, message: "회원 가입 되었습니다." });
+  } catch (err) {
+    if (err instanceof Error) {
+      res.status(401).json({ success: false, message: err.message });
+    } else {
+      res.status(500).json({ success: false, message: "서버 오류" });
+    }
+  }
 });
 
 router.get("/", async (req, res) => {
-  const result = await UserModel.getUsers();
-  res.json(result);
+  if (req.session.user) {
+    const user = await UserModel.getUserById(req.session.user.userId!);
+    res.json({ success: true, user });
+  } else {
+    res.status(401).json({ success: false, message: "로그인이 필요합니다." });
+  }
 });
 
 router.get("/address", async (req, res) => {
