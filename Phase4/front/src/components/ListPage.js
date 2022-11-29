@@ -34,7 +34,7 @@ function ListPage({
           <div className={styles.texts}>
             <h1 className={styles.homeheading}>찾아가던</h1>
             <h1 className={styles.homeheading}>맛집을</h1>
-            <h1 className={styles.homeheading}>원하는 곳에서!</h1>
+            <h1 className={styles.homeheading}>원하는 곳에서 !</h1>
             <p className={styles.homedescription}>
               배달이 안되던 동네 맛집까지
             </p>

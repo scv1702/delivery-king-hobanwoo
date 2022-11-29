@@ -5,20 +5,6 @@ import getStoreColor from "../utils/getStoreColor";
 import styles from "./StoreItem.module.css";
 import { Link } from "react-router-dom";
 
-// const DIFFICULTY = [
-//   "중식",
-//   "분식",
-//   "양식",
-//   "돈까스,회,일식",
-//   "족발,보쌈",
-//   "아시안",
-//   "양식",
-//   "찜,탕,찌개",
-//   "패스트푸드",
-//   "카페,디저트",
-//   "학식",
-// ];
-
 function StoreItem({ store }) {
   const storeColor = getStoreColor(store.code);
   const thumbStyle = {

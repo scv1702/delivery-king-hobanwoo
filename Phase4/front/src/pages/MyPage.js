@@ -29,7 +29,6 @@ function MyPage() {
   return (
     <Container className={styles.container}>
       <h1 className={styles.title}>내 프로필</h1>
-
       <h3 className={styles.subtitle}>아이디</h3>
       <input
         id="id"

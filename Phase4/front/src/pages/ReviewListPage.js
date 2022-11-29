@@ -9,13 +9,15 @@ import styles from "./ReviewListPage.module.css";
 import searchBarStyles from "../components/SearchBar.module.css";
 import searchIcon from "../assets/search.svg";
 import { Link, useSearchParams } from "react-router-dom";
+import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
 
 function ReviewItem({ review }) {
   return (
     <Card className={styles.reviewItem} key={review.title}>
       <div className={styles.info}>
         <p className={styles.title}>
-          <Link to={`/reviews/4{review.id}`}>{review.title}</Link>
+          <Link to={`/reviews/${review.id}`}>{review.title}</Link>
           {review.answers.length > 0 && (
             <span className={styles.count}>[{review.answers.length}]</span>
           )}
@@ -32,6 +34,7 @@ function ReviewItem({ review }) {
 }
 
 function ReviewListPage() {
+  const navigate = useNavigate();
   // 리액트 라우터에서는 쿼리 파라미터 값을 가져오고 싶을 때
   // useSearchParams라는 훅을 사용할 수 있다.
   // useState랑 비슷하나, 생성된 state가 객체라는 점이 다름!
@@ -55,12 +58,23 @@ function ReviewListPage() {
     ); // 파라미터로 객체를 받는다.
   };
 
+  const handleCreateReivewClick = () => {
+    navigate("/createreview");
+  };
+
   return (
     <ListPage
       variant="community"
       title="리뷰"
       description="배달왕 호반우의 리뷰들을 확인해보세요."
     >
+      <Button
+        className={styles.writeButton}
+        variant="round"
+        onClick={handleCreateReivewClick}
+      >
+        + 리뷰 쓰기
+      </Button>
       <form className={searchBarStyles.form} onSubmit={handleSubmit}>
         <input
           name="keyword"
