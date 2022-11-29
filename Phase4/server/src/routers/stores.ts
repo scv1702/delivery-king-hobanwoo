@@ -2,6 +2,7 @@ import express from "express";
 import { Request, Response } from "express";
 import MenuModel from "../model/MenuModel";
 import StoreModel from "../model/StoreModel";
+import ReviewModel from "../model/ReviewModel";
 
 const router = express.Router();
 
@@ -31,6 +32,12 @@ router.get("/:id/menu", async (req, res) => {
   const storeId = parseInt(req.params.id);
   const result = await MenuModel.getMenuListByStoreId(storeId);
   res.json(result);
+});
+
+router.get("/:id/reviews", async (req: Request, res: Response) => {
+  const storeId = parseInt(req.params.id);
+  const reviews = await ReviewModel.getReviewsByStoreId(storeId);
+  res.json(reviews);
 });
 
 module.exports = router;

@@ -1,15 +1,8 @@
 import express from "express";
 import { Request, Response } from "express";
 import UserModel from "../model/UserModel";
-import { User } from "../@types/User";
 
 const router = express.Router();
-
-declare module "express-session" {
-  export interface SessionData {
-    user?: User;
-  }
-}
 
 router.post("/", async (req: Request, res: Response) => {
   const { username, password } = req.body;

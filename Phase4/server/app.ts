@@ -1,6 +1,7 @@
 import express from "express";
 import session from "express-session";
 import cors from "cors";
+import { User } from "./src/@types/User";
 
 const corsOptions = {
   origin: true,
@@ -8,7 +9,7 @@ const corsOptions = {
 };
 
 const app = express();
-const port = 3000;
+const port = 3010;
 
 // Middle-ware setting
 app.use(
@@ -31,6 +32,13 @@ app.use("/stores", require("./src/routers/stores"));
 app.use("/users", require("./src/routers/users"));
 app.use("/session", require("./src/routers/session"));
 app.use("/orders", require("./src/routers/orders"));
+app.use("/reviews", require("./src/routers/reviews"));
+
+declare module "express-session" {
+  export interface SessionData {
+    user?: User;
+  }
+}
 
 app.listen(port, () => {
   console.log(`Server starts on ${port}`);

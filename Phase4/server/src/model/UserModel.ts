@@ -61,19 +61,19 @@ class UserModel {
   updateMembershipTier() {}
   getAddress = async (userId: number) => {
     type AddressDto = {
-      ADDRESS: string;
+      UADDRESS: string;
     };
-    const sql = `SELECT * FROM ADDRESS WHERE USER_ID = ${userId}`;
+    const sql = `SELECT * FROM USER_ADDRESS WHERE USER_ID = ${userId}`;
     const conn = await database.getConnection();
     const result = (await conn.execute<AddressDto>(sql)).rows;
     return result?.map((address: AddressDto) => {
       return {
-        address: address.ADDRESS,
+        address: address.UADDRESS,
       };
     });
   };
   insertAddress = async (userId: number, address: string) => {
-    const sql = `INSERT INTO ADDRESS VALUES (${userId}, '${address}')`;
+    const sql = `INSERT INTO USER_ADDRESS VALUES (${userId}, '${address}')`;
     const conn = await database.getConnection();
     await conn.execute(sql);
   };

@@ -5,10 +5,10 @@ import OrderModel from "../model/OrderModel";
 
 const router = express.Router();
 
-router.post("/:orderId", async (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
   if (req.session.user) {
     const userId = req.session.user.userId;
-    const orderId = parseInt(req.params.orderId);
+    const orderId = parseInt(req.query.orderId as string);
     const { starRating, comments } = req.body;
     const order = await OrderModel.getOrderById(orderId);
     await ReviewModel.insert({
@@ -21,12 +21,6 @@ router.post("/:orderId", async (req: Request, res: Response) => {
   } else {
     res.status(401).json({ success: false, message: "로그인이 필요합니다." });
   }
-});
-
-router.get("/:storeId", async (req: Request, res: Response) => {
-  const storeId = parseInt(req.params.storeId);
-  const reviews = await ReviewModel.getReviewsByStoreId(storeId);
-  res.json(reviews);
 });
 
 router.put("/:reviewId", async (req, res) => {
@@ -53,3 +47,5 @@ router.delete("/:reviewId", async (req, res) => {
     res.json({ success: false });
   }
 });
+
+module.exports = router;
