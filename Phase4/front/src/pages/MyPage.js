@@ -1,5 +1,7 @@
 import Container from "../components/Container";
 import styles from "./MyPage.module.css";
+import tablestyle from "./tableCss/style.css";
+import bootstrap from "./tableCss/bootstrap.min.css";
 
 function MyPage() {
   return (
