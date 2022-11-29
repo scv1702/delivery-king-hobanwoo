@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet";
 import styles from "./HomePage.module.css";
-import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ListPage from "../components/ListPage";
 import Card from "../components/Card";
 import bossam from "../assets/bossam.png";
