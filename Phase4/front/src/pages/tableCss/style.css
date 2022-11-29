@@ -1,5 +1,29 @@
+body {
+  background-color: #fff;
+  font-weight: 300;
+}
+
+p {
+  color: #b3b3b3;
+  font-weight: 300;
+}
+
+a {
+  -webkit-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+a,
+a:hover {
+  text-decoration: none !important;
+}
+
 .content {
   padding: 7rem 0;
+}
+
+h2 {
+  font-size: 20px;
 }
 
 .custom-table-responsive {
