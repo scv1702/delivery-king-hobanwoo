@@ -38,6 +38,9 @@ function UserMenu() {
           <Link to="/login">
             <li>로그인</li>
           </Link>
+          <Link to="/mypage">
+            <li>마이페이지</li>
+          </Link>
         </ul>
       )}
     </div>
