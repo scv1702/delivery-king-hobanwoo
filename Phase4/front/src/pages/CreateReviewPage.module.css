@@ -1,0 +1,73 @@
+.container {
+  margin: 50px auto;
+}
+
+.title {
+  margin: 60px auto;
+  text-align: center;
+}
+
+.subtitle {
+  margin-left: 35%;
+  margin-top: 5%;
+}
+
+.leftmove {
+  margin-left: 40.5%;
+  margin-bottom: 10%;
+}
+  
+.bottomMargin {
+  margin-bottom: 50px;
+}
+
+.inputbox {
+  background: transparent;
+  border: none;
+  border-bottom: solid 1px #ccc;
+  padding: px 0px 5px 0px;
+  font-size: 14pt;
+  width: 40%;
+  margin-left: 35%;
+  margin-bottom: 20px;
+}
+
+.link {
+  margin: 50px auto;
+  text-align: center;
+}
+
+.star_rating {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  justify-content: space-around;
+  padding: 0 0.2em;
+  text-align: center;
+  width: 5em;
+}
+
+.star_rating input {
+  display: none;
+}
+
+.star_rating label {
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2.3px;
+  -webkit-text-stroke-color: #2b2a29;
+  cursor: pointer;
+}
+
+.star_rating :checked ~ label {
+  -webkit-text-fill-color: gold;
+}
+
+.star_rating label:hover,
+.star_rating label:hover ~ label {
+  -webkit-text-fill-color: #fff58c;
+}
+
+textarea::placeholder {
+  font-size: 0.8em;
+}

@@ -9,6 +9,11 @@
   color: #878787;
 }
 
+.writeButton {
+  margin-left: 780px;
+  margin-bottom: 20px;
+}
+
 .emptyList {
   margin: 40px auto;
 }
