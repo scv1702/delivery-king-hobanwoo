@@ -6,28 +6,19 @@ import StoreModel from "../model/StoreModel";
 const router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
-  // const sql = "SELECT * FROM STORE ";
-  // if (req.query.address) {
-  //   sql.concat(`WHERE ADDRESS LIKE ${req.query.address} `);
-  // }
-  // if (req.query.category) {
-  //   if (sql.includes("WHERE")) {
-  //     sql.concat(`AND FOOD_CATEGORY = ${req.query.category}`);
-  //   } else {
-  //     sql.concat(`WHERE FOOD_CATEGORY = ${req.query.category}`);
-  //   }
-  // }
-  // if (req.query.department) {
-  //   sql.concat(
-  //     "S, DEPARTMENT D, COOPERATES C " +
-  //       `WHERE D.DNAME = ${req.query.department} ` +
-  //       "AND C.DNAME = D.DNAME " +
-  //       "AND S.STORE_ID = C.STORE_ID"
-  //   );
-  // }
-  // const result = await db.executeQuery(sql);
-  const result = await StoreModel.getAllStore();
-  res.json(result);
+  if (req.query.address) {
+    res.json(await StoreModel.getStoresByAddress(req.query.address as string));
+  } else if (req.query.category) {
+    res.json(
+      await StoreModel.getStoresByFoodCategory(req.query.category as string)
+    );
+  } else if (req.query.department) {
+    res.json(
+      await StoreModel.getStoresByDepartment(req.query.department as string)
+    );
+  } else {
+    res.json(await StoreModel.getAllStore());
+  }
 });
 
 router.get("/:id", async (req, res) => {

@@ -59,6 +59,24 @@ class UserModel {
   }
   getMembershipTier() {}
   updateMembershipTier() {}
+  getAddress = async (userId: number) => {
+    type AddressDto = {
+      ADDRESS: string;
+    };
+    const sql = `SELECT * FROM ADDRESS WHERE USER_ID = ${userId}`;
+    const conn = await database.getConnection();
+    const result = (await conn.execute<AddressDto>(sql)).rows;
+    return result?.map((address: AddressDto) => {
+      return {
+        address: address.ADDRESS,
+      };
+    });
+  };
+  insertAddress = async (userId: number, address: string) => {
+    const sql = `INSERT INTO ADDRESS VALUES (${userId}, '${address}')`;
+    const conn = await database.getConnection();
+    await conn.execute(sql);
+  };
 }
 
 export default new UserModel();

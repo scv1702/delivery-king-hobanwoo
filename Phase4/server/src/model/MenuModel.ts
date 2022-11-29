@@ -11,42 +11,30 @@ type MenuDto = {
 };
 
 class MenuModel {
-  getMenuByMenuName = async (menuName: string): Promise<Menu | undefined> => {
-    const sql = `SELECT * FROM MENU WHERE MNAME = '${menuName}'`;
+  getMenuList = async (sql: string): Promise<Menu[] | undefined> => {
     const conn = await database.getConnection();
     const result = (await conn.execute<MenuDto>(sql)).rows;
-    if (result) {
-      const { MENU_ID, STORE_ID, MNAME, DESCRIPTION, IMAGE, PRICE } = result[0];
+    return result?.map((menu: MenuDto) => {
       return {
-        menuId: MENU_ID,
-        storeId: STORE_ID,
-        menuName: MNAME,
-        description: DESCRIPTION,
-        image: IMAGE,
-        price: PRICE,
+        menuId: menu.MENU_ID,
+        storeId: menu.STORE_ID,
+        menuName: menu.MNAME,
+        description: menu.DESCRIPTION,
+        image: menu.IMAGE,
+        price: menu.PRICE,
       };
-    }
-    return undefined;
+    });
+  };
+  getMenuByMenuName = async (menuName: string): Promise<Menu | undefined> => {
+    const sql = `SELECT * FROM MENU WHERE MNAME = '${menuName}'`;
+    const result = await this.getMenuList(sql);
+    return result?.[0];
   };
   getMenuListByStoreId = async (
     storeId: number
-  ): Promise<Array<Menu> | undefined> => {
+  ): Promise<Menu[] | undefined> => {
     const sql = `SELECT * FROM MENU WHERE STORE_ID = ${storeId}`;
-    const conn = await database.getConnection();
-    const result = (await conn.execute<MenuDto>(sql)).rows;
-    if (result) {
-      return result.map((menu: MenuDto) => {
-        return {
-          menuId: menu.MENU_ID,
-          storeId: menu.STORE_ID,
-          menuName: menu.MNAME,
-          description: menu.DESCRIPTION,
-          image: menu.IMAGE,
-          price: menu.PRICE,
-        };
-      });
-    }
-    return undefined;
+    return await this.getMenuList(sql);
   };
 }
 
