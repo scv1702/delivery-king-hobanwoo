@@ -57,7 +57,7 @@ router.get("/orders", async (req, res) => {
   }
 });
 
-router.get("/reivew", async (req, res) => {
+router.get("/reviews", async (req, res) => {
   if (req.session.user) {
     res.json(await ReviewModel.getReviewsByUserId(req.session.user.userId!));
   } else {

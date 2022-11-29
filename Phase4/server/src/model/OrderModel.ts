@@ -24,6 +24,15 @@ type OrderMenuDto = {
   QUANTITY: number;
 };
 
+const getAllResolvedResult = <T>(promises: Promise<T>[] | undefined) => {
+  if (promises) {
+    const result = Promise.all(promises);
+    return result;
+  } else {
+    return undefined;
+  }
+};
+
 class OrderModel {
   getOrderMenuById = async (
     orderId: number
@@ -31,7 +40,7 @@ class OrderModel {
     const sql = `SELECT * FROM ORDER_MENU WHERE ORDER_ID = ${orderId}`;
     const conn = await database.getConnection();
     const result = (await conn.execute<OrderMenuDto>(sql)).rows;
-    return result?.map((orderMenu: OrderMenuDto) => {
+    const orderMenuList = result?.map((orderMenu: OrderMenuDto) => {
       return {
         orderMenuId: orderMenu.ORDER_MENU_ID,
         orderId: orderMenu.ORDER_ID,
@@ -39,13 +48,14 @@ class OrderModel {
         image: orderMenu.MENU_IMAGE,
         price: orderMenu.MENU_PRICE,
         quantity: orderMenu.QUANTITY,
-      };
+      } as OrderMenu;
     });
+    return orderMenuList;
   };
   getOrders = async (sql: string): Promise<Order[] | undefined> => {
     const conn = await database.getConnection();
     const result = (await conn.execute<OrderDto>(sql)).rows;
-    return result?.map((order: OrderDto) => {
+    const orders = result?.map((order: OrderDto) => {
       return {
         orderId: order.ORDER_ID,
         userId: order.USER_ID,
@@ -55,6 +65,14 @@ class OrderModel {
         orderDate: order.ORDER_DATE,
       } as Order;
     });
+    const ordersWithOrderMenu = orders?.map((order) => {
+      return new Promise<Order>((resolve) => {
+        this.getOrderMenuById(order.orderId!).then((orderMenuList) => {
+          resolve({ ...order, orderMenuList } as Order);
+        });
+      });
+    });
+    return getAllResolvedResult(ordersWithOrderMenu);
   };
   getOrderById = async (orderId: number): Promise<Order | undefined> => {
     const sql = `SELECT * FROM ORDERS WHERE ${orderId} = ORDER_ID`;

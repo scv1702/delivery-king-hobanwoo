@@ -8,14 +8,12 @@ class Database {
     password: `comp322`,
     connectString: "localhost/xe",
   };
-  private connection: Promise<OracleDB.Connection>;
   public constructor() {
     this.oracleDB.autoCommit = true;
     this.oracleDB.outFormat = OUT_FORMAT_OBJECT;
-    this.connection = this.oracleDB.getConnection(this.config);
   }
   public async getConnection() {
-    return await this.connection;
+    return await this.oracleDB.getConnection(this.config);
   }
 }
 
