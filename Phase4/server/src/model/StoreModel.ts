@@ -14,57 +14,49 @@ type StoreDto = {
 };
 
 class StoreModel {
-  getAllStore = async (): Promise<Array<Store> | undefined> => {
-    const sql = "SELECT * FROM STORE";
+  getStores = async (sql: string): Promise<Store[] | undefined> => {
     const conn = await database.getConnection();
     const result = (await conn.execute<StoreDto>(sql)).rows;
-    if (result) {
-      const storeList = result.map((store: StoreDto) => {
-        return {
-          storeId: store.STORE_ID,
-          address: store.ADDRESS,
-          foodCategory: store.FOOD_CATEGORY,
-          storeName: store.STORE_NAME,
-          phoneNumber: store.PHONE_NUMBER,
-          description: store.DESCRIPTION,
-          deliveryFee: store.DELIVERY_FEE,
-          image: store.IMAGE,
-          businessHour: store.BUSINESS_HOUR,
-        };
-      });
-      return storeList;
-    }
-    return undefined;
+    return result?.map((store: StoreDto) => {
+      return {
+        storeId: store.STORE_ID,
+        address: store.ADDRESS,
+        foodCategory: store.FOOD_CATEGORY,
+        storeName: store.STORE_NAME,
+        phoneNumber: store.PHONE_NUMBER,
+        description: store.DESCRIPTION,
+        deliveryFee: store.DELIVERY_FEE,
+        image: store.IMAGE,
+        businessHour: store.BUSINESS_HOUR,
+      };
+    });
+  };
+  getAllStore = async (): Promise<Store[] | undefined> => {
+    const sql = "SELECT * FROM STORE";
+    return this.getStores(sql);
   };
   getStoreById = async (storeId: number): Promise<Store | undefined> => {
     const sql = `SELECT * FROM STORE WHERE STORE_ID = ${storeId}`;
-    const conn = await database.getConnection();
-    const result = (await conn.execute<StoreDto>(sql)).rows;
-    if (result) {
-      const {
-        STORE_ID,
-        ADDRESS,
-        FOOD_CATEGORY,
-        STORE_NAME,
-        PHONE_NUMBER,
-        DESCRIPTION,
-        DELIVERY_FEE,
-        IMAGE,
-        BUSINESS_HOUR,
-      } = result[0];
-      return {
-        storeId: STORE_ID,
-        address: ADDRESS,
-        foodCategory: FOOD_CATEGORY,
-        storeName: STORE_NAME,
-        phoneNumber: PHONE_NUMBER,
-        description: DESCRIPTION,
-        deliveryFee: DELIVERY_FEE,
-        image: IMAGE,
-        businessHour: BUSINESS_HOUR,
-      };
-    }
-    return undefined;
+    const result = await this.getStores(sql);
+    return result?.[0];
+  };
+  getStoresByAddress = async (
+    address: string
+  ): Promise<Store[] | undefined> => {
+    const sql = `SELECT * FROM STORE WHERE ADDRESS = '${address}'`;
+    return this.getStores(sql);
+  };
+  getStoresByFoodCategory = async (
+    foodCategory: string
+  ): Promise<Store[] | undefined> => {
+    const sql = `SELECT * FROM STORE WHERE FOOD_CATEGORY = '${foodCategory}'`;
+    return this.getStores(sql);
+  };
+  getStoresByDepartment = async (
+    department: string
+  ): Promise<Store[] | undefined> => {
+    const sql = `SELECT * FROM STORE WHERE ADDRESS LIKE '%${department}%'`;
+    return this.getStores(sql);
   };
 }
 

@@ -27,44 +27,39 @@ type OrderMenuDto = {
 class OrderModel {
   getOrderMenuById = async (
     orderId: number
-  ): Promise<Array<OrderMenu> | undefined> => {
+  ): Promise<OrderMenu[] | undefined> => {
     const sql = `SELECT * FROM ORDER_MENU WHERE ORDER_ID = ${orderId}`;
     const conn = await database.getConnection();
     const result = (await conn.execute<OrderMenuDto>(sql)).rows;
-    if (result) {
-      const orderMenuList = result.map((orderMenu: OrderMenuDto) => {
-        return {
-          orderMenuId: orderMenu.ORDER_MENU_ID,
-          orderId: orderMenu.ORDER_ID,
-          menuName: orderMenu.MENU_NAME,
-          image: orderMenu.MENU_IMAGE,
-          price: orderMenu.MENU_PRICE,
-          quantity: orderMenu.QUANTITY,
-        };
-      });
-      return orderMenuList;
-    }
-    return undefined;
+    return result?.map((orderMenu: OrderMenuDto) => {
+      return {
+        orderMenuId: orderMenu.ORDER_MENU_ID,
+        orderId: orderMenu.ORDER_ID,
+        menuName: orderMenu.MENU_NAME,
+        image: orderMenu.MENU_IMAGE,
+        price: orderMenu.MENU_PRICE,
+        quantity: orderMenu.QUANTITY,
+      };
+    });
+  };
+  getOrders = async (sql: string): Promise<Order[] | undefined> => {
+    const conn = await database.getConnection();
+    const result = (await conn.execute<OrderDto>(sql)).rows;
+    return result?.map((order: OrderDto) => {
+      return {
+        orderId: order.ORDER_ID,
+        userId: order.USER_ID,
+        storeId: order.STORE_ID,
+        payment: order.PAYMENT,
+        state: order.STATE,
+        orderDate: order.ORDER_DATE,
+      } as Order;
+    });
   };
   getOrderById = async (orderId: number): Promise<Order | undefined> => {
     const sql = `SELECT * FROM ORDERS WHERE ${orderId} = ORDER_ID`;
-    const conn = await database.getConnection();
-    const result = (await conn.execute<OrderDto>(sql)).rows;
-    if (result) {
-      const { ORDER_ID, USER_ID, STORE_ID, PAYMENT, STATE, ORDER_DATE } =
-        result[0];
-      const orderMenuList = await this.getOrderMenuById(orderId);
-      return {
-        orderId: ORDER_ID,
-        userId: USER_ID,
-        storeId: STORE_ID,
-        payment: PAYMENT,
-        state: STATE,
-        orderDate: ORDER_DATE,
-        orderMenuList: orderMenuList,
-      };
-    }
-    return undefined;
+    const result = await this.getOrders(sql);
+    return result?.[0];
   };
   getMaxOrderId = async (): Promise<number | undefined> => {
     type MaxOrderIdDto = {
@@ -73,10 +68,7 @@ class OrderModel {
     const sql = `SELECT MAX(ORDER_ID) AS MAX_ORDER_ID FROM ORDERS`;
     const conn = await database.getConnection();
     const result = (await conn.execute<MaxOrderIdDto>(sql)).rows;
-    if (result) {
-      return result[0].MAX_ORDER_ID;
-    }
-    return undefined;
+    return result?.[0].MAX_ORDER_ID;
   };
   insert = async (order: Order): Promise<Order | undefined> => {
     const { userId, storeId, orderMenuList, payment } = order;
@@ -100,8 +92,11 @@ class OrderModel {
         });
       })
     );
-    const result = await this.getOrderById(orderId);
-    return result;
+    return await this.getOrderById(orderId);
+  };
+  getOrdersByUserId = async (userId: number): Promise<Order[] | undefined> => {
+    const sql = `SELECT * FROM ORDERS WHERE USER_ID = ${userId}`;
+    return await this.getOrders(sql);
   };
 }
 
