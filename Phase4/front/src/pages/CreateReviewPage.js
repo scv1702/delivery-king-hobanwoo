@@ -5,13 +5,15 @@ import classNames from "classnames";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 
-function SignupPage() {
+function CreateReviewPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const orderId = searchParams.get("orderId");
 
   function CreateReviewException() {
     var comments = document.getElementById("reviewContents").value;
-    var starRating = 3;
+    var starRating = document.querySelector(
+      'input[name="rating"]:checked'
+    ).value;
     if (!comments) {
       alert("리뷰 내용을 작성해주세요!");
       document.getElementById("reviewContents").focus();
@@ -115,4 +117,4 @@ function SignupPage() {
   );
 }
 
-export default SignupPage;
+export default CreateReviewPage;
