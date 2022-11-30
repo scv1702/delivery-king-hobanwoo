@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getReviews } from "../api";
 import DateText from "../components/DateText";
 import ListPage from "../components/ListPage";
@@ -11,24 +11,21 @@ import searchIcon from "../assets/search.svg";
 import { Link, useSearchParams } from "react-router-dom";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function ReviewItem({ review }) {
   return (
-    <Card className={styles.reviewItem} key={review.title}>
+    <Card className={styles.reviewItem} key={review.comments}>
       <div className={styles.info}>
+        별점: {review.starRating}
         <p className={styles.title}>
-          <Link to={`/reviews/${review.id}`}>{review.title}</Link>
-          {review.answers.length > 0 && (
-            <span className={styles.count}>[{review.answers.length}]</span>
-          )}
+          <Link to={`/reviews/${review.reviewId}`}>{review.comments}</Link>
         </p>
         <p className={styles.date}>
           <DateText value={review.createdAt} />
         </p>
       </div>
-      <div className={styles.writer}>
-        <Avatar photo={review.writer.profile.photo} name={review.writer.name} />
-      </div>
+      <div className={styles.writer}>{review.user.username}</div>
     </Card>
   );
 }
@@ -38,10 +35,21 @@ function ReviewListPage() {
   // 리액트 라우터에서는 쿼리 파라미터 값을 가져오고 싶을 때
   // useSearchParams라는 훅을 사용할 수 있다.
   // useState랑 비슷하나, 생성된 state가 객체라는 점이 다름!
+  const [reviewList, setReviewList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams(); // state가 객체로 생성된다. searchParams는 객체!
   const initKeyword = searchParams.get("keyword"); // get함수를 통해 안에있는 값을 가져올 수 있다.
   const [keyword, setKeyword] = useState(initKeyword || "");
-  const reviews = getReviews(initKeyword);
+
+  useEffect(() => {
+    axios.get("http://localhost:3010/reviews").then((res) => {
+      console.log(res.data);
+      setReviewList(res.data);
+    });
+    axios.get("http://localhost:3010/users/review").then((res) => {
+      console.log(res.data);
+      setReviewList(res.data);
+    });
+  }, []);
 
   const handleKeywordChange = (e) => setKeyword(e.target.value);
 
@@ -58,23 +66,12 @@ function ReviewListPage() {
     ); // 파라미터로 객체를 받는다.
   };
 
-  const handleCreateReivewClick = () => {
-    navigate("/createreview");
-  };
-
   return (
     <ListPage
       variant="community"
       title="리뷰"
       description="배달왕 호반우의 리뷰들을 확인해보세요."
     >
-      <Button
-        className={styles.writeButton}
-        variant="round"
-        onClick={handleCreateReivewClick}
-      >
-        + 리뷰 쓰기
-      </Button>
       <form className={searchBarStyles.form} onSubmit={handleSubmit}>
         <input
           name="keyword"
@@ -87,9 +84,9 @@ function ReviewListPage() {
         </button>
       </form>
 
-      <p className={styles.count}>총 {reviews.length}개 리뷰</p>
+      <p className={styles.count}>총 {reviewList.length}개 리뷰</p>
 
-      {initKeyword && reviews.length === 0 ? (
+      {initKeyword && reviewList.length === 0 ? (
         <Warn
           className={styles.emptyList}
           title="조건에 맞는 리뷰가 없어요."
@@ -97,9 +94,10 @@ function ReviewListPage() {
         />
       ) : (
         <div className={styles.reviewList}>
-          {reviews.map((review) => (
-            <ReviewItem key={review.id} review={review} />
-          ))}
+          {reviewList &&
+            reviewList.map((review) => (
+              <ReviewItem key={review.reviewId} review={review} />
+            ))}
         </div>
       )}
     </ListPage>

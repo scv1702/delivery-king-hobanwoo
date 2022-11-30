@@ -18,9 +18,6 @@ function StoreListPage() {
   const initKeyword = searchParams.get("keyword"); // get함수를 통해 안에있는 값을 가져올 수 있다.
   const category = searchParams.get("category");
   const [keyword, setKeyword] = useState(initKeyword || "");
-  // getStores()라는 함수로 코스 목록 데이터를 가져와서
-  // (각 요소마다 StoresItem이라는 컴포넌트로 렌더링 해주는 함수임.)
-  const stores = getStores(initKeyword);
 
   useEffect(() => {
     if (category) {
@@ -78,9 +75,9 @@ function StoreListPage() {
         </button>
       </form>
 
-      <p className={styles.count}>총 {stores.length}개 가게</p>
+      <p className={storeList.count}>총 {storeList.length}개 가게</p>
 
-      {initKeyword && stores.length === 0 ? (
+      {initKeyword && storeList.length === 0 ? (
         <Warn
           className={styles.emptyList}
           title="조건에 맞는 가게가 없어요."

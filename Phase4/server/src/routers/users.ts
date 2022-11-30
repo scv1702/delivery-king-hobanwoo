@@ -53,7 +53,7 @@ router.post("/address", async (req, res) => {
   }
 });
 
-router.get("/coupon", async (req, res) => {
+router.get("/coupons", async (req, res) => {
   if (req.session.user) {
     res.json(await CouponModel.getCouponByUserId(req.session.user.userId!));
   } else {

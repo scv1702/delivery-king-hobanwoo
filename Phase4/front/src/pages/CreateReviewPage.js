@@ -2,29 +2,45 @@ import Button from "../components/Button";
 import Container from "../components/Container";
 import styles from "./CreateReviewPage.module.css";
 import classNames from "classnames";
-
-function CreateReviewException() {
-  var createReview = document.getElementById("reviewContents").value;
-
-  if (!createReview) {
-    alert("리뷰 내용을 작성해주세요");
-    document.getElementById("reviewContents").focus();
-  } else {
-    window.location.href = "/";
-  }
-}
+import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 
 function SignupPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const orderId = searchParams.get("orderId");
+
+  function CreateReviewException() {
+    var comments = document.getElementById("reviewContents").value;
+    var starRating = 3;
+    if (!comments) {
+      alert("리뷰 내용을 작성해주세요!");
+      document.getElementById("reviewContents").focus();
+    } else if (!starRating) {
+      alert("별점을 입력해주세요!");
+    } else {
+      axios
+        .post(
+          `http://localhost:3010/reviews?orderId=${orderId}`,
+          {
+            comments,
+            starRating,
+          },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          alert(res.data.message);
+          window.location.href = "/reviews";
+        })
+        .catch((err) => {
+          alert(err.response.data.message);
+        });
+    }
+  }
+
   return (
     <Container className={styles.container}>
       <h1 className={styles.title}>리뷰 작성</h1>
       <form>
-        <select id="orderList" className={styles.inputbox}>
-          <option value="none">=== 리뷰를 기다리는 주문내역 ===</option>
-          <option value="정돈카츠">정돈카츠</option>
-          <option value="마사">마사</option>
-          <option value="신서울족발보쌈">신서울족발보쌈</option>
-        </select>
         <div
           className={classNames(
             styles.star_rating,

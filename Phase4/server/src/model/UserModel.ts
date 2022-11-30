@@ -83,7 +83,7 @@ class UserModel {
     const conn = await database.getConnection();
     await conn.execute(sql);
   };
-  getUserById = async (userId: number) => {
+  getUserById = async (userId: number): Promise<User | undefined> => {
     const sql = `SELECT * FROM USERS WHERE USER_ID = ${userId}`;
     const conn = await database.getConnection();
     const result = (await conn.execute<UserDto>(sql)).rows?.[0];

@@ -5,3 +5,12 @@ export const getCurrentKorDate = () => {
   const kr_curr = new Date(utc + KR_TIME_DIFF);
   return kr_curr;
 };
+
+export const getAllResolvedResult = <T>(promises: Promise<T>[] | undefined) => {
+  if (promises) {
+    const result = Promise.all(promises);
+    return result;
+  } else {
+    return undefined;
+  }
+};

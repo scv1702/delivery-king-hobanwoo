@@ -4,6 +4,9 @@ import { getCurrentKorDate } from "../utils";
 import MenuModel from "./MenuModel";
 import { Order } from "../@types/Order";
 import { OrderMenu } from "../@types/OrderMenu";
+import { getAllResolvedResult } from "../utils";
+import StoreModel from "./StoreModel";
+import ReviewModel from "./ReviewModel";
 
 type OrderDto = {
   ORDER_ID: number;
@@ -22,15 +25,6 @@ type OrderMenuDto = {
   MENU_IMAGE: string;
   MENU_PRICE: number;
   QUANTITY: number;
-};
-
-const getAllResolvedResult = <T>(promises: Promise<T>[] | undefined) => {
-  if (promises) {
-    const result = Promise.all(promises);
-    return result;
-  } else {
-    return undefined;
-  }
 };
 
 class OrderModel {
@@ -72,7 +66,25 @@ class OrderModel {
         });
       });
     });
-    return getAllResolvedResult(ordersWithOrderMenu);
+    const ordersWithOrderMenuResolved = await getAllResolvedResult(
+      ordersWithOrderMenu
+    );
+    const ordersWithStore = ordersWithOrderMenuResolved?.map((order) => {
+      return new Promise<Order>((resolve) => {
+        StoreModel.getStoreById(order.storeId!).then((store) => {
+          resolve({ ...order, store } as Order);
+        });
+      });
+    });
+    const ordersWithStoreResolved = await getAllResolvedResult(ordersWithStore);
+    const ordersWithIsReviewd = ordersWithStoreResolved?.map((order) => {
+      return new Promise<Order>((resolve) => {
+        ReviewModel.getReviewsByOrderId(order.orderId!).then((reviews) => {
+          resolve({ ...order, isReviewed: reviews?.length! > 0 } as Order);
+        });
+      });
+    });
+    return getAllResolvedResult(ordersWithIsReviewd);
   };
   getOrderById = async (orderId: number): Promise<Order | undefined> => {
     const sql = `SELECT * FROM ORDERS WHERE ${orderId} = ORDER_ID`;
@@ -115,6 +127,12 @@ class OrderModel {
   getOrdersByUserId = async (userId: number): Promise<Order[] | undefined> => {
     const sql = `SELECT * FROM ORDERS WHERE USER_ID = ${userId}`;
     return await this.getOrders(sql);
+  };
+  getOrderMenuIdsByOrderId = async (orderId: number) => {
+    const sql = `SELECT ORDER_MENU_ID FROM ORDER_MENU WHERE ORDER_ID = ${orderId}`;
+    const conn = await database.getConnection();
+    const result = (await conn.execute<{ ORDER_MENU_ID: number }>(sql)).rows;
+    return result?.map((orderMenu) => orderMenu.ORDER_MENU_ID);
   };
 }
 

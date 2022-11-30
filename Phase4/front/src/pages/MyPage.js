@@ -6,26 +6,22 @@ import styles from "./MyPage.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CouponList from "../components/CouponList";
+import MyOrderList from "../components/MyOrderList";
 
 function MyPage() {
   const [userInfo, setUserInfo] = useState({});
-  const [couponList, setCouponList] = useState([]);
+  const [myOrders, setMyOrders] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:15010/users", {
+      .get("http://localhost:3010/users", {
         withCredentials: true,
       })
       .then((res) => {
         setUserInfo(res.data.user);
       });
-    axios
-      .get("http://localhost:15010/users/coupon", { withCredentials: true })
-      .then((res) => {
-        setCouponList(res.data);
-        console.log(res.data);
-      });
   }, []);
+
   return (
     <Container className={styles.container}>
       <h1 className={styles.title}>내 프로필</h1>
@@ -50,7 +46,8 @@ function MyPage() {
         value={userInfo.phoneNumber}
         readOnly
       ></input>
-      <CouponList coupons={couponList} />
+      <CouponList />
+      <MyOrderList />
     </Container>
   );
 }

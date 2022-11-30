@@ -1,7 +1,19 @@
 import styles from "../pages/MyPage.module.css";
 import CouponItem from "./CouponItem";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-function CouponList({ coupons }) {
+function CouponList() {
+  const [coupons, setCoupons] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3010/users/coupons", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setCoupons(res.data);
+      });
+  }, []);
   return (
     <>
       <h1 className={styles.title}>내 쿠폰</h1>

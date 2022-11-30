@@ -2,6 +2,10 @@ import database from "../database";
 import moment from "moment";
 import { getCurrentKorDate } from "../utils";
 import { Review } from "../@types/Review";
+import UserModel from "./UserModel";
+import { User } from "../@types/User";
+import { getAllResolvedResult } from "../utils";
+import OrderModel from "./OrderModel";
 
 type ReviewDto = {
   REVIEW_ID: number;
@@ -28,13 +32,22 @@ class ReviewModel {
       } as Review;
     });
   };
-  insert = async (review: Review) => {
+  insert = async (review: Review, orderId: number) => {
     const autoIncrement = `(SELECT NVL(MAX(REVIEW_ID), 0) + 1 FROM REVIEW)`;
     const createdAt = moment(getCurrentKorDate()).format("YYYY-MM-DD hh:mm:ss");
     const sql = `INSERT INTO REVIEW VALUES (${autoIncrement}, ${review.userId}, ${review.storeId}, ${review.starRating}, '${review.comments}', TO_DATE('${createdAt}', 'YYYY-MM-DD hh24:mi:ss'))`;
     const conn = await database.getConnection();
     await conn.execute(sql);
-    conn.close();
+    const reviewIdSql = `(SELECT MAX(REVIEW_ID) FROM REVIEW)`;
+    const orderMenuList = await OrderModel.getOrderMenuIdsByOrderId(orderId);
+    return Promise.all(
+      orderMenuList!.map((orderMenuId) => {
+        return new Promise((resolve) => {
+          const containsSql = `INSERT INTO CONTAINS VALUES (${orderMenuId}, ${orderId}, ${reviewIdSql})`;
+          resolve(conn.execute(containsSql));
+        });
+      })
+    );
   };
   deleteById = async (reviewId: number) => {
     const sql = `DELETE FROM REVIEW WHERE REVIEW_ID = ${reviewId}`;
@@ -55,6 +68,22 @@ class ReviewModel {
   getReviewsByStoreId = async (storeId: number) => {
     const sql = `SELECT * FROM REVIEW WHERE STORE_ID = ${storeId}`;
     return await this.getReivews(sql);
+  };
+  getReviewsByOrderId = async (orderId: number) => {
+    const sql = `SELECT * FROM REVIEW R, CONTAINS C WHERE R.REVIEW_ID = C.REVIEW_ID AND C.ORDER_ID = ${orderId}`;
+    return await this.getReivews(sql);
+  };
+  getAllReview = async () => {
+    const sql = `SELECT * FROM REVIEW ORDER BY CREATED_AT DESC`;
+    const reviewList = await this.getReivews(sql);
+    const reviewListWithUser = reviewList?.map((review) => {
+      return new Promise<Review>((resolve) => {
+        UserModel.getUserById(review.userId!).then((user) => {
+          resolve({ ...review, user } as Review);
+        });
+      });
+    });
+    return getAllResolvedResult(reviewListWithUser);
   };
 }
 
