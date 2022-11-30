@@ -22,7 +22,7 @@ function CreateReviewPage() {
     } else {
       axios
         .post(
-          `http://localhost:3010/reviews?orderId=${orderId}`,
+          `http://localhost:15010/reviews?orderId=${orderId}`,
           {
             comments,
             starRating,

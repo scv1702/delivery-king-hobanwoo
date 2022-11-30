@@ -29,7 +29,7 @@ function SignupException() {
     document.getElementById("passwordCheck").focus();
   } else {
     axios
-      .post("http://localhost:3010/users", {
+      .post("http://localhost:15010/users", {
         username,
         dname: department,
         password,

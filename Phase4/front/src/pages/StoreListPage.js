@@ -22,7 +22,7 @@ function StoreListPage() {
   useEffect(() => {
     if (category) {
       axios
-        .get(`http://localhost:3010/stores?category=${category}`)
+        .get(`http://localhost:15010/stores?category=${category}`)
         .then((res) => {
           setStoreList(res.data);
         })
@@ -31,7 +31,7 @@ function StoreListPage() {
         });
     } else {
       axios
-        .get("http://localhost:3010/stores")
+        .get("http://localhost:15010/stores")
         .then((res) => {
           setStoreList(res.data);
         })

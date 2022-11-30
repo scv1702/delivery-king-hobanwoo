@@ -14,7 +14,7 @@ function MyPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3010/users", {
+      .get("http://localhost:15010/users", {
         withCredentials: true,
       })
       .then((res) => {

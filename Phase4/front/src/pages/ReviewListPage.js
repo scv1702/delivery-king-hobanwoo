@@ -41,7 +41,7 @@ function ReviewListPage() {
   const [keyword, setKeyword] = useState(initKeyword || "");
 
   useEffect(() => {
-    axios.get("http://localhost:3010/reviews").then((res) => {
+    axios.get("http://localhost:15010/reviews").then((res) => {
       console.log(res.data);
       setReviewList(res.data);
     });

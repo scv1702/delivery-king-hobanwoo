@@ -6,7 +6,7 @@ function MyOrderList() {
   const [myOrders, setMyOrders] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3010/users/orders", { withCredentials: true })
+      .get("http://localhost:15010/users/orders", { withCredentials: true })
       .then((res) => {
         console.log(res.data);
         setMyOrders(res.data);
