@@ -21,7 +21,7 @@ function Main() {
           <Route index element={<HomePage />} />
           <Route path="stores">
             <Route index element={<StoreListPage />} />
-            <Route path=":storeSlug" element={<StorePage />} />
+            <Route path=":storeId" element={<StorePage />} />
           </Route>
           <Route path="reviews">
             <Route index element={<ReviewListPage />} />

@@ -14,12 +14,20 @@ import DateText from "../components/DateText";
 import ReviewStyles from "./ReviewListPage.module.css";
 import classNames from "classnames";
 
+function MenuItem({ menu, storeId, menuId }) {
+  return (
+    <div className={styles.leftMargin}>
+      <h3 className={styles.title}>{menu.menuName}</h3>
+      <p className={styles.summary}>{menu.description}</p>
+      <MenuIcon photoUrl={`../imgs/${storeId}-${menuId + 1}.jpg`} />
+    </div>
+  );
+}
 function ReviewItem({ review }) {
   return (
-    <Card className={ReviewStyles.reviewItem} key={review.title}>
+    <Card className={ReviewStyles.reviewItem} key={review.comments}>
       <div className={ReviewStyles.info}>
-        <p className={ReviewStyles.title}>{review.title}</p>
-        <p className={ReviewStyles.content}>{review.content}</p>
+        <p className={ReviewStyles.comments}>{review.comments}</p>
         <p className={ReviewStyles.date}>
           <DateText value={review.createdAt} />
         </p>
@@ -32,29 +40,34 @@ function StorePage() {
   // 리액트 라우터 dom 에서 제공하는 커스텀 훅인 useParams()
   // useParams()가 리턴하는 객체에는 현재 경로의 파라미터들이 저장되어 있다.
   // 이 객체에 우리가 정의한 storeSlug라는 값도 저장되어 있기에 디스트럭처링으로 storeSlug값을 가져온다.
+  const { storeId } = useParams();
+  const [store, setStore] = useState(null);
+  const [menuList, setMenuList] = useState([]);
+  const [reviewList, setReviewList] = useState([]);
 
-  const reviews = [
-    {
-      id: "616825",
-      title: "특정 인덱스에 있는 컴포넌트만 바꾸기",
-      content:
-        "제가 커뮤니티 사이트를 개발하는 중인데 일부 글만 다르게 컴포넌트를 렌더링해주고 싶습니다 (예를들면 짝수 번째만 다른 걸 보여준다던지 한다는 거요) 어떻게 하나요?",
-      createdAt: "2021-10-14T12:42:25.27Z",
-      updatedAt: "2021-10-14T16:34:20.478Z",
-    },
-  ];
+  useEffect(() => {
+    if (storeId) {
+      axios
+        .get(`http://localhost:15010/stores/${storeId}/reviews`, {})
+        .then((res) => {
+          setReviewList(res.data);
+        });
 
-  const { storeSlug } = useParams();
+      axios.get(`http://localhost:15010/stores/${storeId}`).then((res) => {
+        setStore(res.data);
+      });
+
+      axios.get(`http://localhost:15010/stores/${storeId}/menu`).then((res) => {
+        setMenuList(res.data);
+      });
+    }
+  }, []);
+
   const navigate = useNavigate();
-  const store = getStoreBySlug(storeSlug); // store 변수 !
   const storeColor = getStoreColor(store?.code);
   // storePage를 렌더링할 때 storeSlug값에 해당하는 store를 찾을 수 없으면
   // store의 값이 없다면 "/stores"로 가는 경로의 Navigate 컴포넌트를 리턴
   // 이 컴포넌트를 렌더링하면 리액트 라우터는 to Prop에 지정된 경로로 이동시킴
-  if (!store) {
-    return <Navigate to="/stores" />;
-  }
-
   const headerStyle = {
     borderTopColor: storeColor,
   };
@@ -75,46 +88,54 @@ function StorePage() {
 
   return (
     <>
-      <div className={styles.header} style={headerStyle}>
-        <Container className={styles.content}>
-          <StoreIcon photoUrl={store.photoUrl} />
-          <h1 className={styles.title}>{store.title}</h1>
-          <Button variant="round" onClick={handleOrderClick}>
-            + 주문 하기
-          </Button>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <Button variant="round" onClick={handleAddWishlistClick}>
-            + 가게 담기
-          </Button>
-          <p className={styles.summary}>{store.summary}</p>
-        </Container>
-      </div>
-      <Container className={styles.topics}>
-        {store.map((store) => (
-          <Card className={styles.topic} key={store.storeId}>
-            <MenuIcon photoUrl={store.photoUrl}></MenuIcon>
-            <div className={styles.leftMargin}>
-              <h3 className={styles.title}>{store.storeName}</h3>
+      {store && (
+        <>
+          <div className={styles.header} style={headerStyle}>
+            <Container className={styles.content}>
+              <img src={`../imgs/${store.storeId}-1.jpg`} />
+              <h1 className={styles.title}>{store && store.storeName}</h1>
+              <Button variant="round" onClick={handleOrderClick}>
+                + 주문 하기
+              </Button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <Button variant="round" onClick={handleAddWishlistClick}>
+                + 가게 담기
+              </Button>
               <p className={styles.summary}>{store.description}</p>
+            </Container>
+          </div>
+          <Container className={styles.topics}>
+            <Card className={styles.topic} key={store.storeId}>
+              {menuList &&
+                menuList.map((menu, index) => {
+                  return (
+                    <MenuItem
+                      menu={menu}
+                      storeId={storeId}
+                      menuId={index}
+                      key={menu.menuId}
+                    />
+                  );
+                })}
+            </Card>
+          </Container>
+          <Container className={styles.content}>
+            <h1 className={styles.reviewtitle}>리뷰</h1>
+          </Container>
+          <Container>
+            <div
+              className={classNames(
+                ReviewStyles.reviewList,
+                ReviewStyles.bottomMargin
+              )}
+            >
+              {reviewList.map((review) => (
+                <ReviewItem key={review.reviewId} review={review} />
+              ))}
             </div>
-          </Card>
-        ))}
-      </Container>
-      <Container className={styles.content}>
-        <h1 className={styles.reviewtitle}>리뷰</h1>
-      </Container>
-      <Container>
-        <div
-          className={classNames(
-            ReviewStyles.reviewList,
-            ReviewStyles.bottomMargin
-          )}
-        >
-          {reviews.map((review) => (
-            <ReviewItem key={review.id} review={review} />
-          ))}
-        </div>
-      </Container>
+          </Container>
+        </>
+      )}
     </>
   );
 }

@@ -18,7 +18,7 @@ function StoreItem({ store }) {
       </div>
       <div className={styles.content}>
         <h2 className={styles.title}>
-          <Link to={`/stores/${store.slug}`}>{store.storeName}</Link>
+          <Link to={`/stores/${store.storeId}`}>{store.storeName}</Link>
         </h2>
         <p className={styles.description}>{store.description}</p>
         <div>
