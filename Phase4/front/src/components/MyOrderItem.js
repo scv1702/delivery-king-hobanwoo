@@ -1,6 +1,7 @@
 import DateText from "./DateText";
 import styles from "./MyOrderItem.module.css";
 import closeButton from "../assets/closeButton.svg";
+import Button from "./Button";
 
 const handleDelete = (orderId) => {
   "~~~~~~~~";
@@ -19,17 +20,11 @@ function MyOrderItem({ myOrder }) {
         <td>{myOrder.state}</td>
         <td>{myOrder.payment}</td>
         {myOrder.isReviewed ? (
-          <tr scope="row">
-            <td>리뷰 완료</td>
-            <td>
-              <img
-                className={styles.delete}
-                src={closeButton}
-                alt="리뷰 삭제"
-                onClick={() => handleDelete(myOrder.orderId)}
-              />
-            </td>
-          </tr>
+          <td>
+            <Button onClick={() => handleDelete(myOrder.orderId)}>
+              리뷰 완료
+            </Button>
+          </td>
         ) : (
           <td>
             <a href={`/createreview?orderId=${myOrder.orderId}`}>리뷰 쓰기</a>

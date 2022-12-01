@@ -8,7 +8,6 @@ function MyOrderList() {
     axios
       .get("http://localhost:15010/users/orders", { withCredentials: true })
       .then((res) => {
-        console.log(res.data);
         setMyOrders(res.data);
       });
   }, []);
