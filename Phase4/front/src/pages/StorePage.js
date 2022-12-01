@@ -9,11 +9,41 @@ import { Navigate, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import MenuIcon from "../components/menuIcon";
+import DateText from "../components/DateText";
+import ReviewStyles from "./ReviewListPage.module.css";
+import classNames from "classnames";
+
+function ReviewItem({ review }) {
+  return (
+    <Card className={ReviewStyles.reviewItem} key={review.title}>
+      <div className={ReviewStyles.info}>
+        <p className={ReviewStyles.title}>{review.title}</p>
+        <p className={ReviewStyles.content}>{review.content}</p>
+        <p className={ReviewStyles.date}>
+          <DateText value={review.createdAt} />
+        </p>
+      </div>
+    </Card>
+  );
+}
 
 function StorePage() {
   // 리액트 라우터 dom 에서 제공하는 커스텀 훅인 useParams()
   // useParams()가 리턴하는 객체에는 현재 경로의 파라미터들이 저장되어 있다.
   // 이 객체에 우리가 정의한 storeSlug라는 값도 저장되어 있기에 디스트럭처링으로 storeSlug값을 가져온다.
+
+  const reviews = [
+    {
+      id: "616825",
+      title: "특정 인덱스에 있는 컴포넌트만 바꾸기",
+      content:
+        "제가 커뮤니티 사이트를 개발하는 중인데 일부 글만 다르게 컴포넌트를 렌더링해주고 싶습니다 (예를들면 짝수 번째만 다른 걸 보여준다던지 한다는 거요) 어떻게 하나요?",
+      createdAt: "2021-10-14T12:42:25.27Z",
+      updatedAt: "2021-10-14T16:34:20.478Z",
+    },
+  ];
+
   const { storeSlug } = useParams();
   const navigate = useNavigate();
   const store = getStoreBySlug(storeSlug); // store 변수 !
@@ -62,10 +92,28 @@ function StorePage() {
       <Container className={styles.topics}>
         {store.map((store) => (
           <Card className={styles.topic} key={store.storeId}>
-            <h3 className={styles.title}>{store.storeName}</h3>
-            <p className={styles.summary}>{store.description}</p>
+            <MenuIcon photoUrl={store.photoUrl}></MenuIcon>
+            <div className={styles.leftMargin}>
+              <h3 className={styles.title}>{store.storeName}</h3>
+              <p className={styles.summary}>{store.description}</p>
+            </div>
           </Card>
         ))}
+      </Container>
+      <Container className={styles.content}>
+        <h1 className={styles.reviewtitle}>리뷰</h1>
+      </Container>
+      <Container>
+        <div
+          className={classNames(
+            ReviewStyles.reviewList,
+            ReviewStyles.bottomMargin
+          )}
+        >
+          {reviews.map((review) => (
+            <ReviewItem key={review.id} review={review} />
+          ))}
+        </div>
       </Container>
     </>
   );
