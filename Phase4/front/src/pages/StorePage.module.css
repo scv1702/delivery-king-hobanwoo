@@ -26,6 +26,22 @@
   border-radius: 5px;
 }
 
+.reviewtitle {
+  margin: 10px auto 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #545454;
+  text-align: center;
+}
+
+.leftMargin {
+  margin-left: 100px;
+}
+
+.reviewList {
+  margin: 10px;
+}
+
 .topics {
   margin: 30px auto 100px;
 }

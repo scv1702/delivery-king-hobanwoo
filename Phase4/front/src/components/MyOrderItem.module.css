@@ -1,0 +1,44 @@
+.container {
+  margin: 50px auto;
+}
+
+.title {
+  margin: 30px auto;
+  text-align: center;
+}
+
+ul.items {
+  width: 30%;
+  min-width: 260px;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.item {
+  margin-bottom: 30px;
+}
+
+.item {
+  position: relative;
+}
+
+.delete {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: calc(10px - 8px);
+  cursor: pointer;
+}
+
+.item:hover .delete {
+  display: block;
+}
+
+.emptyList {
+  margin: 50px auto 30px;
+}
+
+.link {
+  text-align: center;
+}
