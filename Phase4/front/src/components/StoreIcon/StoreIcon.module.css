@@ -1,0 +1,9 @@
+.storeIcon {
+  width: 100%;
+  scale: 1;
+  transition: filter 0.1s ease-in-out, scale 0.1s ease-out;
+}
+
+.storeIcon:hover {
+  scale: 1.1;
+}

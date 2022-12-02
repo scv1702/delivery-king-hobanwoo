@@ -1,4 +1,4 @@
-import styles from "../pages/MyPage.module.css";
+import styles from "../pages/MyPage/MyPage.module.css";
 import CouponItem from "./CouponItem";
 import { useState, useEffect } from "react";
 import axios from "axios";

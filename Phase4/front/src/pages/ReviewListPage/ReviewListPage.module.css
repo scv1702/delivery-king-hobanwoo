@@ -1,0 +1,23 @@
+.reviewList {
+  margin-top: 20px;
+}
+
+.count {
+  margin: 20px 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: #878787;
+}
+
+.writeButton {
+  margin-left: 780px;
+  margin-bottom: 20px;
+}
+
+.bottomMargin {
+  margin-bottom: 200px;
+}
+
+.emptyList {
+  margin: 40px auto;
+}

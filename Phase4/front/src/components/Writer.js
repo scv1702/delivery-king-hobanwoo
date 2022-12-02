@@ -1,4 +1,4 @@
-import Avatar from './Avatar';
+import Avatar from "../Avatar/Avatar";
 
 function Writer({ value }) {
   return (

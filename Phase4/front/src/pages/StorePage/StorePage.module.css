@@ -1,0 +1,90 @@
+.header {
+  background-color: #fff;
+}
+
+.header .content {
+  padding: 65px 10px 20px;
+  text-align: center;
+}
+
+.header .title {
+  margin: 10px auto 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #545454;
+  text-align: center;
+}
+
+.header .summary {
+  padding: 11px 68px;
+  margin: 20px 0 0;
+  font-size: 12px;
+  color: #878787;
+  background-color: #f9f9f9;
+  border: solid 2px #f4f4f4;
+  border-radius: 5px;
+}
+
+.reviewtitle {
+  margin: 10px auto 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #545454;
+  text-align: center;
+}
+
+.leftMargin {
+  margin-left: 100px;
+}
+
+.reviewList {
+  margin: 10px;
+}
+
+.topics {
+  margin: 30px auto 100px;
+}
+
+.topic {
+  padding: 28px 50px;
+}
+
+.topic:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.topic .title {
+  margin: 0 auto 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #545454;
+}
+
+.topic .summary {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #878787;
+}
+
+.thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+  border-top: 10px solid black;
+  overflow: hidden;
+  height: 150px;
+}
+
+.menuList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.container {
+  margin-top: -20px;
+  margin-bottom: 30px;
+}

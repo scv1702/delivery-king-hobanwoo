@@ -1,4 +1,4 @@
-import MyOrderItem from "./MyOrderItem";
+import MyOrderItem from "./MyOrderItem/MyOrderItem";
 import { useEffect, useState } from "react";
 import axios from "axios";
 

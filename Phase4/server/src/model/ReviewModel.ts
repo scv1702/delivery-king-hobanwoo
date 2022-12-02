@@ -20,8 +20,7 @@ class ReviewModel {
   getReivews = async (sql: string) => {
     const conn = await database.getConnection();
     const result = (await conn.execute<ReviewDto>(sql)).rows;
-    conn.close();
-    return result?.map((review: ReviewDto) => {
+    const reviewList = result?.map((review: ReviewDto) => {
       return {
         reviewId: review.REVIEW_ID,
         userId: review.USER_ID,
@@ -31,6 +30,14 @@ class ReviewModel {
         createdAt: review.CREATED_AT,
       } as Review;
     });
+    const reviewListWithUser = reviewList?.map((review) => {
+      return new Promise<Review>((resolve) => {
+        UserModel.getUserById(review.userId!).then((user) => {
+          resolve({ ...review, user } as Review);
+        });
+      });
+    });
+    return getAllResolvedResult(reviewListWithUser);
   };
   insert = async (review: Review, orderId: number) => {
     const autoIncrement = `(SELECT NVL(MAX(REVIEW_ID), 0) + 1 FROM REVIEW)`;
@@ -53,7 +60,6 @@ class ReviewModel {
     const sql = `DELETE FROM REVIEW WHERE REVIEW_ID = ${reviewId}`;
     const conn = await database.getConnection();
     await conn.execute(sql);
-    conn.close();
   };
   getReviewsByUserId = async (userId: number) => {
     const sql = `SELECT * FROM REVIEW WHERE USER_ID = ${userId}`;
@@ -63,7 +69,6 @@ class ReviewModel {
     const sql = `UPDATE REVIEW SET STAR_RATING = ${review.starRating}, COMMENTS = '${review.comments}' WHERE REVIEW_ID = ${review.reviewId}`;
     const conn = await database.getConnection();
     await conn.execute(sql);
-    conn.close();
   };
   getReviewsByStoreId = async (storeId: number) => {
     const sql = `SELECT * FROM REVIEW WHERE STORE_ID = ${storeId}`;
@@ -75,15 +80,7 @@ class ReviewModel {
   };
   getAllReview = async () => {
     const sql = `SELECT * FROM REVIEW ORDER BY CREATED_AT DESC`;
-    const reviewList = await this.getReivews(sql);
-    const reviewListWithUser = reviewList?.map((review) => {
-      return new Promise<Review>((resolve) => {
-        UserModel.getUserById(review.userId!).then((user) => {
-          resolve({ ...review, user } as Review);
-        });
-      });
-    });
-    return getAllResolvedResult(reviewListWithUser);
+    return await this.getReivews(sql);
   };
 }
 

@@ -1,0 +1,32 @@
+.container {
+  margin: 50px auto;
+}
+
+.title {
+  margin: 60px auto;
+  text-align: center;
+}
+
+.subtitle {
+  margin-top: 5%;
+}
+
+.inputbox {
+  background: transparent;
+  border: none;
+  border-bottom: solid 1px #ccc;
+  padding: px 0px 5px 0px;
+  font-size: 14pt;
+  width: 40%;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.link {
+  margin: 50px auto;
+  text-align: center;
+}
+
+.alignCenter {
+  margin-left: 37%;
+}
