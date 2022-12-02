@@ -31,9 +31,12 @@ function OrderPage() {
 
   return (
     <>
+      <div className={styles.header}>
+        <Container className={styles.content}>
+          <h1 className={styles.title}>주문하기</h1>
+        </Container>
+      </div>
       <Container className={styles.container}>
-        <h1 className={styles.title}>주문하기</h1>
-        <h3 className={styles.subtitle}>주문 메뉴</h3>
         <MenuList menuList={menuList} storeId={storeId} order={true} />
         <h3 className={styles.subtitle}>결제 방식</h3>
         <select id="payType" className={styles.inputbox}>
@@ -41,6 +44,7 @@ function OrderPage() {
           <option value="현금">현금</option>
         </select>
         <h3 className={styles.subtitle}>총 주문 금액</h3>
+        <p style={{ marginLeft: "35%" }}>5000원</p>
         <h3 className={styles.subtitle}>배달팁</h3>
         <p style={{ marginLeft: "35%" }}>{store && store.deliveryFee}원</p>
         <div className={styles.link}>

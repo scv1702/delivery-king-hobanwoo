@@ -103,7 +103,7 @@ function CreateReviewPage() {
         </div>
         <textarea
           id="reviewContents"
-          rows="7"
+          rows="10"
           className={styles.inputbox}
           placeholder="음식의 맛, 양, 포장 상태 등 음식에 대한 리뷰를 남겨주세요."
         ></textarea>

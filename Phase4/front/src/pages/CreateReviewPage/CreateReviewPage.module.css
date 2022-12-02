@@ -3,17 +3,17 @@
 }
 
 .title {
-  margin: 60px auto;
+  margin: 60px;
   text-align: center;
 }
 
 .subtitle {
-  margin-left: 35%;
+  margin-left: 25%;
   margin-top: 5%;
 }
 
 .leftmove {
-  margin-left: 40.5%;
+  margin-left: 41.7%;
   margin-bottom: 10%;
 }
 
@@ -23,13 +23,23 @@
 
 .inputbox {
   background: transparent;
-  border: none;
-  border-bottom: solid 1px #ccc;
-  padding: px 0px 5px 0px;
   font-size: 14pt;
-  width: 40%;
-  margin-left: 35%;
-  margin-bottom: 20px;
+  width: 60%;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  outline: none;
+  margin-top: -7%;
+  margin-left: 21.5%;
+  box-sizing: border-box;
+  padding: 1%;
+  font-family: "Gmarket Sans";
+  transition: 0.3s;
+  resize: none;
+}
+
+.inputbox:focus {
+  border-color: dodgerBlue;
+  box-shadow: 0 0 8px 0 dodgerBlue;
 }
 
 .link {
@@ -39,6 +49,7 @@
 
 .star_rating {
   display: flex;
+  margin-top: -5%;
   flex-direction: row-reverse;
   font-size: 2.25rem;
   line-height: 2.5rem;

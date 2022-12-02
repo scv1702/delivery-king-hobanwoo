@@ -2,6 +2,23 @@
   margin: 50px auto;
 }
 
+.header {
+  background-color: #fff;
+}
+
+.header .content {
+  padding: 65px 10px 2px;
+  text-align: center;
+}
+
+.header .title {
+  margin: 10px auto 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #545454;
+  text-align: center;
+}
+
 .title {
   margin: 60px auto;
   text-align: center;
@@ -33,4 +50,8 @@
   margin-bottom: 40px;
   color: black;
   font-size: 20px;
+}
+
+.profile {
+  width: 30%;
 }

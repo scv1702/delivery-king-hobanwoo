@@ -1,5 +1,22 @@
 .container {
-  margin: 50px auto;
+  margin: 30px auto;
+}
+
+.header {
+  background-color: #fff;
+}
+
+.header .content {
+  padding: 65px 10px 2px;
+  text-align: center;
+}
+
+.header .title {
+  margin: 10px auto 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #545454;
+  text-align: center;
 }
 
 .title {
@@ -20,7 +37,6 @@
   font-size: 14pt;
   width: 40%;
   margin-left: 35%;
-  margin-bottom: 20px;
 }
 
 .link {
@@ -30,7 +46,8 @@
 
 .inputbox {
   background: transparent;
-  font-size: 14pt;
+  font-size: 12pt;
+  font-family: "Gmarket Sans";
   width: 30%;
   border: 1px solid #aaa;
   border-radius: 4px;

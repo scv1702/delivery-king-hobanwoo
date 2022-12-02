@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CouponList from "../../components/CouponList";
 import MyOrderList from "../../components/MyOrderList";
-
+import { Form } from "react-bootstrap";
 function MyPage() {
   const [userInfo, setUserInfo] = useState({});
   const [myOrders, setMyOrders] = useState([]);
@@ -21,32 +21,25 @@ function MyPage() {
   }, []);
 
   return (
-    <Container className={styles.container}>
-      <h1 className={styles.title}>내 프로필</h1>
-      <h3 className={styles.subtitle}>아이디</h3>
-      <input
-        id="id"
-        className={styles.inputbox}
-        value={userInfo.username}
-        readOnly
-      ></input>
-      <h3 className={styles.subtitle}>학과명</h3>
-      <input
-        id="department"
-        className={styles.inputbox}
-        value={userInfo.dname}
-        readOnly
-      ></input>
-      <h3 className={styles.subtitle}>전화번호</h3>
-      <input
-        id="phone"
-        className={styles.inputbox}
-        value={userInfo.phoneNumber}
-        readOnly
-      ></input>
-      <CouponList />
-      <MyOrderList />
-    </Container>
+    <>
+      <div className={styles.header}>
+        <Container className={styles.content}>
+          <h1 className={styles.title}>내 프로필</h1>
+        </Container>
+      </div>
+      <Container className={styles.content}>
+        <Container className={styles.profile}>
+          <h3>아이디</h3>
+          <Form.Control type="text" value={userInfo.username} readOnly />
+          <h3>학과명</h3>
+          <Form.Control type="text" value={userInfo.dname} readOnly />
+          <h3>전화번호</h3>
+          <Form.Control type="text" value={userInfo.phoneNumber} readOnly />
+        </Container>
+        <MyOrderList />
+        <CouponList />
+      </Container>
+    </>
   );
 }
 

@@ -18,7 +18,8 @@
 
 .inputbox {
   background: transparent;
-  font-size: 14pt;
+  font-family: "Gmarket Sans";
+  font-size: 12pt;
   width: 60%;
   border: 1px solid #aaa;
   border-radius: 4px;

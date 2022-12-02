@@ -11,6 +11,7 @@ function getLinkStyle({ isActive }) {
   // 해당 Menu가 액티브상태이면 underline 적용
   return {
     textDecoration: isActive ? "underline" : "",
+    textUnderlinePosition: "under",
   };
 }
 
