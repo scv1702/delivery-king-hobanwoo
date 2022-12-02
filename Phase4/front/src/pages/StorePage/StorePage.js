@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import ReviewItem from "../../components/ReviewItem/ReviewItem";
 import ReviewStyles from "../ReviewListPage/ReviewListPage.module.css";
 import classNames from "classnames";
-import MenuItem from "../../components/MenuItem/MenuItem";
+import MenuList from "../../components/MenuList/MenuList";
 
 function StorePage() {
   const { storeId } = useParams();
@@ -37,7 +37,7 @@ function StorePage() {
   const navigate = useNavigate();
 
   const handleOrderClick = () => {
-    navigate("/order");
+    navigate("/orders?storeId=" + storeId);
   };
 
   return (
@@ -55,21 +55,7 @@ function StorePage() {
               <p className={styles.summary}>{store.description}</p>
             </Container>
           </div>
-          <Container className={styles.container}>
-            <div className={styles.menuList}>
-              {menuList &&
-                menuList.map((menu, index) => {
-                  return (
-                    <MenuItem
-                      menu={menu}
-                      storeId={storeId}
-                      menuId={index}
-                      key={menu.menuId}
-                    />
-                  );
-                })}
-            </div>
-          </Container>
+          <MenuList menuList={menuList} storeId={storeId} />
           <Container className={styles.content}>
             <h1 className={styles.reviewtitle}>리뷰</h1>
           </Container>

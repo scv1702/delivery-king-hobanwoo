@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import tablestyle from "../tableCss/style.css";
-import bootstrap from "../tableCss/bootstrap.min.css";
 import Container from "../../components/Container/Container";
 import styles from "./MyPage.module.css";
 import { useEffect, useState } from "react";

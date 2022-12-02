@@ -1,29 +1,46 @@
 .container {
-    margin: 50px auto;
-  }
-  
-  .title {
-    margin: 60px auto;
-    text-align: center;
-  }
-  
-  .subtitle {
-    margin-left: 35%;
-    margin-top: 5%;
-  }
-  
-  .inputbox {
-    background:transparent;
-    border:none;
-    border-bottom: solid 1px #ccc;
-    padding:px 0px 5px 0px;
-    font-size:14pt;
-    width:40%;
-    margin-left: 35%;
-    margin-bottom: 20px;
-  }
-  
-  .link {
-    margin: 50px auto;
-    text-align: center;
-  }
+  margin: 50px auto;
+}
+
+.title {
+  margin: 60px auto;
+  text-align: center;
+}
+
+.subtitle {
+  margin-left: 35%;
+  margin-top: 5%;
+}
+
+.inputbox {
+  background: transparent;
+  border: none;
+  border-bottom: solid 1px #ccc;
+  padding: px 0px 5px 0px;
+  font-size: 14pt;
+  width: 40%;
+  margin-left: 35%;
+  margin-bottom: 20px;
+}
+
+.link {
+  margin: 50px auto;
+  text-align: center;
+}
+
+.inputbox {
+  background: transparent;
+  font-size: 14pt;
+  width: 30%;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+.inputbox:focus {
+  border-color: dodgerBlue;
+  box-shadow: 0 0 8px 0 dodgerBlue;
+}

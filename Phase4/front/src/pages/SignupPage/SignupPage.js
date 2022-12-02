@@ -1,7 +1,7 @@
 import axios from "axios";
 import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
-import styles from "./SignupPage.module.css";
+import styles from "../LoginPage/LoginPage.module.css";
 
 function SignupException() {
   var username = document.getElementById("username").value;
@@ -9,8 +9,6 @@ function SignupException() {
   var passwordCheck = document.getElementById("passwordCheck").value;
   var department = document.getElementById("department").value;
   var phoneNumber = document.getElementById("phoneNumber").value;
-  console.log(password);
-  console.log(passwordCheck);
 
   if (!username) {
     alert("아이디를 입력해주세요");
@@ -46,31 +44,18 @@ function SignupException() {
 
 function SignupPage() {
   return (
-    <Container className={styles.container}>
+    <Container>
       <h1 className={styles.title}>회원가입</h1>
       <div className={styles.alignCenter}>
         <h3 className={styles.subtitle}>아이디</h3>
         <form>
-          <input
-            id="username"
-            className={styles.inputbox}
-            placeholder="아이디를 입력하세요"
-          ></input>
+          <input id="username" className={styles.inputbox}></input>
           <h3 className={styles.subtitle}>비밀번호</h3>
-          <input
-            id="password"
-            className={styles.inputbox}
-            placeholder="비밀번호를 입력하세요"
-          ></input>
+          <input id="password" className={styles.inputbox}></input>
           <h3 className={styles.subtitle}>비밀번호 확인</h3>
-          <input
-            id="passwordCheck"
-            className={styles.inputbox}
-            placeholder="비밀번호를 입력하세요"
-          ></input>
+          <input id="passwordCheck" className={styles.inputbox}></input>
           <h3 className={styles.subtitle}>학과명</h3>
           <select id="department" className={styles.inputbox}>
-            <option value="none">학과를 선택해주세요.</option>
             <option value="사회과학대학">사회과학대학</option>
             <option value="자연과학대학">자연과학대학</option>
             <option value="경상대학">경상대학</option>
@@ -92,11 +77,7 @@ function SignupPage() {
             <option value="융합학부">융합학부</option>
           </select>
           <h3 className={styles.subtitle}>전화번호</h3>
-          <input
-            id="phoneNumber"
-            className={styles.inputbox}
-            placeholder="전화번호를 입력하세요"
-          ></input>
+          <input id="phoneNumber" className={styles.inputbox}></input>
         </form>
       </div>
       <div className={styles.link}>

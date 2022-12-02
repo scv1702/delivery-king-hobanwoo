@@ -42,11 +42,7 @@ function LoginPage() {
       <h1 className={styles.title}>로그인</h1>
       <div className={styles.alignCenter}>
         <h3 className={styles.subtitle}>아이디</h3>
-        <input
-          className={styles.inputbox}
-          id="username"
-          placeholder="아이디를 입력하세요"
-        ></input>
+        <input className={styles.inputbox} id="username"></input>
         <br></br>
         <br></br>
         <h3 className={styles.subtitle}>비밀번호</h3>
@@ -54,7 +50,6 @@ function LoginPage() {
           className={styles.inputbox}
           id="password"
           type="password"
-          placeholder="비밀번호를 입력하세요"
         ></input>
       </div>
       <div className={styles.link}>

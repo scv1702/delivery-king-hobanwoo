@@ -12,7 +12,7 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 134px;
-  padding: 20px 20px 30px;
+  padding: 20px 20px 20px;
   background-color: #f9f9f9;
   border-top: solid 1px #ebebeb;
 }
@@ -34,4 +34,22 @@
   font-weight: 300;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.order {
+  text-align: right;
+}
+
+.count {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: -10px;
+  padding: 0px 20px 20px;
+  background-color: #f9f9f9;
+}
+
+.button {
+  margin-top: 10px;
+  flex: auto;
 }

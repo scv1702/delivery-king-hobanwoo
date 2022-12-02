@@ -14,7 +14,6 @@ import MyPage from "./pages/MyPage/MyPage";
 import CreateReviewPage from "./pages/CreateReviewPage/CreateReviewPage";
 
 function Main() {
-  // 아래 Route path=":storeSlug(경로 파라미터)"를 통해 경로에서 사용하는 동적인 값인 storeSlug라는 변수를 파라미터로써 useParams()를 이용해 동적인 경로로 사용하고 있다.
   return (
     <BrowserRouter>
       <Routes>

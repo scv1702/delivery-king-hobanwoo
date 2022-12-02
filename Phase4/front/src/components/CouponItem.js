@@ -12,9 +12,6 @@ function CouponItem({ coupon }) {
         <td>{coupon.minimumOrderAmount}</td>
         <td>{coupon.state}</td>
       </tr>
-      <tr className="spacer">
-        <td colspan="100"></td>
-      </tr>
     </>
   );
 }

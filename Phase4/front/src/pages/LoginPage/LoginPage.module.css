@@ -1,7 +1,3 @@
-.container {
-  margin: 50px auto;
-}
-
 .title {
   margin: 60px auto;
   text-align: center;
@@ -11,22 +7,28 @@
   margin-top: 5%;
 }
 
-.inputbox {
-  background: transparent;
-  border: none;
-  border-bottom: solid 1px #ccc;
-  padding: px 0px 5px 0px;
-  font-size: 14pt;
-  width: 40%;
-  margin-bottom: 20px;
-  align-items: center;
-}
-
 .link {
   margin: 50px auto;
   text-align: center;
 }
 
 .alignCenter {
-  margin-left: 37%;
+  margin-left: 29%;
+}
+
+.inputbox {
+  background: transparent;
+  font-size: 14pt;
+  width: 60%;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+.inputbox:focus {
+  border-color: dodgerBlue;
+  box-shadow: 0 0 8px 0 dodgerBlue;
 }
