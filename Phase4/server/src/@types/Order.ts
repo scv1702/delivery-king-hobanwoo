@@ -1,5 +1,6 @@
 import { Store } from "express-session";
 import { OrderMenu } from "./OrderMenu";
+import { Review } from "./Review";
 
 export type Order = {
   orderId?: number;
@@ -10,5 +11,5 @@ export type Order = {
   state?: string;
   orderDate?: string;
   orderMenuList?: OrderMenu[];
-  isReviewed?: boolean;
+  review?: Review;
 };

@@ -8,10 +8,6 @@ import MenuList from "../../components/MenuList/MenuList";
 import Carousel from "react-bootstrap/Carousel";
 import card from "../../assets/card.png";
 
-function OrderItem({ menu }) {
-  return <option value={menu.menuName}>{menu.menuName}</option>;
-}
-
 function OrderPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const storeId = searchParams.get("storeId");
@@ -48,9 +44,7 @@ function OrderPage() {
         <h3 className={styles.subtitle}>배달팁</h3>
         <p style={{ marginLeft: "35%" }}>{store && store.deliveryFee}원</p>
         <div className={styles.link}>
-          <Link to="/">
-            <Button as="div">주문하기</Button>
-          </Link>
+          <Button as="div">주문하기</Button>
         </div>
       </Container>
     </>

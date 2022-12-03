@@ -6,6 +6,7 @@ import UserModel from "./UserModel";
 import { User } from "../@types/User";
 import { getAllResolvedResult } from "../utils";
 import OrderModel from "./OrderModel";
+import { connect } from "http2";
 
 type ReviewDto = {
   REVIEW_ID: number;
@@ -74,8 +75,8 @@ class ReviewModel {
     const sql = `SELECT * FROM REVIEW WHERE STORE_ID = ${storeId}`;
     return await this.getReivews(sql);
   };
-  getReviewsByOrderId = async (orderId: number) => {
-    const sql = `SELECT * FROM REVIEW R, CONTAINS C WHERE R.REVIEW_ID = C.REVIEW_ID AND C.ORDER_ID = ${orderId}`;
+  getReviewByOrderId = async (orderId: number) => {
+    const sql = `SELECT DISTINCT R.REVIEW_ID, R.USER_ID, R.STORE_ID, R.STAR_RATING, R.COMMENTS, R.CREATED_AT FROM REVIEW R, CONTAINS C WHERE R.REVIEW_ID = C.REVIEW_ID AND C.ORDER_ID = ${orderId}`;
     return await this.getReivews(sql);
   };
   getAllReview = async () => {

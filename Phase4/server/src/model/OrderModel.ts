@@ -7,6 +7,7 @@ import { OrderMenu } from "../@types/OrderMenu";
 import { getAllResolvedResult } from "../utils";
 import StoreModel from "./StoreModel";
 import ReviewModel from "./ReviewModel";
+import { rejects } from "assert";
 
 type OrderDto = {
   ORDER_ID: number;
@@ -78,9 +79,9 @@ class OrderModel {
     });
     const ordersWithStoreResolved = await getAllResolvedResult(ordersWithStore);
     const ordersWithIsReviewd = ordersWithStoreResolved?.map((order) => {
-      return new Promise<Order>((resolve) => {
-        ReviewModel.getReviewsByOrderId(order.orderId!).then((reviews) => {
-          resolve({ ...order, isReviewed: reviews?.length! > 0 } as Order);
+      return new Promise<Order>((resolve, reject) => {
+        ReviewModel.getReviewByOrderId(order.orderId!).then((review) => {
+          resolve({ ...order, review } as Order);
         });
       });
     });
@@ -133,6 +134,45 @@ class OrderModel {
     const conn = await database.getConnection();
     const result = (await conn.execute<{ ORDER_MENU_ID: number }>(sql)).rows;
     return result?.map((orderMenu) => orderMenu.ORDER_MENU_ID);
+  };
+  getOrderMenuByOrderMenuKey = async (
+    orderMenuId: number,
+    orderId: number
+  ): Promise<OrderMenu | undefined> => {
+    const sql = `SELECT * FROM ORDER_MENU WHERE ORDER_MENU_ID = ${orderMenuId} AND ORDER_ID = ${orderId}`;
+    const conn = await database.getConnection();
+    const result = (await conn.execute<OrderMenuDto>(sql)).rows?.[0];
+    if (result) {
+      return {
+        orderMenuId: result.ORDER_MENU_ID,
+        orderId: result.ORDER_ID,
+        menuName: result.MENU_NAME,
+        image: result.MENU_IMAGE,
+        price: result.MENU_PRICE,
+        quantity: result.QUANTITY,
+      } as OrderMenu;
+    } else {
+      return undefined;
+    }
+  };
+  getOrderMenuByReviewId = async (reviewId: number) => {
+    const sql = `SELECT ORDER_ID, ORDER_MENU_ID FROM CONTAINS WHERE REVIEW_ID = ${reviewId}`;
+    const conn = await database.getConnection();
+    const orderMenuKeyList = (
+      await conn.execute<{ ORDER_ID: number; ORDER_MENU_ID: number }>(sql)
+    ).rows; // ORDER_MENU_ID[]
+    const orderMenuList = orderMenuKeyList?.map((obj) => {
+      const orderMenuId = obj.ORDER_MENU_ID;
+      const orderId = obj.ORDER_ID;
+      return new Promise<OrderMenu>((resolve) => {
+        this.getOrderMenuByOrderMenuKey(orderMenuId!, orderId!).then(
+          (orderMenu) => {
+            resolve(orderMenu as OrderMenu);
+          }
+        );
+      });
+    });
+    return getAllResolvedResult(orderMenuList);
   };
 }
 

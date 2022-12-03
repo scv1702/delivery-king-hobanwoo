@@ -2,11 +2,48 @@ import express from "express";
 import { Request, Response } from "express";
 import ReviewModel from "../model/ReviewModel";
 import OrderModel from "../model/OrderModel";
+import { getAllResolvedResult } from "../utils";
+import { Review } from "../@types/Review";
 
 const router = express.Router();
 
+router.delete("/:reviewId", async (req, res) => {
+  if (req.session.user) {
+    const reviewId = parseInt(req.params.reviewId);
+    await ReviewModel.deleteById(reviewId);
+    res.json({ success: true, message: "리뷰가 삭제되었습니다." });
+  } else {
+    res.json({ success: false, message: "로그인이 필요합니다." });
+  }
+});
+
+router.put("/:reviewId", async (req, res) => {
+  if (req.session.user) {
+    const reviewId = parseInt(req.params.reviewId);
+    const { starRating, comments } = req.body;
+    await ReviewModel.update({
+      reviewId,
+      starRating,
+      comments,
+    });
+    res.json({ success: true, message: "리뷰가 수정되었습니다." });
+  } else {
+    res.status(401).json({ success: false, message: "로그인이 필요합니다." });
+  }
+});
+
 router.get("/", async (req: Request, res: Response) => {
-  res.json(await ReviewModel.getAllReview());
+  const reviews = await ReviewModel.getAllReview();
+  const result = reviews?.map((review) => {
+    return new Promise<Review>((resolve) => {
+      OrderModel.getOrderMenuByReviewId(review.reviewId!).then(
+        (orderMenuList) => {
+          resolve({ ...review, orderMenuList });
+        }
+      );
+    });
+  });
+  res.json(await getAllResolvedResult(result));
 });
 
 router.post("/", async (req: Request, res: Response) => {
@@ -33,31 +70,6 @@ router.post("/", async (req: Request, res: Response) => {
     }
   } else {
     res.status(401).json({ success: false, message: "로그인이 필요합니다." });
-  }
-});
-
-router.put("/:reviewId", async (req, res) => {
-  if (req.session.user) {
-    const reviewId = parseInt(req.params.reviewId);
-    const { starRating, comments } = req.body;
-    await ReviewModel.update({
-      reviewId,
-      starRating,
-      comments,
-    });
-    res.json({ success: true, message: "리뷰가 수정되었습니다." });
-  } else {
-    res.status(401).json({ success: false, message: "로그인이 필요합니다." });
-  }
-});
-
-router.delete("/:reviewId", async (req, res) => {
-  if (req.session.user) {
-    const reviewId = parseInt(req.params.reviewId);
-    await ReviewModel.deleteById(reviewId);
-    res.json({ success: true, message: "리뷰가 삭제되었습니다." });
-  } else {
-    res.json({ success: false });
   }
 });
 

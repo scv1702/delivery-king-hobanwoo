@@ -1,9 +1,8 @@
 import styles from "../MenuList//MenuList.module.css";
 import Container from "../Container/Container";
 import OrderMenuItem from "../MenuItem/OrderMenuItem";
-import { useEffect } from "react";
 
-function OrderMenuList({ menuList, storeId, getOrderMenuList }) {
+function OrderMenuList({ menuList, storeId }) {
   const [orderMenuList, setOrderMenuList] = useState([]);
 
   menuList.map((menu, index) => {

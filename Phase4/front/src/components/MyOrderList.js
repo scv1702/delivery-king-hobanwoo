@@ -28,7 +28,6 @@ function MyOrderList() {
                 <th scope="col">주문 금액</th>
                 <th scope="col">주문 상태</th>
                 <th scope="col">리뷰 쓰기</th>
-                <th scope="col">리뷰 삭제</th>
               </tr>
             </thead>
             <tbody>

@@ -2,6 +2,7 @@ import styles from "./ReviewItem.module.css";
 import Card from "../Card/Card";
 import { Link } from "react-router-dom";
 import DateText from "../DateText";
+import Tags from "../Tags/Tags";
 
 function ReviewItem({ review }) {
   return (
@@ -14,6 +15,11 @@ function ReviewItem({ review }) {
         <p className={styles.date}>
           <DateText value={review.createdAt} />
         </p>
+        <div>
+          {review.orderMenuList.map((orderMenu, index) => {
+            return <Tags key={index} values={[orderMenu.menuName]} />;
+          })}
+        </div>
       </div>
       <div className={styles.writer}>{review.user.username}</div>
     </Card>

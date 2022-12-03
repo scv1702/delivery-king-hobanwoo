@@ -1,3 +1,4 @@
+import { OrderMenu } from "./OrderMenu";
 import { User } from "./User";
 
 export type Review = {
@@ -8,4 +9,5 @@ export type Review = {
   starRating?: number;
   comments?: string;
   createdAt?: string;
+  orderMenuList?: OrderMenu[];
 };

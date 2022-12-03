@@ -8,7 +8,9 @@ function MyOrderItem({ myOrder }) {
 
   const deleteHanler = (reviewId) => {
     axios
-      .delete(`http://localhost:15010/reviews/${reviewId}`)
+      .delete(`http://localhost:15010/reviews/${reviewId}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         alert(res.data.message);
       })
@@ -31,21 +33,13 @@ function MyOrderItem({ myOrder }) {
         </td>
         <td>{myOrder.state}</td>
         <td>{myOrder.payment}</td>
-        {myOrder.isReviewed ? (
+        {myOrder.review.length > 0 ? (
           <>
             <td>
               <Button
-                onClick={deleteHanler}
-                as="input"
-                type="button"
-                value="리뷰 완료"
-                size="sm"
-                disabled
-              />
-            </td>
-            <td>
-              <Button
-                onClick={deleteHanler}
+                onClick={() => {
+                  deleteHanler(myOrder.review[0].reviewId);
+                }}
                 as="input"
                 type="button"
                 value="리뷰 삭제"
@@ -61,15 +55,6 @@ function MyOrderItem({ myOrder }) {
                 as="input"
                 type="button"
                 value="리뷰 쓰기"
-                size="sm"
-              />
-            </td>
-            <td>
-              <Button
-                onClick={deleteHanler}
-                as="input"
-                type="button"
-                value="리뷰 삭제"
                 size="sm"
               />
             </td>
