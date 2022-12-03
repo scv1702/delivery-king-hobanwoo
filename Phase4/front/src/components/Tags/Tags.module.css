@@ -11,9 +11,17 @@ ul.tags > li {
   color: #878787;
   background-color: #ebebeb;
   border-radius: 5px;
-  opacity: .8;
+  opacity: 0.8;
 }
 
 ul.tags > li:not(:last-child) {
   margin-right: 10px;
+}
+
+.emptyline {
+  margin-left: 10px;
+}
+
+.float {
+  float: left;
 }
