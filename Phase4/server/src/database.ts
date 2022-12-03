@@ -4,9 +4,9 @@ import { OUT_FORMAT_OBJECT } from "oracledb";
 class Database {
   private oracleDB = OracleDB;
   private config = {
-    user: `deliverykinghobanwoo`,
+    user: `delivery_king_hobanwoo`,
     password: `comp322`,
-    connectString: "localhost/orcl",
+    connectString: "localhost/xe",
   };
   public constructor() {
     this.oracleDB.autoCommit = true;
