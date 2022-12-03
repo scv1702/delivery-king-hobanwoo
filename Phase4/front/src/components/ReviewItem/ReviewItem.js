@@ -16,7 +16,7 @@ function ReviewItem({ review }) {
           <DateText value={review.createdAt} />
         </p>
         <div>
-          {review.orderMenuList.map((orderMenu, index) => {
+          {review.orderMenuList?.map((orderMenu, index) => {
             return <Tags key={index} values={[orderMenu.menuName]} />;
           })}
         </div>

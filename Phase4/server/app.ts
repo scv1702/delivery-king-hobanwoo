@@ -9,7 +9,7 @@ const corsOptions = {
 };
 
 const app = express();
-const port = 15010;
+const port = 3010;
 
 // Middle-ware setting
 app.use(

@@ -5,11 +5,11 @@ import Container from "../../components/Container/Container";
 import styles from "./OrderPage.module.css";
 import axios from "axios";
 import MenuList from "../../components/MenuList/MenuList";
-import Carousel from "react-bootstrap/Carousel";
-import card from "../../assets/card.png";
+import { useNavigate } from "react-router-dom";
 
 function OrderPage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const storeId = searchParams.get("storeId");
   const [menuList, setMenuList] = useState([]);
   const [store, setStore] = useState(null);
@@ -30,6 +30,33 @@ function OrderPage() {
   useEffect(() => {
     console.log("Menu useEffect", menuData);
   }, [menuData]);
+
+  function orderHandler() {
+    const payment = document.getElementById("payment").value;
+    const orderMenuList = menuData.map((orderMenu) => {
+      return {
+        quantity: orderMenu.count,
+        menuName: orderMenu.menu.menuName,
+      };
+    });
+    axios
+      .post(
+        `http://localhost:15010/orders`,
+        {
+          storeId: storeId,
+          orderMenuList,
+          payment,
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        alert(res.data.message);
+        navigate("/mypage");
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  }
 
   const handleTotalMenuCount = (pass) => {
     console.log("pass data:", pass);
@@ -72,7 +99,7 @@ function OrderPage() {
           handleTotalMenuCount={handleTotalMenuCount}
         />
         <h3 className={styles.subtitle}>결제 방식</h3>
-        <select id="payType" className={styles.inputbox}>
+        <select id="payment" className={styles.inputbox}>
           <option value="카드">카드</option>
           <option value="현금">현금</option>
         </select>
@@ -81,7 +108,14 @@ function OrderPage() {
         <h3 className={styles.subtitle}>배달팁</h3>
         <p style={{ marginLeft: "35%" }}>{store && store.deliveryFee}원</p>
         <div className={styles.link}>
-          <Button as="div">주문하기</Button>
+          <Button
+            onClick={() => {
+              orderHandler();
+            }}
+            as="div"
+          >
+            주문하기
+          </Button>
         </div>
       </Container>
     </>
