@@ -8,7 +8,6 @@ import MyOrderList from "../../components/MyOrderList";
 import { Form } from "react-bootstrap";
 function MyPage() {
   const [userInfo, setUserInfo] = useState({});
-  const [myOrders, setMyOrders] = useState([]);
 
   useEffect(() => {
     axios

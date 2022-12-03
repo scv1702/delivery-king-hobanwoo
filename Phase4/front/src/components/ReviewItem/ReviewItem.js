@@ -1,6 +1,5 @@
 import styles from "./ReviewItem.module.css";
 import Card from "../Card/Card";
-import { Link } from "react-router-dom";
 import DateText from "../DateText";
 import Tags from "../Tags/Tags";
 
@@ -8,8 +7,7 @@ function ReviewItem({ review }) {
   return (
     <Card className={styles.reviewItem} key={review.comments}>
       <div className={styles.info}>
-        별점: {review.starRating}
-        <p></p>
+        <p>별점: {review.starRating}</p>
         <p className={styles.title}>{review.comments}</p>
         <div>
           {review.orderMenuList?.map((orderMenu, index) => {

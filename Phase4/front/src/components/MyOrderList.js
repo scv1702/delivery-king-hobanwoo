@@ -12,7 +12,7 @@ function MyOrderList() {
       .then((res) => {
         setMyOrders(res.data);
       });
-  }, []);
+  }, [myOrders]);
 
   return (
     <>
@@ -22,11 +22,11 @@ function MyOrderList() {
           <Table responsive>
             <thead>
               <tr>
-                <th scope="col">주문 ID</th>
                 <th scope="col">주문 가게</th>
                 <th scope="col">주문 일자</th>
                 <th scope="col">주문 금액</th>
                 <th scope="col">주문 상태</th>
+                <th scope="col">주문 상세</th>
                 <th scope="col">리뷰 쓰기</th>
               </tr>
             </thead>

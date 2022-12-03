@@ -33,3 +33,20 @@
   border-color: dodgerBlue;
   box-shadow: 0 0 8px 0 dodgerBlue;
 }
+
+.header {
+  background-color: #fff;
+}
+
+.header .content {
+  padding: 65px 10px 2px;
+  text-align: center;
+}
+
+.header .title {
+  margin: 10px auto 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #545454;
+  text-align: center;
+}

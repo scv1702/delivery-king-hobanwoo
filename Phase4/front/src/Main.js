@@ -23,10 +23,6 @@ function Main() {
             <Route index element={<StoreListPage />} />
             <Route path=":storeId" element={<StorePage />} />
           </Route>
-          <Route path="reviews">
-            <Route index element={<ReviewListPage />} />
-            <Route path=":reviewId" element={<ReviewPage />} />
-          </Route>
           <Route path="wishlist" element={<WishlistPage />} />
           <Route path="orders" element={<OrderPage />} />
           <Route path="login" element={<LoginPage />} />

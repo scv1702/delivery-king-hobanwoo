@@ -4,6 +4,7 @@ import ReviewModel from "../model/ReviewModel";
 import OrderModel from "../model/OrderModel";
 import { getAllResolvedResult } from "../utils";
 import { Review } from "../@types/Review";
+import StoreModel from "../model/StoreModel";
 
 const router = express.Router();
 
@@ -34,16 +35,7 @@ router.put("/:reviewId", async (req, res) => {
 
 router.get("/", async (req: Request, res: Response) => {
   const reviews = await ReviewModel.getAllReview();
-  const result = reviews?.map((review) => {
-    return new Promise<Review>((resolve) => {
-      OrderModel.getOrderMenuByReviewId(review.reviewId!).then(
-        (orderMenuList) => {
-          resolve({ ...review, orderMenuList });
-        }
-      );
-    });
-  });
-  res.json(await getAllResolvedResult(result));
+  res.json(reviews);
 });
 
 router.post("/", async (req: Request, res: Response) => {

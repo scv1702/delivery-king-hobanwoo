@@ -30,11 +30,6 @@ function Nav() {
             </NavLink>
           </li>
           <li>
-            <NavLink style={getLinkStyle} to="reviews">
-              리뷰
-            </NavLink>
-          </li>
-          <li>
             <UserMenu />
           </li>
         </ul>

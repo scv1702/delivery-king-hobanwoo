@@ -38,7 +38,19 @@ class ReviewModel {
         });
       });
     });
-    return getAllResolvedResult(reviewListWithUser);
+    const resolvedReviewListWithUser = await getAllResolvedResult(
+      reviewListWithUser
+    );
+    const reviewsWithOrderMenu = resolvedReviewListWithUser?.map((review) => {
+      return new Promise<Review>((resolve) => {
+        OrderModel.getOrderMenuByReviewId(review.reviewId!).then(
+          (orderMenuList) => {
+            resolve({ ...review, orderMenuList });
+          }
+        );
+      });
+    });
+    return getAllResolvedResult(reviewsWithOrderMenu);
   };
   insert = async (review: Review, orderId: number) => {
     const autoIncrement = `(SELECT NVL(MAX(REVIEW_ID), 0) + 1 FROM REVIEW)`;

@@ -31,7 +31,7 @@ function CreateReviewPage() {
         )
         .then((res) => {
           alert(res.data.message);
-          window.location.href = "/reviews";
+          window.location.href = "/mypage";
         })
         .catch((err) => {
           alert(err.response.data.message);

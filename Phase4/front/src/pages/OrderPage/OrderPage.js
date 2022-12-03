@@ -39,12 +39,15 @@ function OrderPage() {
         menuName: orderMenu.menu.menuName,
       };
     });
+    const filteredOrderMenuList = orderMenuList.filter(
+      (orderMenu) => orderMenu.quantity > 0
+    );
     axios
       .post(
         `http://localhost:15010/orders`,
         {
-          storeId: storeId,
-          orderMenuList,
+          storeId,
+          orderMenuList: filteredOrderMenuList,
           payment,
         },
         { withCredentials: true }

@@ -42,19 +42,21 @@ function OrderMenuItem({ menu, storeId, menuId, handleTotalMenuCount }) {
               as="input"
               type="button"
               value="추가"
+              variant="secondary"
             />
             <Button
               as="input"
               type="button"
               value={count}
               disabled
-              variant="outline-primary"
+              variant="outline-secondary"
             />{" "}
             <Button
               onClick={decrementClick}
               as="input"
               type="button"
               value="삭제"
+              variant="secondary"
             />
           </ButtonGroup>
         </div>

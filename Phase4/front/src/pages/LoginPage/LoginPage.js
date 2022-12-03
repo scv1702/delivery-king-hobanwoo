@@ -38,26 +38,32 @@ function LoginPage() {
     }
   }
   return (
-    <Container className={styles.container}>
-      <h1 className={styles.title}>로그인</h1>
-      <div className={styles.alignCenter}>
-        <h3 className={styles.subtitle}>아이디</h3>
-        <input className={styles.inputbox} id="username"></input>
-        <br></br>
-        <br></br>
-        <h3 className={styles.subtitle}>비밀번호</h3>
-        <input
-          className={styles.inputbox}
-          id="password"
-          type="password"
-        ></input>
+    <>
+      <div className={styles.header}>
+        <Container className={styles.content}>
+          <h1 className={styles.title}>로그인</h1>
+        </Container>
       </div>
-      <div className={styles.link}>
-        <Button as="div" onClick={loginHandler}>
-          로그인
-        </Button>
-      </div>
-    </Container>
+      <Container className={styles.container}>
+        <div className={styles.alignCenter}>
+          <h3 className={styles.subtitle}>아이디</h3>
+          <input className={styles.inputbox} id="username"></input>
+          <br></br>
+          <br></br>
+          <h3 className={styles.subtitle}>비밀번호</h3>
+          <input
+            className={styles.inputbox}
+            id="password"
+            type="password"
+          ></input>
+        </div>
+        <div className={styles.link}>
+          <Button as="div" onClick={loginHandler}>
+            로그인
+          </Button>
+        </div>
+      </Container>
+    </>
   );
 }
 
