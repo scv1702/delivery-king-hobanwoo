@@ -9,17 +9,18 @@ function ReviewItem({ review }) {
     <Card className={styles.reviewItem} key={review.comments}>
       <div className={styles.info}>
         별점: {review.starRating}
-        <p className={styles.title}>
-          <Link to={`/reviews/${review.reviewId}`}>{review.comments}</Link>
-        </p>
-        <p className={styles.date}>
-          <DateText value={review.createdAt} />
-        </p>
-        <div>
+        <p></p>
+        <p className={styles.title}>{review.comments}</p>
+        <div style={{ marginLeft: "-2%" }}>
           {review.orderMenuList?.map((orderMenu, index) => {
             return <Tags key={index} values={[orderMenu.menuName]} />;
           })}
         </div>
+        <br></br>
+        <br></br>
+        <p className={styles.date}>
+          <DateText value={review.createdAt} />
+        </p>
       </div>
       <div className={styles.writer}>{review.user.username}</div>
     </Card>
