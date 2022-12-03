@@ -3,7 +3,8 @@ import Container from "../Container/Container";
 import MenuItem from "../MenuItem/MenuItem";
 import OrderMenuItem from "../MenuItem/OrderMenuItem";
 
-function MenuList({ menuList, storeId, order }) {
+function MenuList({ menuList, storeId, order, handleTotalMenuCount }) {
+
   return (
     <Container className={styles.container}>
       <div className={styles.menuList}>
@@ -15,6 +16,7 @@ function MenuList({ menuList, storeId, order }) {
                   menu={menu}
                   storeId={storeId}
                   menuId={index}
+                  handleTotalMenuCount={handleTotalMenuCount}
                   key={menu.menuId}
                 />
               );
