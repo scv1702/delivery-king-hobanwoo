@@ -1,5 +1,13 @@
 # 배달왕 호반우 Phase4
 
+## 개발 환경
+- 백엔드
+ - 언어: TypeScript 4.9.3
+ - 프레임워크: Express 4.18.2
+ - 데이터베이스: Oracle Database 11g Express Edition Release 11.2.0
+- 프론트
+ - 프레임워크: React 17.0.2
+
 ## 실행 방법
 
 1. `https://docs.docker.com/get-docker/`를 참고해 Docker 설치
