@@ -12,7 +12,7 @@ function MyOrderList() {
       .then((res) => {
         setMyOrders(res.data);
       });
-  }, [myOrders]);
+  }, []);
 
   return (
     <>
