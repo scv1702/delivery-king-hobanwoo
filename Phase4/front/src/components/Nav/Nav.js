@@ -21,7 +21,7 @@ function Nav() {
     <div className={styles.nav}>
       <Container className={styles.container}>
         <Link to="/">
-          <img className={styles.marginImg} src={logoImg} alt="Codethat Logo" />
+          <img className={styles.marginImg} src={logoImg} alt="배달왕 호반우" />
         </Link>
         <ul className={styles.menu}>
           <li>

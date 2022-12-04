@@ -7,7 +7,7 @@ import { OrderMenu } from "../@types/OrderMenu";
 import { getAllResolvedResult } from "../utils";
 import StoreModel from "./StoreModel";
 import ReviewModel from "./ReviewModel";
-import { rejects } from "assert";
+import { isDBError } from "../utils";
 
 type OrderDto = {
   ORDER_ID: number;
@@ -108,22 +108,30 @@ class OrderModel {
     const sql = `INSERT INTO ORDERS VALUES (${orderId}, ${userId}, ${storeId}, '${payment}', '주문 중', to_date('${orderDate}', 'YYYY-MM-DD hh24:mi:ss'))`;
     const conn = await database.getConnection();
     await conn.execute(sql);
-    await Promise.all(
-      orderMenuList!.map((orderMenu, index) => {
-        return new Promise((resolve, reject) => {
-          MenuModel.getMenuByMenuName(orderMenu.menuName).then((menu) => {
-            const { image, price } = menu!;
-            const sql = `INSERT INTO ORDER_MENU VALUES (${
-              index + 1
-            }, ${orderId}, '${orderMenu.menuName}', '${image}', ${price}, ${
-              orderMenu.quantity
-            })`;
-            resolve(conn.execute(sql));
+    try {
+      await Promise.all(
+        orderMenuList!.map((orderMenu, index) => {
+          return new Promise((resolve, reject) => {
+            MenuModel.getMenuByMenuName(orderMenu.menuName).then((menu) => {
+              const { image, price } = menu!;
+              const sql = `INSERT INTO ORDER_MENU VALUES (${
+                index + 1
+              }, ${orderId}, '${orderMenu.menuName}', '${image}', ${price}, ${
+                orderMenu.quantity
+              })`;
+              resolve(conn.execute(sql));
+            });
           });
-        });
-      })
-    );
-    return await this.getOrderById(orderId);
+        })
+      );
+      return await this.getOrderById(orderId);
+    } catch (err) {
+      if (isDBError(err)) {
+        console.error(err.message);
+        await conn.rollback();
+      }
+      return undefined;
+    }
   };
   getOrdersByUserId = async (userId: number): Promise<Order[] | undefined> => {
     const sql = `SELECT * FROM ORDERS WHERE USER_ID = ${userId}`;

@@ -1,3 +1,5 @@
+import { DBError } from "oracledb";
+
 export const getCurrentKorDate = () => {
   const curr = new Date();
   const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
@@ -14,3 +16,7 @@ export const getAllResolvedResult = <T>(promises: Promise<T>[] | undefined) => {
     return undefined;
   }
 };
+
+export function isDBError(err: any): err is DBError {
+  return "errorNum" in err && "message" in err && "offset" in err;
+}

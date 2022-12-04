@@ -1,6 +1,6 @@
 import database from "../database";
 import { User } from "../@types/User";
-import { DBError } from "oracledb";
+import { isDBError } from "../utils";
 
 type UserDto = {
   USER_ID: number;
@@ -10,10 +10,6 @@ type UserDto = {
   PHONE_NUMBER: string;
   MEMBERSHIP_TIER: string;
 };
-
-function isDBError(err: any): err is DBError {
-  return "errorNum" in err && "message" in err && "offset" in err;
-}
 
 class UserModel {
   async insert(user: User) {
