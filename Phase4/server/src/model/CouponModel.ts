@@ -21,9 +21,8 @@ type CouponEventDto = {
 
 class CouponModel {
   insert = async (couponEventId: number, userId: number) => {
-    const transaction = "SET TRANSACTION ISOLATION LEVEL SERIALIZABLE";
     const conn = await database.getConnection();
-    await conn.execute(transaction);
+    await conn.execute("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
     const quantitySql = `SELECT * FROM COUPON_EVENT WHERE COUPON_EVENT_ID = ${couponEventId}`;
     const quantity = (await conn.execute<CouponEventDto>(quantitySql)).rows?.[0]
       .QUANTITY;
@@ -36,6 +35,7 @@ class CouponModel {
       try {
         await conn.execute(couponSql);
         await conn.execute(couponEventSql);
+        await conn.commit();
       } catch (err) {
         console.error(err);
         if (isDBError(err)) {
