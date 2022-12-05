@@ -9,7 +9,7 @@ class Database {
     connectString: "localhost/xe",
   };
   public constructor() {
-    this.oracleDB.autoCommit = true;
+    this.oracleDB.autoCommit = false;
     this.oracleDB.outFormat = OUT_FORMAT_OBJECT;
   }
   public async getConnection() {

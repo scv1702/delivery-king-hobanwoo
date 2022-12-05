@@ -1,0 +1,40 @@
+.reviewItem {
+  display: flex;
+  align-items: center;
+  padding: 19px 30px 20px;
+}
+
+.reviewItem:not(:last-child) {
+  margin-bottom: 11px;
+}
+
+.reviewItem .info {
+  flex: 1 1;
+}
+
+.reviewItem .title {
+  margin: 0 auto 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #494949;
+}
+
+.reviewItem .title a {
+  font-family: var(--notosans);
+}
+
+.reviewItem .title .count {
+  margin-left: 5px;
+  color: #fe92ab;
+}
+
+.reviewItem .date {
+  margin: 0;
+  font-size: 12px;
+  color: #c4c4c4;
+}
+
+.reviewItem .writer {
+  flex: none;
+  margin-left: 30px;
+}

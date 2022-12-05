@@ -30,6 +30,11 @@ function Nav() {
             </NavLink>
           </li>
           <li>
+            <NavLink style={getLinkStyle} to="/coupon-event">
+              쿠폰 이벤트
+            </NavLink>
+          </li>
+          <li>
             <UserMenu />
           </li>
         </ul>

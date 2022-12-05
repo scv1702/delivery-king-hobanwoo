@@ -19,6 +19,7 @@ class UserModel {
     const conn = await database.getConnection();
     try {
       await conn.execute(sql);
+      await conn.commit();
     } catch (err) {
       if (isDBError(err)) {
         if (err.errorNum === 1) {
@@ -78,6 +79,7 @@ class UserModel {
     const sql = `INSERT INTO USER_ADDRESS VALUES (${userId}, '${address}')`;
     const conn = await database.getConnection();
     await conn.execute(sql);
+    await conn.commit();
   };
   getUserById = async (userId: number): Promise<User | undefined> => {
     const sql = `SELECT * FROM USERS WHERE USER_ID = ${userId}`;

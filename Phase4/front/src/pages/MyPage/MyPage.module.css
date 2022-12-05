@@ -11,6 +11,10 @@
   text-align: center;
 }
 
+.content {
+  margin-bottom: 1%;
+}
+
 .header .title {
   margin: 10px auto 20px;
   font-size: 22px;

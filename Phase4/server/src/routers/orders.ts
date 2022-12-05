@@ -15,7 +15,7 @@ router.post("/", async (req: Request, res: Response) => {
     });
     res.json({ success: true, message: "주문 되었습니다." });
   } else {
-    res.json({ success: false, message: "로그인이 필요합니다." });
+    res.status(401).json({ success: false, message: "로그인이 필요합니다." });
   }
 });
 

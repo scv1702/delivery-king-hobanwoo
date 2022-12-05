@@ -33,6 +33,8 @@ app.use("/users", require("./src/routers/users"));
 app.use("/session", require("./src/routers/session"));
 app.use("/orders", require("./src/routers/orders"));
 app.use("/reviews", require("./src/routers/reviews"));
+app.use("/coupons", require("./src/routers/coupons"));
+app.use("/coupon-event", require("./src/routers/coupon-event"));
 
 declare module "express-session" {
   export interface SessionData {
