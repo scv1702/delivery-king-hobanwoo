@@ -108,6 +108,7 @@ class OrderModel {
     const sql = `INSERT INTO ORDERS VALUES (${orderId}, ${userId}, ${storeId}, '${payment}', '주문 중', to_date('${orderDate}', 'YYYY-MM-DD hh24:mi:ss'))`;
     const conn = await database.getConnection();
     await conn.execute(sql);
+    await conn.commit();
     try {
       await Promise.all(
         orderMenuList!.map((orderMenu, index) => {
@@ -124,6 +125,7 @@ class OrderModel {
           });
         })
       );
+      await conn.commit();
       return await this.getOrderById(orderId);
     } catch (err) {
       if (isDBError(err)) {

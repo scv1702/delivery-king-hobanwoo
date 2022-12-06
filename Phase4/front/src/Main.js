@@ -12,6 +12,7 @@ import OrderPage from "./pages/OrderPage/OrderPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
 import MyPage from "./pages/MyPage/MyPage";
 import CreateReviewPage from "./pages/CreateReviewPage/CreateReviewPage";
+import CouponEventPage from "./pages/CouponEventPage/CouponEventPage";
 
 function Main() {
   return (
@@ -23,6 +24,7 @@ function Main() {
             <Route index element={<StoreListPage />} />
             <Route path=":storeId" element={<StorePage />} />
           </Route>
+          <Route path="coupon-event" element={<CouponEventPage />} />
           <Route path="wishlist" element={<WishlistPage />} />
           <Route path="orders" element={<OrderPage />} />
           <Route path="login" element={<LoginPage />} />

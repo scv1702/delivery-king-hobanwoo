@@ -14,7 +14,7 @@ router.delete("/:reviewId", async (req, res) => {
     await ReviewModel.deleteById(reviewId);
     res.json({ success: true, message: "리뷰가 삭제되었습니다." });
   } else {
-    res.json({ success: false, message: "로그인이 필요합니다." });
+    res.status(401).json({ success: false, message: "로그인이 필요합니다." });
   }
 });
 

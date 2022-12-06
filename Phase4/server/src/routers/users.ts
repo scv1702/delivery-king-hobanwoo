@@ -55,7 +55,7 @@ router.post("/address", async (req, res) => {
 
 router.get("/coupons", async (req, res) => {
   if (req.session.user) {
-    res.json(await CouponModel.getCouponByUserId(req.session.user.userId!));
+    res.json(await CouponModel.getCouponsByUserId(req.session.user.userId!));
   } else {
     res.status(401).json({ success: false, message: "로그인이 필요합니다." });
   }

@@ -58,9 +58,10 @@ class ReviewModel {
     const sql = `INSERT INTO REVIEW VALUES (${autoIncrement}, ${review.userId}, ${review.storeId}, ${review.starRating}, '${review.comments}', TO_DATE('${createdAt}', 'YYYY-MM-DD hh24:mi:ss'))`;
     const conn = await database.getConnection();
     await conn.execute(sql);
+    await conn.commit();
     const reviewIdSql = `(SELECT MAX(REVIEW_ID) FROM REVIEW)`;
     const orderMenuList = await OrderModel.getOrderMenuIdsByOrderId(orderId);
-    return Promise.all(
+    const result = Promise.all(
       orderMenuList!.map((orderMenuId) => {
         return new Promise((resolve) => {
           const containsSql = `INSERT INTO CONTAINS VALUES (${orderMenuId}, ${orderId}, ${reviewIdSql})`;
@@ -68,11 +69,14 @@ class ReviewModel {
         });
       })
     );
+    await conn.commit();
+    return result;
   };
   deleteById = async (reviewId: number) => {
     const sql = `DELETE FROM REVIEW WHERE REVIEW_ID = ${reviewId}`;
     const conn = await database.getConnection();
     await conn.execute(sql);
+    await conn.commit();
   };
   getReviewsByUserId = async (userId: number) => {
     const sql = `SELECT * FROM REVIEW WHERE USER_ID = ${userId}`;
@@ -82,6 +86,7 @@ class ReviewModel {
     const sql = `UPDATE REVIEW SET STAR_RATING = ${review.starRating}, COMMENTS = '${review.comments}' WHERE REVIEW_ID = ${review.reviewId}`;
     const conn = await database.getConnection();
     await conn.execute(sql);
+    await conn.commit();
   };
   getReviewsByStoreId = async (storeId: number) => {
     const sql = `SELECT * FROM REVIEW WHERE STORE_ID = ${storeId}`;
