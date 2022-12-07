@@ -14,6 +14,8 @@
 
 ## 실행 방법
 
+### 도커
+
 1. `https://docs.docker.com/get-docker/`를 참고해 Docker 설치
 
 2. DockerHub에서 이미지 다운로드
@@ -44,6 +46,46 @@ npm run dev
 ```
 
 6. `http://localhost:15000` 접속
+
+### 윈도우
+
+### 리눅스
+
+1. `git clone`을 통해 해당 레포지토리 클론
+
+```bash
+git clone https://github.com/scv1702/delivery-king-hobanwoo.git
+```
+
+2. `delivery_king_hobanwoo/Phase4`의 `Team7-Phase4-DDL.sql`, `Team7-Phase4-Insert.sql`를 실행해 데이터베이스 스키마 생성 및 데이터 삽입
+
+3. `delivery_king_hobanwoo/Phase4/front`로 이동 후 의존성 라이브러리 설치
+
+```bash
+cd /delivery-king-hobanwoo/Phase4/front
+npm install
+```
+
+4. 리액트 서버 실행
+
+```
+npm start
+```
+
+5. `delivery_king_hobanwoo/Phase4/server`로 이동 후 의존성 라이브러리 설치` 디렉토리로 이동 후 의존성 라이브러리 설치
+
+```bash
+cd /delivery-king-hobanwoo/Phase4/server
+npm install
+```
+
+6. Express 서버 실행
+
+```
+npm run dev
+```
+
+7. `http://localhost:15000` 접속
 
 ## 기능 설명
 
