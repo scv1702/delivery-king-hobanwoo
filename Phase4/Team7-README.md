@@ -47,9 +47,7 @@ npm run dev
 
 6. `http://localhost:15000` 접속
 
-### 윈도우
-
-### 리눅스
+### 윈도우 및 리눅스
 
 1. `git clone`을 통해 해당 레포지토리 클론
 
@@ -72,7 +70,7 @@ npm install
 npm start
 ```
 
-5. `delivery_king_hobanwoo/Phase4/server`로 이동 후 의존성 라이브러리 설치` 디렉토리로 이동 후 의존성 라이브러리 설치
+5. `delivery_king_hobanwoo/Phase4/server`로 이동 후 의존성 라이브러리 설치
 
 ```bash
 cd /delivery-king-hobanwoo/Phase4/server
