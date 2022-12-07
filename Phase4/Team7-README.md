@@ -6,7 +6,6 @@
 
 - 언어: TypeScript 4.9.3
 - 프레임워크: Express 4.18.2
-- 데이터베이스: Oracle Database 11g Express Edition Release 11.2.0
 
 ### 프론트
 
@@ -15,6 +14,13 @@
 ### Node.js 엔진
 
 - Node.js v16.18.1 LTS 사용
+
+### 데이터베이스
+
+- Oracle Database 11g Express Edition Release 11.2.0 사용
+- ID: `delivery_king_hobanwoo`
+- PW: `comp322`
+- 포트: `1600`
 
 ## 실행 방법
 
